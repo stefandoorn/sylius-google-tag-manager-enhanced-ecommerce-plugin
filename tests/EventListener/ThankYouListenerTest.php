@@ -39,7 +39,7 @@ class ThankYouListenerTest extends \PHPUnit_Framework_TestCase
 
         // Service and listener
         $service = new AddTransaction($gtm, $channelContext, $currencyContext);
-        $listener = new ThankYouListener($service, $orderRepository);
+        $listener = new ThankYouListener(true, $service, $orderRepository);
 
         // Run listener
         $listener->onKernelController($event);
