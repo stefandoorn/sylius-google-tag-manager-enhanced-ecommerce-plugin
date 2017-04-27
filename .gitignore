@@ -46,3 +46,9 @@
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
+
+# Bundle skeleton
+/composer.lock
+/vendor/
+/etc/build/*
+!/etc/build/.gitkeep

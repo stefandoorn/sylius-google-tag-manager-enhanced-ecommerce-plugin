@@ -1,0 +1,49 @@
+parameters:
+    locale: en_US
+    secret: "Heron is the best animal in the world!"
+
+imports:
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
+
+    - { resource: "@GtmEnhancedEcommercePlugin/Resources/config/services.yml" }
+
+    - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }
+
+google_tag_manager:
+    enabled: true
+    id: "GTM-TESTTEST"
+    autoAppend: false
+
+gtm:
+    features:
+        environment: true
+        route: true
+
+gtm_enhanced_ecommerce:
+    features:
+        purchases: true
+
+framework:
+    translator: { fallbacks: ["%locale%"] }
+    secret: "%secret"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form: true
+    csrf_protection: true
+    validation: { enable_annotations: true }
+    templating: { engines: ["twig"] }
+    default_locale: "%locale%"
+    trusted_proxies: ~
+    session:
+        handler_id: ~
+    test: ~
+
+doctrine:
+    dbal:
+        driver: "pdo_sqlite"
+        path: "%kernel.cache_dir%/db.sql"
+        charset: UTF8

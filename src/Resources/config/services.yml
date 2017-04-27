@@ -1,0 +1,16 @@
+services:
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.thank_you:
+        class: GtmEnhancedEcommercePlugin\EventListener\ThankYouListener
+        arguments:
+            - "%gtm_enhanced_ecommerce.features.purchases%"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction"
+            - "@sylius.repository.order"
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction:
+        class: GtmEnhancedEcommercePlugin\TagManager\AddTransaction
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.channel"
+            - "@sylius.context.currency"
