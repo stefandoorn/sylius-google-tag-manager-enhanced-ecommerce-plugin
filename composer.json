@@ -5,8 +5,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.1",
-        "sylius/sylius": "^1.0.0@beta",
-        "xynnn/google-tag-manager-bundle": "dev-master",
         "stefandoorn/google-tag-manager-plugin": "dev-master"
     },
     "require-dev": {
