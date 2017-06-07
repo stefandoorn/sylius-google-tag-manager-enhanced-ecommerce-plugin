@@ -69,7 +69,7 @@ class AddTransaction implements AddTransactionInterface
 
         $purchase = [
             'actionField' => [
-                'id' => $order->getId(),
+                'id' => $order->getNumber(),
                 'affiliation' => $this->channelContext->getChannel()->getName(),
                 'tax' => $order->getTaxTotal() / 100,
                 'revenue' => $order->getTotal() / 100,
