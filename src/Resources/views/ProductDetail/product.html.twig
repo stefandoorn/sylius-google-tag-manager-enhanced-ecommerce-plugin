@@ -8,7 +8,7 @@
             'detail': {
                 'products': [
                     {%- for variant in product.variants -%}
-                        {% include 'GtmEnhancedEcommercePlugin:ProductDetail:_variant.html.twig' with {'variant': variant, 'product': product} only %}
+                        {% include 'GtmEnhancedEcommercePlugin:ProductDetail:_variant.html.twig' with {'variant': variant, 'product': settings.product} only %}
                         {%- if loop.last is same as(false) %},{% endif -%}
                     {% endfor %}
                 ]
