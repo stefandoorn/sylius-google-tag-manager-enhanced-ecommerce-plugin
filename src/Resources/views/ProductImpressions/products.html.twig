@@ -2,14 +2,6 @@
     var productListType = window.productListType || 'Category Product List';
 
     {%- for product in settings.products -%}
-        {# @var product \Sylius\Component\Core\Model\ProductInterface #}
-        productImpressions.push({
-            'name': '{{ product.name }}',
-            'id': {{ product.id }},
-            'price': {{ product|sylius_resolve_variant|sylius_calculate_price({'channel': sylius.channel}) / 100 }},
-            'category': '{{ product.mainTaxon.name }}',
-            'list': productListType,
-            'position': {{ loop.index }}
-        });
+        {% include 'GtmEnhancedEcommercePlugin:ProductImpressions:_product.html.twig' with {'product': product} only %}
     {%- endfor -%}
 </script>
