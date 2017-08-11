@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    if (window.productImpressions.length > 0) {
+        dataLayer.push({
+            'ecommerce': {
+                'currencyCode': '{{ sylius.currencyCode }}',
+                'impressions': window.productImpressions
+            }
+        });
+    }
+</script>
