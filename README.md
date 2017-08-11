@@ -24,17 +24,13 @@ new GtmEnhancedEcommercePlugin\GtmEnhancedEcommercePlugin(),
 
 ### 4. Adjust configurations
 
-Add to `app/config/config.yml`:
-
-```yml
-    - { resource: "@GtmEnhancedEcommercePlugin/Resources/config/services.yml" }
-```
-
-And configure the features you would like to use/not. Find a base configuration reference by running:
+Configure the features you would like to use/not. Find a base configuration reference by running:
 
 ```
 bin/console config:dump-reference GtmEnhancedEcommercePlugin
 ```
+
+By default all features are enabled.
 
 ## Features
 
