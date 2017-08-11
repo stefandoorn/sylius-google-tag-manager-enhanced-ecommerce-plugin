@@ -2,6 +2,6 @@
     var productListType = window.productListType || 'Category Product List';
 
     {%- for product in settings.products -%}
-        {% include 'GtmEnhancedEcommercePlugin:ProductImpressions:_product.html.twig' with {'product': product} only %}
+        {% include 'GtmEnhancedEcommercePlugin:ProductImpressions:_product.html.twig' with {'product': product, 'loop': loop} only %}
     {%- endfor -%}
 </script>
