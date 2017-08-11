@@ -2,6 +2,6 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.product.show.after_add_to_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - '@@GtmEnhancedEcommercePlugin/product_show.html.twig'
+            - '@@GtmEnhancedEcommercePlugin/ProductDetail/product.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.show.after_add_to_cart, method: onBlockEvent }
