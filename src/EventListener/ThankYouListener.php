@@ -26,24 +26,16 @@ class ThankYouListener
     private $orderRepository;
 
     /**
-     * @var bool
-     */
-    private $enabled;
-
-    /**
      * ThankYouListener constructor.
-     * @param bool $enabled
      * @param AddTransactionInterface $transactionService
      * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
-        bool $enabled,
         AddTransactionInterface $transactionService,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->transactionService = $transactionService;
         $this->orderRepository = $orderRepository;
-        $this->enabled = $enabled;
     }
 
     /**
@@ -51,10 +43,6 @@ class ThankYouListener
      */
     public function onKernelController(FilterControllerEvent $event): void
     {
-        if (!$this->enabled) {
-            return;
-        }
-
         $controller = $event->getController();
 
         /*
