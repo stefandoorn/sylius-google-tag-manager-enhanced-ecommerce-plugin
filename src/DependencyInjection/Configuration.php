@@ -25,6 +25,7 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('features')
                     ->children()
                         ->booleanNode('purchases')->defaultTrue()->end()
+                        ->booleanNode('product-detail-impressions')->defaultTrue()->end()
                     ->end()
                 ->end()
             ->end()

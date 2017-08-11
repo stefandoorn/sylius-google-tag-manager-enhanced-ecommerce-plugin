@@ -38,4 +38,5 @@ bin/console config:dump-reference GtmEnhancedEcommercePlugin
 
 ## Features
 
-* `purchases`: Send purchases to GTM (through Thank You page listener)
+* `purchases`: Send purchases to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#purchases)
+* `product-detail-impressions`: Send impression on product detail pages to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#details)

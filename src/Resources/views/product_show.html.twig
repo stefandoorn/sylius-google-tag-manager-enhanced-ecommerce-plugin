@@ -1,0 +1,18 @@
+{# @var product \Sylius\Component\Core\Model\ProductInterface #}
+{% set product = settings.product %}
+
+<script type="text/javascript">
+    dataLayer.push({
+        'ecommerce': {
+            'currencyCode': '{{ sylius.currencyCode}}',
+            'detail': {
+                'products': [
+                    {%- for variant in product.variants -%}
+                        {% include 'GtmEnhancedEcommercePlugin:ProductDetail:_variant.html.twig' %}
+                        {%- if loop.last is same as(false) %},{% endif -%}
+                    {% endfor %}
+                ]
+            }
+        }
+    });
+</script>

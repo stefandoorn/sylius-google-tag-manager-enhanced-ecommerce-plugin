@@ -1,0 +1,7 @@
+{
+    'name': '{{ settings.product.name }}',
+    'id': {{ settings.product.id }},
+    'price': {{ variant|sylius_calculate_price({'channel': sylius.channel}) / 100 }},
+    'category': '{{ settings.product.mainTaxon.name }}',
+    'variant': '{{ variant.code }}'
+}
