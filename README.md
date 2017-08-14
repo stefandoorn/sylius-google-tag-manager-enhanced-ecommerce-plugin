@@ -35,5 +35,5 @@ By default all features are enabled.
 ## Features
 
 * `purchases`: Send purchases to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#purchases)
-* `product-impressions`: Send impressions on product listings to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions)
-* `product-detail-impressions`: Send impression on product detail pages to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#details)
+* `product_impressions`: Send impressions on product listings to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions)
+* `product_detail_impressions`: Send impression on product detail pages to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#details)
