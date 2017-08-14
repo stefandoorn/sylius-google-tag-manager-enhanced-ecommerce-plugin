@@ -5,3 +5,16 @@ services:
             - "@google_tag_manager"
             - "@sylius.context.channel"
             - "@sylius.context.currency"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.currency_code:
+        class: GtmEnhancedEcommercePlugin\TagManager\CurrencyCode
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.currency"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.currencyCode:
+        class: GtmEnhancedEcommercePlugin\EventListener\CurrencyCodeListener
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.currency_code"
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
