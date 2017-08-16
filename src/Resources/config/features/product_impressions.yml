@@ -19,3 +19,10 @@ services:
             - 'GtmEnhancedEcommercePlugin::ProductImpressions/products.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.index.before_list, method: onBlockEvent }
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.sylius.shop.taxon.header.before:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - 'GtmEnhancedEcommercePlugin::ProductImpressions/taxon.html.twig'
+        tags:
+            - name: kernel.event_listener, event: sonata.block.event.sylius.shop.taxon.header.before, method: onBlockEvent }
