@@ -37,3 +37,12 @@ By default all features are enabled.
 * `purchases`: Send purchases to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#purchases)
 * `product_impressions`: Send impressions on product listings to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions)
 * `product_detail_impressions`: Send impression on product detail pages to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#details)
+
+## Feature specifics
+
+### Product Impressions
+
+A 'productListType' variable is used to distinguish certain pages on which the products have been shown. The plugin currently does not know on which
+taxon page the listing is shown, so it defaults to 'Category Product List'. Feel free to set your own naming in `window.productListType`.
+
+@todo There is a PR submitted to Sylius to support reading the taxon name via an event, so we can implement this (https://github.com/Sylius/Sylius/pull/8405)
