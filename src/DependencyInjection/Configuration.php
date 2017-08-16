@@ -27,6 +27,7 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('purchases')->defaultTrue()->end()
                         ->booleanNode('product_impressions')->defaultTrue()->end()
                         ->booleanNode('product_detail_impressions')->defaultTrue()->end()
+                        ->booleanNode('product_clicks')->defaultTrue()->end()
                     ->end()
                 ->end()
             ->end()
