@@ -96,12 +96,11 @@ Becomes:
 
 #### Add to Cart
 
-Unfortunately, the default add to cart does a redirect directly after adding. In case you enable this feature, a JS method
-called 'enhancedEcommerceAddToCart' will be available. Make sure this gets fired after adding something to the cart. It is hard
-to automate this for all shops and overriding the default JS requires us to keep it up to date + it might result
-in unexpected behavior in customised shops.
+In case you enable this feature, a JS method called 'enhancedEcommerceAddToCart' will be available. Make sure this gets
+fired after adding something to the cart. As it requires changes to templates, we only provide the JS method
+and let you handle the templating and triggers, as every webshop probably differs and it's hard to maintain.
 
-This could be done by overriding the default `sylius-add-to-cart.js` and add in the `onSuccess` handler:
+The final triggering could be done by overriding the default `sylius-add-to-cart.js` and add in the `onSuccess` handler:
 
 ```javascript
 enhancedEcommerceAddToCart(gtmAddToCartProductInfo);
@@ -109,3 +108,11 @@ enhancedEcommerceAddToCart(gtmAddToCartProductInfo);
 
 The `gtmAddToCartProductInfo` is set on the product page and can be extended with additional information that's missing
 by default; e.g. the price, variant, dimensions and metrics. The quantity defaults to 1.
+
+#### Remove from Cart
+
+Same goes for remove from cart. As it needs customisation to templates which are not easy to do as every theme is different,
+a JS method `enhancedEcommerceRemoveFromCart` is available.
+
+Make sure to inject an object as from the GTM documentation, and you are good to go. You can override the default `sylius-remove-from-cart.js`
+and trigger this method in the `onSuccess` method.
