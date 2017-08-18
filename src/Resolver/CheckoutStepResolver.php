@@ -13,13 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 class CheckoutStepResolver
 {
     /**
-     * @todo Add object typehint check in PHP 7.2
-     * @param $controller
      * @param string $method
      * @param Request $request
      * @return int|null
      */
-    public function resolve(OrderController $controller, string $method, Request $request): ?int
+    public function resolve(string $method, Request $request): ?int
     {
         if ($method === 'summaryAction') {
             return CheckoutStep::STEP_CART;

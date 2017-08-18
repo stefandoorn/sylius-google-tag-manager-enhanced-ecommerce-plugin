@@ -1,6 +1,6 @@
 services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout.listener.cart_summary:
-        class: GtmEnhancedEcommercePlugin\EventListener\CheckoutCartSummaryListener
+        class: GtmEnhancedEcommercePlugin\EventListener\CheckoutStepListener
         arguments:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step"
             - "@sylius.context.cart"

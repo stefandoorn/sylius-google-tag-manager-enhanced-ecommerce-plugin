@@ -3,11 +3,8 @@
 namespace GtmEnhancedEcommercePlugin\EventListener;
 
 use GtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver;
-use GtmEnhancedEcommercePlugin\TagManager\AddTransactionInterface;
 use GtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -15,7 +12,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  * Class CheckoutCartSummaryListener
  * @package GtmEnhancedEcommerce\EventListener
  */
-class CheckoutCartSummaryListener
+class CheckoutStepListener
 {
     /**
      * @var CheckoutStep
@@ -69,7 +66,7 @@ class CheckoutCartSummaryListener
         }
 
         // Resolve step
-        $step = $this->checkoutStepResolver->resolve($controller[0], $controller[1], $event->getRequest());
+        $step = $this->checkoutStepResolver->resolve($controller[1], $event->getRequest());
         if ($step === null) {
             return;
         }
