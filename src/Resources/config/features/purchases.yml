@@ -1,5 +1,5 @@
 services:
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.thank_you:
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.purchases.listener.thank_you:
         class: GtmEnhancedEcommercePlugin\EventListener\ThankYouListener
         arguments:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction"

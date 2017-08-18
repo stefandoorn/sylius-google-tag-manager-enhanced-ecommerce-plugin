@@ -46,6 +46,7 @@ By default all features are enabled.
 * `product_impressions`: Send impressions on product listings to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions)
 * `product_detail_impressions`: Send impression on product detail pages to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#details)
 * `product_clicks`: Send click events on product links to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#product-clicks)
+* `cart`: Send add to cart / remove from cart events to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#cart)
 
 ## Feature specifics
 
@@ -90,3 +91,21 @@ Becomes:
 ```
 <a data-id="{{ product.id}}" data-name="{{ product.name }}" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="header sylius-product-name gtm-eh-track-product-click">{{ product.name }}</a>
 ```
+
+### Cart
+
+#### Add to Cart
+
+Unfortunately, the default add to cart does a redirect directly after adding. In case you enable this feature, a JS method
+called 'enhancedEcommerceAddToCart' will be available. Make sure this gets fired after adding something to the cart. It is hard
+to automate this for all shops and overriding the default JS requires us to keep it up to date + it might result
+in unexpected behavior in customised shops.
+
+This could be done by overriding the default `sylius-add-to-cart.js` and add in the `onSuccess` handler:
+
+```javascript
+enhancedEcommerceAddToCart(gtmAddToCartProductInfo);
+```
+
+The `gtmAddToCartProductInfo` is set on the product page and can be extended with additional information that's missing
+by default; e.g. the price, variant, dimensions and metrics. The quantity defaults to 1.

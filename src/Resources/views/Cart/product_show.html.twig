@@ -1,0 +1,10 @@
+{# @var product \Sylius\Component\Core\Model\ProductInterface #}
+<script type="text/javascript">
+    var gtmAddToCartProductInfo = {
+        'name': '{{ product.name }}',
+        'id': {{ product.id }},
+        'brand': '{{ sylius.channel.name }}',
+        'category': '{{ product.mainTaxon.name }}',
+        'quantity': 1
+    };
+</script>

@@ -1,5 +1,5 @@
 services:
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.product.show.after_add_to_cart:
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show.after_add_to_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
             - 'GtmEnhancedEcommercePlugin::ProductDetail/product.html.twig'
