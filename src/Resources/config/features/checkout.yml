@@ -1,0 +1,9 @@
+services:
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout.listener.cart_summary:
+        class: GtmEnhancedEcommercePlugin\EventListener\CheckoutCartSummaryListener
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step"
+            - "@sylius.context.cart"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step"
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

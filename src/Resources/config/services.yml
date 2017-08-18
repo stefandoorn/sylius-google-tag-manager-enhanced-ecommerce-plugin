@@ -6,6 +6,14 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
 
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step:
+        class: GtmEnhancedEcommercePlugin\TagManager\CheckoutStep
+        arguments:
+            - "@google_tag_manager"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step:
+        class: GtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver
+
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.currency_code:
         class: GtmEnhancedEcommercePlugin\TagManager\CurrencyCode
         arguments:
