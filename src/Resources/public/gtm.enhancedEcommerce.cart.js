@@ -1,4 +1,4 @@
-function enhancedEcommerceAddToCart(productObj, redirectUrl) {
+function enhancedEcommerceAddToCart(productObj, callbackOrRedirectUrl) {
     var obj = {
         'event': 'addToCart',
         'ecommerce': {
@@ -8,16 +8,20 @@ function enhancedEcommerceAddToCart(productObj, redirectUrl) {
         }
     };
 
-    if (typeof redirectUrl !== 'undefined') {
-        obj.eventCallback = function () {
-            document.location = redirectUrl
-        };
+    if (typeof callbackOrRedirectUrl !== 'undefined') {
+        if (typeof callbackOrRedirectUrl === 'string') {
+            obj.eventCallback = function () {
+                document.location = callbackOrRedirectUrl
+            };
+        } else if (typeof callbackOrRedirectUrl === 'function') {
+            obj.eventCallback = callbackOrRedirectUrl;
+        }
     }
 
     dataLayer.push(obj);
 }
 
-function enhancedEcommerceRemoveFromCart(productObj, redirectUrl) {
+function enhancedEcommerceRemoveFromCart(productObj, callbackOrRedirectUrl) {
     var obj = {
         'event': 'removeFromCart',
         'ecommerce': {
@@ -27,10 +31,14 @@ function enhancedEcommerceRemoveFromCart(productObj, redirectUrl) {
         }
     };
 
-    if (typeof redirectUrl !== 'undefined') {
-        obj.eventCallback = function () {
-            document.location = redirectUrl
-        };
+    if (typeof callbackOrRedirectUrl !== 'undefined') {
+        if (typeof callbackOrRedirectUrl === 'string') {
+            obj.eventCallback = function () {
+                document.location = callbackOrRedirectUrl
+            };
+        } else if (typeof callbackOrRedirectUrl === 'function') {
+            obj.eventCallback = callbackOrRedirectUrl;
+        }
     }
 
     dataLayer.push(obj);
