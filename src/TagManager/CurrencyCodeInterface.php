@@ -5,7 +5,7 @@ namespace GtmEnhancedEcommercePlugin\TagManager;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Interface AddTransactionInterface
+ * Interface CurrencyCodeInterface
  * @package GtmEnhancedEcommercePlugin\TagManager
  */
 interface CurrencyCodeInterface

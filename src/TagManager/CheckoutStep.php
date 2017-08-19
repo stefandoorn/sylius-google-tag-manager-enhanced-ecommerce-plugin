@@ -2,11 +2,8 @@
 
 namespace GtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 /**
@@ -33,12 +30,11 @@ final class CheckoutStep implements CheckoutStepInterface
     private $googleTagManager;
 
     /**
-     * AddTransaction constructor.
+     * CheckoutStep constructor.
      * @param GoogleTagManagerInterface $googleTagManager
      */
-    public function __construct(
-        GoogleTagManagerInterface $googleTagManager
-    ) {
+    public function __construct(GoogleTagManagerInterface $googleTagManager)
+    {
         $this->googleTagManager = $googleTagManager;
     }
 
@@ -69,14 +65,22 @@ final class CheckoutStep implements CheckoutStepInterface
     {
         foreach ($order->getItems() as $item) {
             /** @var OrderItemInterface $item */
-            $this->products[] = [
-                'name' => $item->getProduct()->getName(),
-                'id' => $item->getProduct()->getId(),
-                'quantity' => $item->getQuantity(),
-                'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
-                'category' => $item->getProduct()->getMainTaxon()->getName(),
-                'price' => $item->getTotal() / 100,
-            ];
+            $this->addProduct($item);
         }
+    }
+
+    /**
+     * @param OrderItemInterface $item
+     */
+    private function addProduct(OrderItemInterface $item): void
+    {
+        $this->products[] = [
+            'name' => $item->getProduct()->getName(),
+            'id' => $item->getProduct()->getId(),
+            'quantity' => $item->getQuantity(),
+            'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
+            'category' => $item->getProduct()->getMainTaxon()->getName(),
+            'price' => $item->getTotal() / 100,
+        ];
     }
 }

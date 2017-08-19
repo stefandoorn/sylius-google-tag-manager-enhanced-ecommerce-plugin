@@ -23,7 +23,7 @@ class CurrencyCode implements CurrencyCodeInterface
     private $currencyContext;
 
     /**
-     * AddTransaction constructor.
+     * CurrencyCode constructor.
      * @param GoogleTagManagerInterface $googleTagManager
      * @param CurrencyContextInterface $currencyContext
      */
