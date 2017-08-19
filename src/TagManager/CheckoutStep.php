@@ -13,7 +13,7 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
  * Class CheckoutStep
  * @package SyliusGoogleAnalyticsEnhancedEcommerceTrackingBundle\TagManager
  */
-final class CheckoutStep
+final class CheckoutStep implements CheckoutStepInterface
 {
     const STEP_CART = 1;
     const STEP_ADDRESS = 2;
@@ -43,7 +43,7 @@ final class CheckoutStep
     }
 
     /**
-     * @param OrderInterface $order
+     * @inheritdoc
      */
     public function addStep(OrderInterface $order, int $step): void
     {

@@ -9,12 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
  * Class CheckoutStepResolver
  * @package GtmEnhancedEcommercePlugin\Resolver
  */
-class CheckoutStepResolver
+class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
     /**
-     * @param string $method
-     * @param Request $request
-     * @return int|null
+     * @inheritdoc
      */
     public function resolve(string $method, Request $request): ?int
     {
@@ -48,7 +46,7 @@ class CheckoutStepResolver
             case 'sylius_shop_checkout_complete':
                 return CheckoutStep::STEP_CONFIRM;
         }
-        
+
         return null;
     }
 }

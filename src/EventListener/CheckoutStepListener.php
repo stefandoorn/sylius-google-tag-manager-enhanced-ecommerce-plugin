@@ -2,8 +2,8 @@
 
 namespace GtmEnhancedEcommercePlugin\EventListener;
 
-use GtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver;
-use GtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
+use GtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolverInterface;
+use GtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 class CheckoutStepListener
 {
     /**
-     * @var CheckoutStep
+     * @var CheckoutStepInterface
      */
     private $checkoutStep;
 
@@ -25,19 +25,20 @@ class CheckoutStepListener
     private $cartContext;
 
     /**
-     * @var CheckoutStepResolver
+     * @var CheckoutStepResolverInterface
      */
     private $checkoutStepResolver;
 
     /**
      * CheckoutCartSummaryListener constructor.
-     * @param CheckoutStep $checkoutStep
+     * @param CheckoutStepInterface $checkoutStep
      * @param CartContextInterface $cartContext
+     * @param CheckoutStepResolverInterface $checkoutStepResolver
      */
     public function __construct(
-        CheckoutStep $checkoutStep,
+        CheckoutStepInterface $checkoutStep,
         CartContextInterface $cartContext,
-        CheckoutStepResolver $checkoutStepResolver
+        CheckoutStepResolverInterface $checkoutStepResolver
     ) {
         $this->checkoutStep = $checkoutStep;
         $this->cartContext = $cartContext;
