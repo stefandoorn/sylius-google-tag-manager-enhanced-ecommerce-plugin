@@ -24,7 +24,7 @@ final class GtmEnhancedEcommerceExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        foreach($config['features'] as $feature => $setting) {
+        foreach ($config['features'] as $feature => $setting) {
             $parameter = sprintf('gtm_enhanced_ecommerce.features.%s', $feature);
 
             $container->setParameter($parameter, $setting);
