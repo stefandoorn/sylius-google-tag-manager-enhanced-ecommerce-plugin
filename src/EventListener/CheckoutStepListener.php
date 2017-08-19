@@ -30,7 +30,7 @@ class CheckoutStepListener
     private $checkoutStepResolver;
 
     /**
-     * CheckoutCartSummaryListener constructor.
+     * CheckoutStepListener constructor.
      * @param CheckoutStepInterface $checkoutStep
      * @param CartContextInterface $cartContext
      * @param CheckoutStepResolverInterface $checkoutStepResolver
