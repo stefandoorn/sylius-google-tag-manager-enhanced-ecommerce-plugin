@@ -29,6 +29,7 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('product_detail_impressions')->defaultTrue()->end()
                         ->booleanNode('product_clicks')->defaultTrue()->end()
                         ->booleanNode('cart')->defaultTrue()->end()
+                        ->booleanNode('checkout')->defaultTrue()->end()
                     ->end()
                 ->end()
             ->end()

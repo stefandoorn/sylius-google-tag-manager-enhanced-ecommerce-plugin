@@ -18,9 +18,15 @@ function enhancedEcommerceAddToCart(productObj, callbackOrRedirectUrl) {
         }
     }
 
+    /** global: dataLayer */
     dataLayer.push(obj);
 }
 
+/**
+ *
+ * @param {Object} productObj
+ * @param {function|string} callbackOrRedirectUrl
+ */
 function enhancedEcommerceRemoveFromCart(productObj, callbackOrRedirectUrl) {
     var obj = {
         'event': 'removeFromCart',
@@ -41,5 +47,6 @@ function enhancedEcommerceRemoveFromCart(productObj, callbackOrRedirectUrl) {
         }
     }
 
+    /** global: dataLayer */
     dataLayer.push(obj);
 }

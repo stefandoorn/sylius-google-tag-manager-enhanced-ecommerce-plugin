@@ -2,11 +2,8 @@
 
 namespace GtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 /**
@@ -26,7 +23,7 @@ class CurrencyCode implements CurrencyCodeInterface
     private $currencyContext;
 
     /**
-     * AddTransaction constructor.
+     * CurrencyCode constructor.
      * @param GoogleTagManagerInterface $googleTagManager
      * @param CurrencyContextInterface $currencyContext
      */
@@ -39,7 +36,6 @@ class CurrencyCode implements CurrencyCodeInterface
     }
 
     /**
-     * @param OrderInterface $order
      */
     public function addCurrencyCode(): void
     {
