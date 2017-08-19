@@ -9,7 +9,7 @@ use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
- * Class CheckoutCartSummaryListener
+ * Class CheckoutStepListener
  * @package GtmEnhancedEcommerce\EventListener
  */
 class CheckoutStepListener
