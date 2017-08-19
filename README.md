@@ -47,6 +47,7 @@ By default all features are enabled.
 * `product_detail_impressions`: Send impression on product detail pages to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#details)
 * `product_clicks`: Send click events on product links to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#product-clicks)
 * `cart`: Send add to cart / remove from cart events to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#cart)
+* `checkout`: Send checkout steps & selected options to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#checkout)
 
 ## Feature specifics
 
@@ -116,3 +117,10 @@ a JS method `enhancedEcommerceRemoveFromCart` is available.
 
 Make sure to inject an object as from the GTM documentation, and you are good to go. You can override the default `sylius-remove-from-cart.js`
 and trigger this method in the `onSuccess` method.
+
+### Checkout
+
+The checkout steps are registered from the backend code. Based on the controller / method a certain step will be triggered and sent to GTM.
+
+The checkout options are tracked through JS. The payment & shipping forms are being listened for submits, and at that moment the
+selected option will be sent to GTM. Keep this in mind when adjusting the checkout forms.
