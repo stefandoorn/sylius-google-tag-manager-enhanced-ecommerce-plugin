@@ -6,13 +6,13 @@
 
     $.fn.extend({
         enhancedEcommerceCheckoutShipping: function () {
-            $(this).on('submit', function (event) {
+            $(this).on('submit', function () {
                 enhancedEcommerceTrackCheckoutOption(CHECKOUT_STEP_SHIPPING, $('input[type=radio]:checked', $(this)).val());
             });
         },
 
         enhancedEcommerceCheckoutPayment: function () {
-            $(this).on('submit', function (event) {
+            $(this).on('submit', function () {
                 enhancedEcommerceTrackCheckoutOption(CHECKOUT_STEP_PAYMENT, $('input[type=radio]:checked', $(this)).val());
             });
         }

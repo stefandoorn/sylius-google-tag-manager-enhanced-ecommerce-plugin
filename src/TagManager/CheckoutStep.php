@@ -2,7 +2,7 @@
 
 namespace GtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
@@ -64,7 +64,6 @@ final class CheckoutStep implements CheckoutStepInterface
     private function setProducts(OrderInterface $order): void
     {
         foreach ($order->getItems() as $item) {
-            /** @var OrderItemInterface $item */
             $this->addProduct($item);
         }
     }

@@ -2,7 +2,7 @@
 
 namespace GtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * Interface CheckoutStepInterface
