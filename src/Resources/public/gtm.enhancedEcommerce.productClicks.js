@@ -47,8 +47,8 @@
  * callback datalayer variable to handle navigation after the ecommerce data has been sent
  * to Google Analytics.
  * @param {Object} productObj An object representing a product.
- * @param string clickedUrl URL clicked, browser need to direct there
- * @param string actionFieldList Optional to use as action field list
+ * @param {string} clickedUrl URL clicked, browser need to direct there
+ * @param {string} actionFieldList Optional to use as action field list
  */
 function enhancedEcommerceTrackProductClick(productObj, clickedUrl, actionFieldList) {
     if (typeof actionFieldList === 'undefined') {
@@ -71,5 +71,6 @@ function enhancedEcommerceTrackProductClick(productObj, clickedUrl, actionFieldL
         obj.ecommerce.click.actionField = {'list': actionFieldList}; // Optional list property.
     }
 
+    /** global: dataLayer */
     dataLayer.push(obj);
 }
