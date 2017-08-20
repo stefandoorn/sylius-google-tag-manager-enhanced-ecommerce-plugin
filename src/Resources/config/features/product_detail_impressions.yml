@@ -2,6 +2,6 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show:
         class: GtmEnhancedEcommercePlugin\EventListener\ProductShowListener
         arguments:
-            - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_product_details'
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.product_detail_impression"
         tags:
             - { name: kernel.event_listener, event: sylius.product.show, method: onProductShow }
