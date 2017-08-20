@@ -4,7 +4,6 @@ namespace GtmEnhancedEcommercePlugin\TagManager;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
