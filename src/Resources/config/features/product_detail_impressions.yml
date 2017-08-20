@@ -1,7 +1,7 @@
 services:
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show.after_add_to_cart:
-        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show:
+        class: GtmEnhancedEcommercePlugin\EventListener\ProductShowListener
         arguments:
-            - 'GtmEnhancedEcommercePlugin::ProductDetail/product.html.twig'
+            - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_product_details'
         tags:
-            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.show.after_add_to_cart, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sylius.product.show, method: onProductShow }
