@@ -76,11 +76,20 @@ class ProductDetailImpression implements ProductDetailImpressionInterface
         $this->variants[] = [
             'name' => $product->getName(),
             'id' => $product->getId(),
-            'price' => $this->productVariantPriceCalculator->calculate($productVariant, [
-                'channel' => $this->channelContext->getChannel(),
-            ]),
+            'price' => $this->getPrice($productVariant),
             'category' => $product->getMainTaxon()->getName(),
             'variant' => $productVariant->getCode(),
         ];
+    }
+
+    /**
+     * @param ProductVariantInterface $productVariant
+     * @return float
+     */
+    private function getPrice(ProductVariantInterface $productVariant): float
+    {
+        return (float)$this->productVariantPriceCalculator->calculate($productVariant, [
+                'channel' => $this->channelContext->getChannel(),
+            ]) / 100;
     }
 }
