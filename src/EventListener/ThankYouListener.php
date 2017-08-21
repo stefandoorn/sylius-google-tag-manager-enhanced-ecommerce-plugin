@@ -60,7 +60,7 @@ class ThankYouListener
         }
 
         // Now check the method, should be
-        if (!$controller[1] === 'thankYouAction') {
+        if ($controller[1] !== 'thankYouAction') {
             return;
         }
 
