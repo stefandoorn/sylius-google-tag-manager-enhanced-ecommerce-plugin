@@ -47,8 +47,8 @@ final class CheckoutStep implements CheckoutStepInterface
             $this->setProducts($order);
         }
 
-        $this->googleTagManager->addData('event', 'checkout');
-        $this->googleTagManager->addData('ecommerce', [
+        $this->googleTagManager->setData('event', 'checkout');
+        $this->googleTagManager->mergeData('ecommerce', [
             'checkout' => [
                 'actionField' => [
                     'step' => $step,

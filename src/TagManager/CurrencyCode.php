@@ -39,7 +39,7 @@ class CurrencyCode implements CurrencyCodeInterface
      */
     public function addCurrencyCode(): void
     {
-        $this->googleTagManager->addData('ecommerce', [
+        $this->googleTagManager->mergeData('ecommerce', [
             'currencyCode' => $this->currencyContext->getCurrencyCode(),
         ]);
     }

@@ -59,7 +59,7 @@ class ProductDetailImpression implements ProductDetailImpressionInterface
             $this->addProductVariant($variant);
         }
 
-        $this->googleTagManager->addData('ecommerce', [
+        $this->googleTagManager->mergeData('ecommerce', [
             'detail' => [
                 'products' => $this->variants,
             ],
