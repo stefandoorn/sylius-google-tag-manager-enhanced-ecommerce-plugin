@@ -6,7 +6,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 /**

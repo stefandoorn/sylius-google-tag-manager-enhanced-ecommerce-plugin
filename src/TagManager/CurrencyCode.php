@@ -2,7 +2,6 @@
 
 namespace GtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
