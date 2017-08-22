@@ -58,23 +58,26 @@ class AddTransaction implements AddTransactionInterface
                 'name' => $item->getProduct()->getName(),
                 'id' => $item->getProduct()->getId(),
                 'quantity' => $item->getQuantity(),
-                'coupon' => '',
                 'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
-                'brand' => '',
                 'category' => $item->getProduct()->getMainTaxon()->getName(),
                 'price' => $item->getTotal() / 100,
             ];
         }
 
+        $actionField = [
+            'id' => $order->getNumber(),
+            'affiliation' => $this->channelContext->getChannel()->getName(),
+            'tax' => $order->getTaxTotal() / 100,
+            'revenue' => $order->getTotal() / 100,
+            'shipping' => $order->getShippingTotal() / 100,
+        ];
+
+        if ($order->getPromotionCoupon() !== null) {
+            $actionField['coupon'] = $order->getPromotionCoupon()->getCode();
+        }
+
         $purchase = [
-            'actionField' => [
-                'id' => $order->getNumber(),
-                'affiliation' => $this->channelContext->getChannel()->getName(),
-                'tax' => $order->getTaxTotal() / 100,
-                'revenue' => $order->getTotal() / 100,
-                'shipping' => $order->getShippingTotal() / 100,
-                'coupon' => $order->getPromotionCoupon() !== null ? $order->getPromotionCoupon()->getCode() : '',
-            ],
+            'actionField' => $actionField,
             'products' => $products,
         ];
 
