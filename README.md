@@ -49,6 +49,11 @@ By default all features are enabled.
 * `cart`: Send add to cart / remove from cart events to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#cart)
 * `checkout`: Send checkout steps & selected options to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#checkout)
 
+Make sure to check that the required 'sonata_block_render_events' template events are available. Check the
+`src/Resources/config/features/*.yml` & `src/Resources/config/services.yml` for the definitions.
+
+This is only to be checked if you've been overriding templates yourselves.
+
 ## Features not supported (yet):
 
 * `promotion_impressions`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-impressions
