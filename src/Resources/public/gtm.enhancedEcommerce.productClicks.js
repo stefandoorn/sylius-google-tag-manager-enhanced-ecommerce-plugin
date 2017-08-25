@@ -57,6 +57,7 @@ function enhancedEcommerceTrackProductClick(productObj, clickedUrl, actionFieldL
 
     var obj = {
         'event': 'productClick',
+        'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
         'ecommerce': {
             'click': {
                 'products': [productObj]

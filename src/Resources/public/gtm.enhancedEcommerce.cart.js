@@ -3,7 +3,7 @@ function enhancedEcommerceAddToCart(productObj, callbackOrRedirectUrl) {
         'event': 'addToCart',
         'ecommerce': {
             /** global: gtmEnhancedEcommerceCurrencyCode */
-            'currencyCode': gtmEnhancedEcommerceCurrencyCode,
+            'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
             'add': {
                 'products': [productObj]
             }
@@ -34,7 +34,7 @@ function enhancedEcommerceRemoveFromCart(productObj, callbackOrRedirectUrl) {
         'event': 'removeFromCart',
         'ecommerce': {
             /** global: gtmEnhancedEcommerceCurrencyCode */
-            'currencyCode': gtmEnhancedEcommerceCurrencyCode,
+            'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
             'remove': {
                 'products': [productObj]
             }

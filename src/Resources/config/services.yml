@@ -26,3 +26,10 @@ services:
         arguments:
             - "@google_tag_manager"
             - "@sylius.context.currency"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.global.listener.sylius.shop.layout.head:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - 'GtmEnhancedEcommercePlugin::Global/head.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
