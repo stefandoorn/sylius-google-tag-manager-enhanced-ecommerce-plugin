@@ -1,10 +1,15 @@
 <script type="text/javascript">
-    if (window.productImpressions.length > 0) {
+    $(document).ready(function() {
+        if (typeof window.productImpressions === 'undefined' || window.productImpressions.length === 0) {
+            return;
+        }
+
         dataLayer.push({
+            'event': 'productImpressions',
             'ecommerce': {
                 'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
                 'impressions': window.productImpressions
             }
         });
-    }
+    });
 </script>

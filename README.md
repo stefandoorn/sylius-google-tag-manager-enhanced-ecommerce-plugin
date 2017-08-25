@@ -57,6 +57,9 @@ A 'productListType' variable is used to distinguish certain pages on which the p
 defaults to the category name with a string prefix ('Category List'). Feel free to set your own naming in `window.productListType`
 after the default is set.
 
+Because Sylius doesn't fire the `sylius.<resource>.index` yet (https://github.com/Sylius/Sylius/issues/7305), make sure to listen in GTM on the event
+'productImpressions' to get your data registered (use event action = 'impression' in GTM config).
+
 ### Product clicks
 
 To make this work, make sure to install the assets so the JS file will get loaded. Next to this, perform the following steps:
