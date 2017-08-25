@@ -34,7 +34,7 @@
                     obj.position = position;
                 }
 
-                enhancedEcommerceTrackProductClick(obj, $(this).attr('href'), $this.attr('data-action-field-list'));
+                enhancedEcommerceTrackProductClick(obj, $(this).attr('href'), $(this).attr('data-action-field-list'));
             });
         }
     });
