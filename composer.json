@@ -6,7 +6,7 @@
     "require": {
         "php": "^7.1",
         "sylius/sylius": "^1.0@beta",
-        "stefandoorn/google-tag-manager-plugin": "dev-master"
+        "stefandoorn/google-tag-manager-plugin": "~0.1"
     },
     "require-dev": {
         "behat/behat": "^3.3",
