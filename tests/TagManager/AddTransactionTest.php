@@ -38,6 +38,7 @@ class AddTransactionTest extends \PHPUnit_Framework_TestCase
 
         // Test result
         $this->assertArrayHasKey('ecommerce', $gtm->getData());
+        $this->assertArrayHasKey('currencyCode', $gtm->getData());
         $this->assertArrayHasKey('purchase', $gtm->getData()['ecommerce']);
         $this->assertArrayHasKey('actionField', $gtm->getData()['ecommerce']['purchase']);
         $this->assertArrayHasKey('products', $gtm->getData()['ecommerce']['purchase']);

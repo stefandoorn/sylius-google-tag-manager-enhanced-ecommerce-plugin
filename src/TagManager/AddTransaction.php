@@ -82,6 +82,7 @@ class AddTransaction implements AddTransactionInterface
         ];
 
         $this->googleTagManager->mergeData('ecommerce', [
+            'currencyCode' => $this->currencyContext->getCurrencyCode(),
             'purchase' => $purchase,
         ]);
     }
