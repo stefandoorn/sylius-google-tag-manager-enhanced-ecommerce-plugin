@@ -2,6 +2,7 @@
     if (window.productImpressions.length > 0) {
         dataLayer.push({
             'ecommerce': {
+                'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
                 'impressions': window.productImpressions
             }
         });
