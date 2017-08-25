@@ -49,6 +49,12 @@ By default all features are enabled.
 * `cart`: Send add to cart / remove from cart events to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#cart)
 * `checkout`: Send checkout steps & selected options to GTM (https://developers.google.com/tag-manager/enhanced-ecommerce#checkout)
 
+## Features not supported (yet):
+
+* `promotion_impressions`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-impressions
+* `promotion_clicks`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-clicks
+* `refunds`: https://developers.google.com/tag-manager/enhanced-ecommerce#refunds
+
 ## Feature specifics
 
 ### Product Impressions
