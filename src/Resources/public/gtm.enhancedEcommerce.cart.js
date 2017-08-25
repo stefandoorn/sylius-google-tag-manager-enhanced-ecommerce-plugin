@@ -2,6 +2,8 @@ function enhancedEcommerceAddToCart(productObj, callbackOrRedirectUrl) {
     var obj = {
         'event': 'addToCart',
         'ecommerce': {
+            /** global: gtmEnhancedEcommerceCurrencyCode */
+            'currencyCode': gtmEnhancedEcommerceCurrencyCode,
             'add': {
                 'products': [productObj]
             }
@@ -31,6 +33,8 @@ function enhancedEcommerceRemoveFromCart(productObj, callbackOrRedirectUrl) {
     var obj = {
         'event': 'removeFromCart',
         'ecommerce': {
+            /** global: gtmEnhancedEcommerceCurrencyCode */
+            'currencyCode': gtmEnhancedEcommerceCurrencyCode,
             'remove': {
                 'products': [productObj]
             }
