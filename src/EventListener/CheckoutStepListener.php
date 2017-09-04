@@ -52,6 +52,11 @@ class CheckoutStepListener
     {
         $controller = $event->getController();
 
+        // Only perform on master request
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
         /*
          * $controller passed can be either a class or a Closure.
          * This is not usual in Symfony but it may happen.
