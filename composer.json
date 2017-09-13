@@ -4,8 +4,6 @@
     "description": "Google Tag Manager Enhanced Ecommerce plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^7.1",
-        "sylius/sylius": "^1.0",
         "stefandoorn/google-tag-manager-plugin": "~0.2"
     },
     "require-dev": {
