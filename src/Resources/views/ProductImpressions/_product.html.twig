@@ -3,7 +3,7 @@ productImpressions.push({
     'name': '{{ product.name }}',
     'id': {{ product.id }},
     'price': {{ product|sylius_resolve_variant|sylius_calculate_price({'channel': sylius.channel}) / 100 }},
-    'category': '{{ product.mainTaxon.name }}',
+    'category': '{{ product.mainTaxon ? product.mainTaxon.name : '' }}',
     'list': productListType,
     'position': {{ loop.index }}
 });
