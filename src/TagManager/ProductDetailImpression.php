@@ -77,7 +77,7 @@ class ProductDetailImpression implements ProductDetailImpressionInterface
             'name' => $product->getName(),
             'id' => $product->getId(),
             'price' => $this->getPrice($productVariant),
-            'category' => $product->getMainTaxon()->getName(),
+            'category' => $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
             'variant' => $productVariant->getCode(),
         ];
     }
