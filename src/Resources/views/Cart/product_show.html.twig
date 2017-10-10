@@ -5,7 +5,7 @@
         'name': '{{ product.name }}',
         'id': {{ product.id }},
         'brand': '{{ sylius.channel.name }}',
-        'category': '{{ product.mainTaxon.name }}',
+        'category': '{{ product.mainTaxon ? product.mainTaxon.name : '' }}',
         'quantity': 1
     };
 </script>
