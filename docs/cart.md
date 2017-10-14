@@ -30,14 +30,22 @@ Make sure to inject an object as from the GTM documentation, and you are good to
 and trigger this method in the `onSuccess` method.
 ## Configuration in GTM
 
-### Trigger (Add to Cart)
+## Configuration in GTM
+
+Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/analytics/answer/6163791).
+
+### Add to Cart (1/2)
+
+#### Trigger (Add to Cart)
 
 Add a trigger:
 
 * Type: Custom Event
 * Activate on: Event equals `addToCart`
 
-### Tag (Add to Cart)
+#### Tag (Add to Cart)
+
+Note: this trigger is different than the
 
 Add a tag:
 
@@ -49,14 +57,16 @@ Add a tag:
 * Use dataLayer
 * Trigger on: see trigger above.
 
-### Trigger (Remove from Cart)
+### Remove from Cart (2/2)
+
+#### Trigger (Remove from Cart)
 
 Add a trigger:
 
 * Type: Custom Event
 * Activate on: Event equals `removeFromCart`
 
-### Tag (Remove from Cart)
+#### Tag (Remove from Cart)
 
 Add a tag:
 

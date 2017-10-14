@@ -42,6 +42,8 @@ Becomes:
 
 ## Configuration in GTM
 
+Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/analytics/answer/6163791).
+
 ### Trigger
 
 Add a trigger:

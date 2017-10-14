@@ -13,14 +13,20 @@ selected option will be sent to GTM. Keep this in mind when adjusting the checko
 
 ## Configuration in GTM
 
-### Trigger (Checkout)
+Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/analytics/answer/6163791).
+
+### Checkout (1/2)
+
+Checkout is used to track the steps customers follow throughout your checkout flow.
+
+#### Trigger (Checkout)
 
 Add a trigger:
 
 * Type: Custom Event
 * Activate on: Event equals `checkout`
 
-### Tag (Checkout)
+#### Tag (Checkout)
 
 Add a tag:
 
@@ -32,14 +38,18 @@ Add a tag:
 * Use dataLayer
 * Trigger on: see trigger above.
 
-### Trigger (Checkout Option)
+### Checkout Option (2/2)
+
+Checkout Option is used to track selected shipping method or payment method by the customer.
+
+#### Trigger (Checkout Option)
 
 Add a trigger:
 
 * Type: Custom Event
 * Activate on: Event equals `checkoutOption`
 
-### Tag (Checkout Option)
+#### Tag (Checkout Option)
 
 Add a tag:
 
