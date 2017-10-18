@@ -23,6 +23,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('features')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('purchases')->defaultTrue()->end()
                         ->booleanNode('product_impressions')->defaultTrue()->end()
