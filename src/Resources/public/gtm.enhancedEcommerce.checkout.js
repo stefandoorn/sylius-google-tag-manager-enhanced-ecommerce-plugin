@@ -1,8 +1,8 @@
 (function ( $ ) {
     'use strict';
 
-    const CHECKOUT_STEP_SHIPPING = 3;
-    const CHECKOUT_STEP_PAYMENT = 4;
+    var CHECKOUT_STEP_SHIPPING = 3;
+    var CHECKOUT_STEP_PAYMENT = 4;
 
     $.fn.extend({
         enhancedEcommerceCheckoutShipping: function () {
