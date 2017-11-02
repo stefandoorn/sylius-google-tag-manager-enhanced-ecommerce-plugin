@@ -12,7 +12,7 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
  * Class AddTransaction
  * @package SyliusGoogleAnalyticsEnhancedEcommerceTrackingBundle\TagManager
  */
-class AddTransaction implements AddTransactionInterface
+final class AddTransaction implements AddTransactionInterface
 {
 
     /**

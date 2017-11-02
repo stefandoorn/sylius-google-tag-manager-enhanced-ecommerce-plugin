@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  * Class ThankYouListener
  * @package GtmEnhancedEcommerce\EventListener
  */
-class ThankYouListener
+final class ThankYouListener
 {
 
     /**

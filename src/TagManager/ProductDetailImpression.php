@@ -2,17 +2,15 @@
 
 namespace GtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use GtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 /**
  * Class ProductDetailImpression
  * @package SyliusGoogleAnalyticsEnhancedEcommerceTrackingBundle\TagManager
  */
-class ProductDetailImpression implements ProductDetailImpressionInterface
+final class ProductDetailImpression implements ProductDetailImpressionInterface
 {
     /**
      * @var GoogleTagManagerInterface
@@ -20,34 +18,21 @@ class ProductDetailImpression implements ProductDetailImpressionInterface
     private $googleTagManager;
 
     /**
-     * @var ProductVariantPriceCalculatorInterface
+     * @var ProductDetailImpressionDataResolverInterface
      */
-    private $productVariantPriceCalculator;
-
-    /**
-     * @var ChannelContextInterface
-     */
-    private $channelContext;
-
-    /**
-     * @var array
-     */
-    private $variants = [];
+    private $productDetailImpressionDataResolver;
 
     /**
      * ProductDetailImpression constructor.
      * @param GoogleTagManagerInterface $googleTagManager
-     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-     * @param ChannelContextInterface $channelContext
+     * @param ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver
      */
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
-        ChannelContextInterface $channelContext
+        ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver
     ) {
         $this->googleTagManager = $googleTagManager;
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
-        $this->channelContext = $channelContext;
+        $this->productDetailImpressionDataResolver = $productDetailImpressionDataResolver;
     }
 
     /**
@@ -55,41 +40,10 @@ class ProductDetailImpression implements ProductDetailImpressionInterface
      */
     public function add(ProductInterface $product): void
     {
-        foreach ($product->getVariants() as $variant) {
-            $this->addProductVariant($variant);
-        }
-
         $this->googleTagManager->mergeData('ecommerce', [
             'detail' => [
-                'products' => $this->variants,
+                'products' => $this->productDetailImpressionDataResolver->get($product)->toArray(),
             ],
         ]);
-    }
-
-    /**
-     * @param ProductVariantInterface $productVariant
-     */
-    private function addProductVariant(ProductVariantInterface $productVariant): void
-    {
-        $product = $productVariant->getProduct();
-
-        $this->variants[] = [
-            'name' => $product->getName(),
-            'id' => $product->getId(),
-            'price' => $this->getPrice($productVariant),
-            'category' => $product->getMainTaxon() ? $product->getMainTaxon()->getName() : '',
-            'variant' => $productVariant->getCode(),
-        ];
-    }
-
-    /**
-     * @param ProductVariantInterface $productVariant
-     * @return float
-     */
-    private function getPrice(ProductVariantInterface $productVariant): float
-    {
-        return (float)round($this->productVariantPriceCalculator->calculate($productVariant, [
-                'channel' => $this->channelContext->getChannel(),
-            ]) / 100, 2);
     }
 }
