@@ -1,0 +1,9 @@
+services:
+    sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data_cache:
+        decorates: sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data
+        class: GtmEnhancedEcommercePlugin\Resolver\Cache\ProductDetailImpressionCachedDataResolver
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data_cache.inner"
+            - "@cache.app"
+            - "%gtm_enhanced_ecommerce.cache_resolver.product_detail_impressions%"
+            - "gtm_enhanced_ecommerce.cache_resolver.product_detail_impressions"

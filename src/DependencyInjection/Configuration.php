@@ -33,6 +33,18 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('checkout')->defaultTrue()->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('cache_resolvers')
+                    ->canBeEnabled()
+                    ->children()
+                        ->arrayNode('ttl')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->integerNode('product_detail_impressions')->defaultValue(3600)->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
