@@ -33,5 +33,14 @@ final class GtmEnhancedEcommerceExtension extends Extension
                 $loader->load(sprintf('features/%s.yml', $feature));
             }
         }
+
+        if ($config['cache_resolvers']['enabled'] === true) {
+            $loader->load('cache_services.yml');
+
+            foreach ($config['cache_resolvers']['ttl'] as $feature => $ttl) {
+                $parameter = sprintf('gtm_enhanced_ecommerce.cache_resolver.%s', $feature);
+                $container->setParameter($parameter, $ttl);
+            }
+        }
     }
 }

@@ -63,3 +63,9 @@ This is only to be checked if you've been overriding templates yourselves.
 * `promotion_impressions`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-impressions
 * `promotion_clicks`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-clicks
 * `refunds`: https://developers.google.com/tag-manager/enhanced-ecommerce#refunds
+
+## Cache Resolvers
+
+It might be that your data resolvers give a performance hit, e.g. on the product show page.
+There are decorators available that allow you to cache the results for a set time in order. Take a look
+at the service definitions in `cache_services.yml` & the default configuration on how to enable this setting.
