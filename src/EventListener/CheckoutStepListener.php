@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  * Class CheckoutStepListener
  * @package GtmEnhancedEcommerce\EventListener
  */
-class CheckoutStepListener
+final class CheckoutStepListener
 {
     /**
      * @var CheckoutStepInterface

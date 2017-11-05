@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Class CheckoutStepResolver
  * @package GtmEnhancedEcommercePlugin\Resolver
  */
-class CheckoutStepResolver implements CheckoutStepResolverInterface
+final class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
     /**
      * @inheritdoc

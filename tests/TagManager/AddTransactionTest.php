@@ -16,7 +16,6 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
  */
 class AddTransactionTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testSimpleTransaction()
     {
         // Requirements
