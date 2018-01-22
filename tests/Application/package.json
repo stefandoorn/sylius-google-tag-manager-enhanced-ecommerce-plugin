@@ -2,7 +2,9 @@
   "dependencies": {
     "jquery": "^2.2.0",
     "lightbox2": "^2.9.0",
-    "semantic-ui-css": "^2.2.0",
+    "semantic-ui-css": "^2.2.0"
+  },
+  "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-chug": "^0.5",
     "gulp-concat": "^2.6.0",

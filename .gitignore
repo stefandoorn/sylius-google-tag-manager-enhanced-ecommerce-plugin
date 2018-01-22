@@ -50,6 +50,7 @@
 # Bundle skeleton
 /composer.lock
 /vendor/
+yarn.lock
 /etc/build/*
 !/etc/build/.gitkeep
 
