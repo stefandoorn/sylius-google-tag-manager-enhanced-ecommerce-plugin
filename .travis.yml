@@ -1,27 +1,33 @@
 language: php
 
+dist: trusty
+
+sudo: false
+
 php:
     - 7.1
     - 7.2
     - nightly
 
-env:
-  - TRAVIS_NODE_VERSION="4"
+matrix:
+    fast_finish: true
+    allow_failures:
+        - php: nightly
 
 cache:
     yarn: true
     directories:
         - ~/.composer/cache/files
+        - $SYLIUS_CACHE_DIR
 
-sudo: required
+env:
+    global:
+        - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
 
 before_install:
-    - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-    - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
-    - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    - sudo apt-get update -qq
-    - sudo apt-get install -y -qq yarn
+    - phpenv config-rm xdebug.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - mkdir -p "${SYLIUS_CACHE_DIR}"
 
 install:
     - composer update --prefer-dist
@@ -32,18 +38,40 @@ install:
 
 before_script:
     - mkdir -p build/logs
-    - (cd tests/Application && bin/console doctrine:schema:create --env=test)
-    - (mkdir tests/Application/web && cd tests/Application && bin/console assets:install web --env=test)
+
+    - (cd tests/Application && bin/console doctrine:database:create --env=test -vvv)
+    - (cd tests/Application && bin/console doctrine:schema:create --env=test -vvv)
+    - (cd tests/Application && bin/console assets:install web --env=test -vvv)
     - (cd tests/Application && yarn run gulp)
 
+    # Configure display
     - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
     - export DISPLAY=:99
 
-    - curl http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip > chromedriver.zip && unzip chromedriver.zip
+    # Download and configure ChromeDriver
+    - |
+        if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 2.34)" = "0" ]; then
+            curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip
+            unzip chromedriver.zip
+            chmod +x chromedriver
+            mv chromedriver $SYLIUS_CACHE_DIR
+        fi
 
-    - cp etc/travis/behat.yml ./behat.yml
-    - vendor/bin/selenium-server-standalone -Dwebdriver.chrome.driver=chromedriver > /dev/null 2>&1 &
-    - (cd tests/Application && bin/console server:run 127.0.0.1:8080 --env=test --quiet > /dev/null 2>&1 &)
+    # Run ChromeDriver
+    - $SYLIUS_CACHE_DIR/chromedriver > /dev/null 2>&1 &
+
+    # Download and configure Selenium
+    - |
+        if [ ! -f $SYLIUS_CACHE_DIR/selenium.jar ] || [ "$(java -jar $SYLIUS_CACHE_DIR/selenium.jar --version | grep -c 3.4.0)" = "0" ]; then
+            curl http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar > selenium.jar
+            mv selenium.jar $SYLIUS_CACHE_DIR
+        fi
+
+    # Run Selenium
+    - java -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver -jar $SYLIUS_CACHE_DIR/selenium.jar > /dev/null 2>&1 &
+
+    # Run webserver
+    - (cd tests/Application && bin/console server:run 127.0.0.1:8080 -d web --env=test --quiet > /dev/null 2>&1 &)
 
 script:
     - composer validate --strict --no-check-all
