@@ -7,12 +7,9 @@ sudo: false
 php:
     - 7.1
     - 7.2
-    - nightly
 
 matrix:
     fast_finish: true
-    allow_failures:
-        - php: nightly
 
 cache:
     yarn: true
@@ -23,6 +20,11 @@ cache:
 env:
     global:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
+    matrix:
+       - DEPENDENCY_VERSIONS="sylius/sylius:1.2.* symfony/symfony:4.1.*"
+       - DEPENDENCY_VERSIONS="sylius/sylius:1.2.* symfony/symfony:3.4.*"
+       - DEPENDENCY_VERSIONS="sylius/sylius:1.1.* symfony/symfony:3.4.*"
+       - DEPENDENCY_VERSIONS="sylius/sylius:1.0.* symfony/symfony:3.4.*"
 
 before_install:
     - phpenv config-rm xdebug.ini
