@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
     sylius.google_tag_manager_enhanced_ecommerce.cart.block_event_listener.sylius.shop.product.show.before_add_to_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:

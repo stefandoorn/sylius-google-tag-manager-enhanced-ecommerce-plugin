@@ -7,6 +7,7 @@ use GtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactoryInterface;
 use GtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactoryInterface;
 use GtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver;
 use GtmEnhancedEcommercePlugin\TagManager\ProductDetailImpression;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\Channel;
@@ -15,7 +16,7 @@ use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\Taxon;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
-class ProductDetailImpressionTest extends \PHPUnit_Framework_TestCase
+final class ProductDetailImpressionTest extends TestCase
 {
     public function testSimpleTransaction()
     {

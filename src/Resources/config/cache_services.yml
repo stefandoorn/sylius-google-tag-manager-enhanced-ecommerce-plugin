@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
     sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data_cache:
         decorates: sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data
         class: GtmEnhancedEcommercePlugin\Resolver\Cache\ProductDetailImpressionCachedDataResolver
