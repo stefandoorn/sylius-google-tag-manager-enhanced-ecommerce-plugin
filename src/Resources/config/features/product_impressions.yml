@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_impressions.listener.sylius.shop.layout.head:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:

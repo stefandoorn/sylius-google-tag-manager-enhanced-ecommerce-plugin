@@ -4,6 +4,7 @@ namespace Tests\GtmEnhancedEcommercePlugin\EventListener;
 
 use GtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
 use GtmEnhancedEcommercePlugin\TagManager\AddTransaction;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\Controller\OrderController;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -16,7 +17,7 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
  * @package Tests\GtmEnhancedEcommercePlugin\EventListener
  * @covers \GtmEnhancedEcommercePlugin\EventListener\ThankYouListener
  */
-class ThankYouListenerTest extends \PHPUnit_Framework_TestCase
+final class ThankYouListenerTest extends TestCase
 {
 
     public function testWrongController()

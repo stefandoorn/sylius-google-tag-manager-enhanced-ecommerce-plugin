@@ -11,7 +11,7 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
  * Class ProductDetailImpressionCachedDataResolver
  * @package GtmEnhancedEcommercePlugin\Resolver\Cache
  */
-class ProductDetailImpressionCachedDataResolver implements ProductDetailImpressionDataResolverInterface
+final class ProductDetailImpressionCachedDataResolver implements ProductDetailImpressionDataResolverInterface
 {
     /**
      * @var ProductDetailImpressionDataResolverInterface

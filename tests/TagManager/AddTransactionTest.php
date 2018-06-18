@@ -2,6 +2,7 @@
 
 namespace Tests\GtmEnhancedEcommercePlugin\TagManager;
 
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\Order;
@@ -14,7 +15,7 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
  * @package Tests\GtmEnhancedEcommercePlugin\TagManager
  * @covers \GtmEnhancedEcommercePlugin\TagManager\AddTransaction
  */
-class AddTransactionTest extends \PHPUnit_Framework_TestCase
+final class AddTransactionTest extends TestCase
 {
     public function testSimpleTransaction()
     {
