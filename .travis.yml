@@ -20,7 +20,6 @@ cache:
 env:
     global:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
-        - TRAVIS_NODE_VERSION=4.0
     matrix:
        - DEPENDENCY_VERSIONS="sylius/sylius:1.2.* symfony/symfony:4.1.*"
        - DEPENDENCY_VERSIONS="sylius/sylius:1.2.* symfony/symfony:3.4.*"
