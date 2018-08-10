@@ -1,0 +1,15 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        if (typeof window.productDetails === 'undefined' || window.productDetails.length === 0) {
+            return;
+        }
+
+        dataLayer.push({
+            'event': 'productDetails',
+            'ecommerce': {
+                'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
+                'detail': window.productDetails
+            }
+        });
+    });
+</script>
