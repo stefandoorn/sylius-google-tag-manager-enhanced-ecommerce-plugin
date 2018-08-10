@@ -7,27 +7,27 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_impressions.listener.sylius.shop.layout.head:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'GtmEnhancedEcommercePlugin::ProductImpressions/head.html.twig'
+            - '@@GtmEnhancedEcommercePlugin/ProductImpressions/head.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_impressions.listener.sylius.shop.layout.after_body:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'GtmEnhancedEcommercePlugin::ProductImpressions/foot.html.twig'
+            - '@@GtmEnhancedEcommercePlugin/ProductImpressions/foot.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_body, method: onBlockEvent }
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_impressions.listener.sylius.shop.product.index.before_list:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'GtmEnhancedEcommercePlugin::ProductImpressions/products.html.twig'
+            - '@@GtmEnhancedEcommercePlugin/ProductImpressions/products.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.index.before_list, method: onBlockEvent }
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_impressions.listener.sylius.shop.taxon.header.before:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'GtmEnhancedEcommercePlugin::ProductImpressions/taxon.html.twig'
+            - '@@GtmEnhancedEcommercePlugin/ProductImpressions/taxon.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.taxon.header.before, method: onBlockEvent }

@@ -4,9 +4,24 @@ services:
         autoconfigure: false
         public: false
 
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show:
-        class: GtmEnhancedEcommercePlugin\EventListener\ProductShowListener
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.sylius.shop.layout.head:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.product_detail_impression"
+            - '@@GtmEnhancedEcommercePlugin/ProductDetail/head.html.twig'
         tags:
-            - { name: kernel.event_listener, event: sylius.product.show, method: onProductShow }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.sylius.shop.layout.after_body:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - '@@GtmEnhancedEcommercePlugin/ProductDetail/foot.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_body, method: onBlockEvent }
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show.after_product_header:
+        class: GtmEnhancedEcommercePlugin\EventListener\ProductShowBlockAfterProductHeaderListener
+        arguments:
+            - '@@GtmEnhancedEcommercePlugin/ProductDetail/variants.html.twig'
+            - '@sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.product.show.after_product_header, method: onProductShow }

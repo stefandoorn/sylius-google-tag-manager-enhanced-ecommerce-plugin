@@ -16,12 +16,6 @@ services:
         arguments:
             - "@google_tag_manager"
 
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.product_detail_impression:
-        class: GtmEnhancedEcommercePlugin\TagManager\ProductDetailImpression
-        arguments:
-            - "@google_tag_manager"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data"
-
     sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data:
         class: GtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver
         arguments:
