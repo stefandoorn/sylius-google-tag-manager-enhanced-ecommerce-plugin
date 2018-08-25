@@ -89,4 +89,9 @@ final class CheckoutStep implements CheckoutStepInterface
             'price' => $item->getTotal() / 100,
         ];
     }
+
+    public function reset()
+    {
+        $this->products = [];
+    }
 }
