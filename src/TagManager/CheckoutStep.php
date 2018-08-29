@@ -20,11 +20,6 @@ final class CheckoutStep implements CheckoutStepInterface
     const STEP_THANKYOU = 6;
 
     /**
-     * @var array
-     */
-    private $products = [];
-
-    /**
      * @var GoogleTagManagerInterface
      */
     private $googleTagManager;
@@ -43,8 +38,9 @@ final class CheckoutStep implements CheckoutStepInterface
      */
     public function addStep(OrderInterface $order, int $step): void
     {
+        $products = [];
         if ($step < self::STEP_THANKYOU) {
-            $this->setProducts($order);
+            $products = $this->getProducts($order);
         }
 
         $checkout = [
@@ -53,8 +49,8 @@ final class CheckoutStep implements CheckoutStepInterface
             ],
         ];
 
-        if (!empty($this->products)) {
-            $checkout['products'] = $this->products;
+        if (!empty($products)) {
+            $checkout['products'] = $products;
         }
 
         $this->googleTagManager->addPush([
@@ -67,20 +63,24 @@ final class CheckoutStep implements CheckoutStepInterface
 
     /**
      * @param OrderInterface $order
+     * @return array
      */
-    private function setProducts(OrderInterface $order): void
+    private function getProducts(OrderInterface $order): array
     {
+        $products = [];
         foreach ($order->getItems() as $item) {
-            $this->addProduct($item);
+            $products[] = $this->createProduct($item);
         }
+        return $products;
     }
 
     /**
      * @param OrderItemInterface $item
+     * @return array
      */
-    private function addProduct(OrderItemInterface $item): void
+    private function createProduct(OrderItemInterface $item): array
     {
-        $this->products[] = [
+        return [
             'name' => $item->getProduct()->getName(),
             'id' => $item->getProduct()->getId(),
             'quantity' => $item->getQuantity(),
@@ -88,10 +88,5 @@ final class CheckoutStep implements CheckoutStepInterface
             'category' => $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
             'price' => $item->getTotal() / 100,
         ];
-    }
-
-    public function reset()
-    {
-        $this->products = [];
     }
 }
