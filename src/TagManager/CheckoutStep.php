@@ -20,11 +20,6 @@ final class CheckoutStep implements CheckoutStepInterface
     const STEP_THANKYOU = 6;
 
     /**
-     * @var array
-     */
-    private $products = [];
-
-    /**
      * @var GoogleTagManagerInterface
      */
     private $googleTagManager;
@@ -43,18 +38,14 @@ final class CheckoutStep implements CheckoutStepInterface
      */
     public function addStep(OrderInterface $order, int $step): void
     {
-        if ($step < self::STEP_THANKYOU) {
-            $this->setProducts($order);
-        }
-
         $checkout = [
             'actionField' => [
                 'step' => $step,
             ],
         ];
 
-        if (!empty($this->products)) {
-            $checkout['products'] = $this->products;
+        if ($step < self::STEP_THANKYOU) {
+            $checkout['products'] = $this->getProducts($order);
         }
 
         $this->googleTagManager->addPush([
@@ -67,20 +58,26 @@ final class CheckoutStep implements CheckoutStepInterface
 
     /**
      * @param OrderInterface $order
+     * @return array
      */
-    private function setProducts(OrderInterface $order): void
+    private function getProducts(OrderInterface $order): array
     {
+        $products = [];
+
         foreach ($order->getItems() as $item) {
-            $this->addProduct($item);
+            $products[] = $this->createProduct($item);
         }
+
+        return $products;
     }
 
     /**
      * @param OrderItemInterface $item
+     * @return array
      */
-    private function addProduct(OrderItemInterface $item): void
+    private function createProduct(OrderItemInterface $item): array
     {
-        $this->products[] = [
+        return [
             'name' => $item->getProduct()->getName(),
             'id' => $item->getProduct()->getId(),
             'quantity' => $item->getQuantity(),
