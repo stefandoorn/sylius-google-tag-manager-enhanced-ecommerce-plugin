@@ -38,19 +38,14 @@ final class CheckoutStep implements CheckoutStepInterface
      */
     public function addStep(OrderInterface $order, int $step): void
     {
-        $products = [];
-        if ($step < self::STEP_THANKYOU) {
-            $products = $this->getProducts($order);
-        }
-
         $checkout = [
             'actionField' => [
                 'step' => $step,
             ],
         ];
 
-        if (!empty($products)) {
-            $checkout['products'] = $products;
+        if ($step < self::STEP_THANKYOU) {
+            $checkout['products'] = $this->getProducts($order);
         }
 
         $this->googleTagManager->addPush([
@@ -68,9 +63,11 @@ final class CheckoutStep implements CheckoutStepInterface
     private function getProducts(OrderInterface $order): array
     {
         $products = [];
+
         foreach ($order->getItems() as $item) {
             $products[] = $this->createProduct($item);
         }
+
         return $products;
     }
 
