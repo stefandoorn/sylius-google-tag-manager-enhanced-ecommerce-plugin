@@ -22,7 +22,7 @@
         "phpspec/phpspec": "^4.0",
         "phpstan/phpstan-shim": "^0.9.2",
         "phpunit/phpunit": "^6.0|^7.0",
-        "se/selenium-server-standalone": "^2.52"
+        "se/selenium-server-standalone": "^3.12"
     },
     "autoload": {
         "psr-4": {
