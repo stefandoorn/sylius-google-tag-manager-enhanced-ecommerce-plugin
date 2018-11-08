@@ -1,5 +1,5 @@
 {
-    "name": "stefandoorn/google-tag-manager-enhanced-ecommerce-plugin",
+    "name": "stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin",
     "type": "sylius-plugin",
     "description": "Google Tag Manager Enhanced Ecommerce plugin for Sylius.",
     "license": "MIT",
@@ -29,13 +29,13 @@
     },
     "autoload": {
         "psr-4": {
-            "GtmEnhancedEcommercePlugin\\": "src/"
+            "SyliusGtmEnhancedEcommercePlugin\\": "src/"
         }
     },
     "autoload-dev": {
         "classmap": ["tests/Application/app/AppKernel.php"],
         "psr-4": {
-            "Tests\\GtmEnhancedEcommercePlugin\\": "tests/"
+            "Tests\\SyliusGtmEnhancedEcommercePlugin\\": "tests/"
         }
     }
 }

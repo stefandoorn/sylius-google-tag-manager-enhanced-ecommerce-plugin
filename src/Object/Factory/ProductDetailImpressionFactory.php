@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\Object\Factory;
+namespace SyliusGtmEnhancedEcommercePlugin\Object\Factory;
 
-use GtmEnhancedEcommercePlugin\Object\ProductDetailImpression;
-use GtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
+use SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpression;
+use SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
 
 /**
  * Class ProductDetailImpressionFactory
- * @package GtmEnhancedEcommercePlugin\Object\Factory
+ * @package SyliusGtmEnhancedEcommercePlugin\Object\Factory
  */
 final class ProductDetailImpressionFactory implements ProductDetailImpressionFactoryInterface
 {

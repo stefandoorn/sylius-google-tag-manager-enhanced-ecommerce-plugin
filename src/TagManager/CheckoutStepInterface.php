@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\TagManager;
+namespace SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * Interface CheckoutStepInterface
- * @package GtmEnhancedEcommercePlugin\TagManager
+ * @package SyliusGtmEnhancedEcommercePlugin\TagManager
  */
 interface CheckoutStepInterface
 {

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\Object;
+namespace SyliusGtmEnhancedEcommercePlugin\Object;
 
 /**
  * Interface ProductDetailImpressionDataInterface
- * @package GtmEnhancedEcommercePlugin\Object
+ * @package SyliusGtmEnhancedEcommercePlugin\Object
  */
 interface ProductDetailImpressionInterface
 {

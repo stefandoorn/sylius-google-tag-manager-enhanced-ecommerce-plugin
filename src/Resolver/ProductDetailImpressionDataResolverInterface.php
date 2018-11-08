@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\Resolver;
+namespace SyliusGtmEnhancedEcommercePlugin\Resolver;
 
-use GtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
+use SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * Interface ProductDetailImpressionDataResolverInterface
- * @package GtmEnhancedEcommercePlugin\Resolver
+ * @package SyliusGtmEnhancedEcommercePlugin\Resolver
  */
 interface ProductDetailImpressionDataResolverInterface
 {

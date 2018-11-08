@@ -5,19 +5,19 @@ services:
         public: false
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction:
-        class: GtmEnhancedEcommercePlugin\TagManager\AddTransaction
+        class: SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction
         arguments:
             - "@google_tag_manager"
             - "@sylius.context.channel"
             - "@sylius.context.currency"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step:
-        class: GtmEnhancedEcommercePlugin\TagManager\CheckoutStep
+        class: SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep
         arguments:
             - "@google_tag_manager"
 
     sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data:
-        class: GtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver
+        class: SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver
         arguments:
             - "@sylius.calculator.product_variant_price"
             - "@sylius.context.channel"
@@ -25,10 +25,10 @@ services:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step:
-        class: GtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver
+        class: SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.currency_code:
-        class: GtmEnhancedEcommercePlugin\TagManager\CurrencyCode
+        class: SyliusGtmEnhancedEcommercePlugin\TagManager\CurrencyCode
         arguments:
             - "@google_tag_manager"
             - "@sylius.context.currency"
@@ -36,12 +36,12 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.global.listener.sylius.shop.layout.head:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'GtmEnhancedEcommercePlugin::Global/head.html.twig'
+            - 'SyliusGtmEnhancedEcommercePlugin::Global/head.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail:
-        class: GtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactory
+        class: SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactory
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail_impression:
-        class: GtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactory
+        class: SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactory

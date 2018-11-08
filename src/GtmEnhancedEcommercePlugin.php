@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin;
+namespace SyliusGtmEnhancedEcommercePlugin;
 
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class GtmEnhancedEcommercePlugin
- * @package GtmEnhancedEcommercePlugin
+ * Class SyliusGtmEnhancedEcommercePlugin
+ * @package SyliusGtmEnhancedEcommercePlugin
  */
-final class GtmEnhancedEcommercePlugin extends Bundle
+final class SyliusGtmEnhancedEcommercePlugin extends Bundle
 {
     use SyliusPluginTrait;
 }

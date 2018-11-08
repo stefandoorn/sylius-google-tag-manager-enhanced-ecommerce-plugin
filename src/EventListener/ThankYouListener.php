@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\EventListener;
+namespace SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use GtmEnhancedEcommercePlugin\TagManager\AddTransactionInterface;
+use SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransactionInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

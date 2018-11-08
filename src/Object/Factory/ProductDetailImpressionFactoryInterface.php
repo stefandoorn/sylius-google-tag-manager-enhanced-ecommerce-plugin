@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\Object\Factory;
+namespace SyliusGtmEnhancedEcommercePlugin\Object\Factory;
 
-use GtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
+use SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
 
 /**
  * Interface ProductDetailImpressionFactoryInterface
- * @package GtmEnhancedEcommercePlugin\Object\Factory
+ * @package SyliusGtmEnhancedEcommercePlugin\Object\Factory
  */
 interface ProductDetailImpressionFactoryInterface
 {
