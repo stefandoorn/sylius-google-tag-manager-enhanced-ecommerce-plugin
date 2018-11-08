@@ -35,7 +35,7 @@
     "autoload-dev": {
         "classmap": ["tests/Application/app/AppKernel.php"],
         "psr-4": {
-            "Tests\\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\\": "tests/"
+            "Tests\\StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": "tests/"
         }
     }
 }
