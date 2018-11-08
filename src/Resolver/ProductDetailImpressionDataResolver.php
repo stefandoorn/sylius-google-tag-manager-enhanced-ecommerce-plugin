@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace SyliusGtmEnhancedEcommercePlugin\Resolver;
+namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
-use SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactoryInterface;
-use SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactoryInterface;
-use SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
-use SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactoryInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactoryInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -13,7 +13,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
  * Class ProductDetailImpressionDataResolver
- * @package SyliusGtmEnhancedEcommercePlugin\Resolver
+ * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver
  */
 final class ProductDetailImpressionDataResolver implements ProductDetailImpressionDataResolverInterface
 {

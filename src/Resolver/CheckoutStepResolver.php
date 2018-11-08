@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace SyliusGtmEnhancedEcommercePlugin\Resolver;
+namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
-use SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CheckoutStepResolver
- * @package SyliusGtmEnhancedEcommercePlugin\Resolver
+ * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver
  */
 final class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
