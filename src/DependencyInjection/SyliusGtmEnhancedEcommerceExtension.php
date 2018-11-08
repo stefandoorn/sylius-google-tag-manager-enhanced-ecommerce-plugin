@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
+namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

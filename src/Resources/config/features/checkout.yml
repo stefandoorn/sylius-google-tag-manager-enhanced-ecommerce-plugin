@@ -5,7 +5,7 @@ services:
         public: false
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout.listener.cart_summary:
-        class: SyliusGtmEnhancedEcommercePlugin\EventListener\CheckoutStepListener
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CheckoutStepListener
         arguments:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step"
             - "@sylius.context.cart"

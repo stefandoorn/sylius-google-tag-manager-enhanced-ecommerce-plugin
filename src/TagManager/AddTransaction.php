@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SyliusGtmEnhancedEcommercePlugin\TagManager;
+namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;

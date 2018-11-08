@@ -19,7 +19,7 @@ services:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_body, method: onBlockEvent }
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.product_detail.listener.product.show.after_product_header:
-        class: SyliusGtmEnhancedEcommercePlugin\EventListener\ProductShowBlockAfterProductHeaderListener
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ProductShowBlockAfterProductHeaderListener
         arguments:
             - '@@SyliusGtmEnhancedEcommercePlugin/ProductDetail/variants.html.twig'
             - '@sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data'

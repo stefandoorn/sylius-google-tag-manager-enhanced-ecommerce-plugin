@@ -6,7 +6,7 @@ services:
 
     sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data_cache:
         decorates: sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data
-        class: SyliusGtmEnhancedEcommercePlugin\Resolver\Cache\ProductDetailImpressionCachedDataResolver
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\Cache\ProductDetailImpressionCachedDataResolver
         arguments:
             - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data_cache.inner"
             - "@cache.app"

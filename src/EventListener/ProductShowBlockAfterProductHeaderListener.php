@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace SyliusGtmEnhancedEcommercePlugin\EventListener;
+namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolverInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolverInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;

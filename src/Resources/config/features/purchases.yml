@@ -5,7 +5,7 @@ services:
         public: false
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.purchases.listener.thank_you:
-        class: SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener
         arguments:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction"
             - "@sylius.repository.order"
