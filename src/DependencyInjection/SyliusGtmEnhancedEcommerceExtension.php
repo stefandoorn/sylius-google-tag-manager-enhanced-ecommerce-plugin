@@ -7,11 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * Class GtmEnhancedEcommerceExtension
- * @package SyliusGtmEnhancedEcommercePlugin\DependencyInjection
- */
-final class GtmEnhancedEcommerceExtension extends Extension
+final class SyliusGtmEnhancedEcommerceExtension extends Extension
 {
     /**
      * {@inheritdoc}
