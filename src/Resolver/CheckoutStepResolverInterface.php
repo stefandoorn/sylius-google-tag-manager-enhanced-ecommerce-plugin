@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\Resolver;
+namespace SyliusGtmEnhancedEcommercePlugin\Resolver;
 
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Interface CheckoutStepResolverInterface
- * @package GtmEnhancedEcommercePlugin\Resolver
+ * @package SyliusGtmEnhancedEcommercePlugin\Resolver
  */
 interface CheckoutStepResolverInterface
 {

@@ -1,16 +1,16 @@
 # Google Tag Manager Enhanced Ecommerce plugin for Sylius eCommerce platform
 
-[![License](https://img.shields.io/packagist/l/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin)
-[![Version](https://img.shields.io/packagist/v/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin)
-[![Build status on Linux](https://img.shields.io/travis/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin/master.svg)](http://travis-ci.org/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin.svg)](https://scrutinizer-ci.com/g/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin/)
-[![Coverage Status](https://coveralls.io/repos/github/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin/badge.svg?branch=master)](https://coveralls.io/github/stefandoorn/google-tag-manager-enhanced-ecommerce-plugin?branch=master)
+[![License](https://img.shields.io/packagist/l/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
+[![Version](https://img.shields.io/packagist/v/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
+[![Build status on Linux](https://img.shields.io/travis/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/master.svg)](http://travis-ci.org/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://scrutinizer-ci.com/g/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/)
+[![Coverage Status](https://coveralls.io/repos/github/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/badge.svg?branch=master)](https://coveralls.io/github/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin?branch=master)
 
 ## Installation
 
 ### 1. Composer
 
-`composer require stefandoorn/google-tag-manager-enhanced-ecommerce-plugin`
+`composer require stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin`
 
 ### 2. Follow installation instructions of required sub bundle
 
@@ -21,7 +21,7 @@ https://github.com/stefandoorn/google-tag-manager-plugin
 Add to the bundle list in `app/AppKernel.php`:
 
 ```php
-new GtmEnhancedEcommercePlugin\GtmEnhancedEcommercePlugin(),
+new SyliusGtmEnhancedEcommercePlugin\SyliusGtmEnhancedEcommercePlugin(),
 ```
 
 ### 4. Adjust configurations
@@ -29,7 +29,7 @@ new GtmEnhancedEcommercePlugin\GtmEnhancedEcommercePlugin(),
 Configure the features you would like to use/not. Find a base configuration reference by running:
 
 ```
-bin/console config:dump-reference GtmEnhancedEcommercePlugin
+bin/console config:dump-reference SyliusGtmEnhancedEcommercePlugin
 ```
 
 ### 5. Install assets

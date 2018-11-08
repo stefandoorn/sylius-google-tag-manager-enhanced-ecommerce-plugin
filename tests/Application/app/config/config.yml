@@ -8,7 +8,7 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
 
-    - { resource: "@GtmEnhancedEcommercePlugin/Resources/config/services.yml" }
+    - { resource: "@SyliusGtmEnhancedEcommercePlugin/Resources/config/services.yml" }
 
     - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }
 
@@ -22,7 +22,7 @@ gtm:
         environment: true
         route: true
 
-gtm_enhanced_ecommerce:
+sylius_gtm_enhanced_ecommerce:
     features:
         purchases: true
 

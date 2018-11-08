@@ -1,17 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\DependencyInjection;
+namespace SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * Class GtmEnhancedEcommerceExtension
- * @package GtmEnhancedEcommercePlugin\DependencyInjection
- */
-final class GtmEnhancedEcommerceExtension extends Extension
+final class SyliusGtmEnhancedEcommerceExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -25,7 +21,7 @@ final class GtmEnhancedEcommerceExtension extends Extension
         $loader->load('services.yml');
 
         foreach ($config['features'] as $feature => $setting) {
-            $parameter = sprintf('gtm_enhanced_ecommerce.features.%s', $feature);
+            $parameter = sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature);
 
             $container->setParameter($parameter, $setting);
 
@@ -38,7 +34,7 @@ final class GtmEnhancedEcommerceExtension extends Extension
             $loader->load('cache_services.yml');
 
             foreach ($config['cache_resolvers']['ttl'] as $feature => $ttl) {
-                $parameter = sprintf('gtm_enhanced_ecommerce.cache_resolver.%s', $feature);
+                $parameter = sprintf('sylius_gtm_enhanced_ecommerce.cache_resolver.%s', $feature);
                 $container->setParameter($parameter, $ttl);
             }
         }

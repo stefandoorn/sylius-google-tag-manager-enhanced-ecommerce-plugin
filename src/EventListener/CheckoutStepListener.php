@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\EventListener;
+namespace SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use GtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolverInterface;
-use GtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
+use SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolverInterface;
+use SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;

@@ -1,5 +1,5 @@
 <script type="text/javascript">
     {%- for variant in settings.resources.toArray -%}
-        {% include 'GtmEnhancedEcommercePlugin:ProductDetail:_variant.html.twig' with {'product': variant, 'loop': loop} only %}
+        {% include 'SyliusGtmEnhancedEcommercePlugin:ProductDetail:_variant.html.twig' with {'product': variant, 'loop': loop} only %}
     {%- endfor -%}
 </script>

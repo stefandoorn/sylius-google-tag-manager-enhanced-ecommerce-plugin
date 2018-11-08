@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\GtmEnhancedEcommercePlugin\Behat\Page\Shop;
+namespace Tests\SyliusGtmEnhancedEcommercePlugin\Behat\Page\Shop;
 
 use Sylius\Behat\Page\PageInterface;
 

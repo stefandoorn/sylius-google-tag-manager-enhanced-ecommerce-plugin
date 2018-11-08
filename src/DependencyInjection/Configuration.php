@@ -1,14 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace GtmEnhancedEcommercePlugin\DependencyInjection;
+namespace SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * Class Configuration
- * @package GtmEnhancedEcommercePlugin\DependencyInjection
- */
 final class Configuration implements ConfigurationInterface
 {
     /**
@@ -18,7 +14,7 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $rootNode = $treeBuilder->root('gtm_enhanced_ecommerce');
+        $rootNode = $treeBuilder->root('sylius_gtm_enhanced_ecommerce');
 
         $rootNode
             ->children()
