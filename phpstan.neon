@@ -1,6 +1,11 @@
 parameters:
+    symfony:
+        container_xml_path: %rootDir%/../../../var/cache/dev/srcDevDebugProjectContainer.xml
     excludes_analyse:
         # Makes PHPStan crash
         - '**/DependencyInjection/Configuration.php'
         # Behat
         - '**/Behat/*'
+
+includes:
+	- vendor/phpstan/phpstan-symfony/extension.neon
