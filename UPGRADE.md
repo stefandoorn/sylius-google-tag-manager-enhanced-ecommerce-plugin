@@ -5,7 +5,7 @@ Upgrade v0.7.0 -> v0.8.0
 
 Adjusted PSR namespacing to follow Sylius plugin naming conventions.
 
-* Rename namespace from `GtmEnhancedEcommercePlugin` to `StefanDoorn\GtmEnhancedEcommercePlugin`
+* Rename namespace from `SyliusGtmEnhancedEcommercePlugin` to `StefanDoorn\SyliusGtmEnhancedEcommercePlugin`
 
 Upgrade v0.6.1 -> v0.7.0
 ------------------------
