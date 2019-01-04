@@ -25,7 +25,7 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension
 
             $container->setParameter($parameter, $setting);
 
-            if ($setting === true) {
+            if ($setting === true || (is_array($setting) && $setting['enabled'] === true)) {
                 $loader->load(sprintf('features/%s.yml', $feature));
             }
         }
