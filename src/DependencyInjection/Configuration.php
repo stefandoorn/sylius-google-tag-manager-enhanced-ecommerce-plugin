@@ -35,25 +35,27 @@ final class Configuration implements ConfigurationInterface
                                         1 => [
                                             [
                                                 'event' => 'click',
-                                                'selector' => 'a[href$=/checkout/]'
+                                                'selector' => 'a[href$=\'/checkout/\']',
                                             ]
                                         ],
                                         2 => [
                                             [
                                                 'event' => 'submit',
-                                                'selector' => 'form[name=sylius_checkout_address]'
+                                                'selector' => 'form[name=sylius_checkout_address]',
                                             ]
                                         ],
                                         3 => [
                                             [
                                                 'event' => 'submit',
-                                                'selector' => 'form[name=sylius_checkout_select_shipping]'
+                                                'selector' => 'form[name=sylius_checkout_select_shipping]',
+                                                'option' => 'getCheckoutChoiceVal',
                                             ]
                                         ],
                                         4 => [
                                             [
                                                 'event' => 'submit',
-                                                'selector' => 'form[name=sylius_checkout_select_payment]'
+                                                'selector' => 'form[name=sylius_checkout_select_payment]',
+                                                'option' => 'getCheckoutChoiceVal',
                                             ]
                                         ],
                                     ])
@@ -63,6 +65,7 @@ final class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('event')->defaultValue('submit')->end()
                                                 ->scalarNode('selector')->isRequired()->end()
+                                                ->scalarNode('option')->end()
                                             ->end()
                                         ->end()
                                     ->end()
