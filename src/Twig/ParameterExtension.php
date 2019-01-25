@@ -5,10 +5,10 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class ParameterExtension extends AbstractExtension
+final class ParameterExtension extends AbstractExtension
 {
     /** @var array */
-    protected $parameters;
+    private $parameters;
 
     /**
      * @param bool $purchases
@@ -49,7 +49,7 @@ class ParameterExtension extends AbstractExtension
 
     /**
      * @param string $name
-     * @return bool|array
+     * @return bool|array|null
      */
     public function getParameter(string $name)
     {
