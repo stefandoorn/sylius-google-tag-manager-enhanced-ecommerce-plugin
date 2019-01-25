@@ -2,7 +2,7 @@
 
 ## Configuration
 
-You can customize the steps of checkout by creating your own. This is the default one :
+You can customize the steps of checkout by creating your own. This is the default one:
 
 ```$yaml
 # config/packages/sylius_gtm_enhanced_ecommerce.yaml
@@ -20,12 +20,12 @@ sylius_gtm_enhanced_ecommerce:
                         selector: "form[name=sylius_checkout_address]"
                 3:
                     -
+                        option: "enhancedEcommerceCheckoutGetChoiceVal"
                         selector: "form[name=sylius_checkout_select_shipping]"
-                        option: "getCheckoutChoiceVal"
                 4:
                     -
+                        option: "enhancedEcommerceCheckoutGetChoiceVal"
                         selector: "form[name=sylius_checkout_select_payment]"
-                        option: "getCheckoutChoiceVal"
 ```
 
 The configuration allow you to add or remove steps, choice a specific js event to listen,

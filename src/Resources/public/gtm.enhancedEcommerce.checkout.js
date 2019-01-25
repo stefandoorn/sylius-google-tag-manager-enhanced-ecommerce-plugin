@@ -1,19 +1,28 @@
+'use strict';
 (function ($) {
-  'use strict';
 
-  if (typeof checkoutStepsConfiguration !== "undefined" && checkoutStepsConfiguration.enabled === true) {
-    for (var stepId in checkoutStepsConfiguration.steps) {
-      if (checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) {
-        checkoutStepsConfiguration.steps[stepId].forEach(function (conf) {
-          $(conf.selector).on(conf.event, function (e) {
-            var option = null;
-            if (typeof conf.option !== "undefined" && typeof window[conf.option] === 'function') {
-              option = window[conf.option].call(this);
-            }
-            enhancedEcommerceTrackCheckoutOption(stepId, option);
-          });
+  if (typeof checkoutStepsConfiguration === "undefined") return;
+  if (typeof checkoutStepsConfiguration !== "object") return;
+  if (!checkoutStepsConfiguration.hasOwnProperty('enabled')) return;
+  if (checkoutStepsConfiguration.enabled === false) return;
+  if (!checkoutStepsConfiguration.hasOwnProperty('steps')) return;
+
+  for (var stepId in checkoutStepsConfiguration.steps) {
+    if (checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) {
+      checkoutStepsConfiguration.steps[stepId].forEach(function BindStep(conf) {
+        $(conf.selector).on(conf.event, function (e) {
+          var option = null;
+
+          if (
+            typeof conf.option !== "undefined"
+            && typeof window[conf.option] === 'function'
+          ) {
+            option = window[conf.option].call(this);
+          }
+
+          enhancedEcommerceTrackCheckoutOption(stepId, option);
         });
-      }
+      });
     }
   }
 })(jQuery);
@@ -30,21 +39,21 @@
  *
  * @returns {string}
  */
-function getCheckoutChoiceVal() {
+function enhancedEcommerceCheckoutGetChoiceVal() {
   return $('input[type=radio]:checked', this).val();
 }
 
 /**
- * @param {integer} step
+ * @param {integer} stepId
  * @param {string} checkoutOption
  */
-function enhancedEcommerceTrackCheckoutOption(step, checkoutOption) {
+function enhancedEcommerceTrackCheckoutOption(stepId, checkoutOption) {
   var obj = {
     'event': 'checkoutOption',
     'ecommerce': {
       'checkout_option': {
         'actionField': {
-          'step': step,
+          'step': stepId,
           'option': checkoutOption
         }
       }
