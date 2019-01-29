@@ -8,22 +8,22 @@
   if (!checkoutStepsConfiguration.hasOwnProperty('steps')) return;
 
   for (var stepId in checkoutStepsConfiguration.steps) {
-    if (checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) {
-      checkoutStepsConfiguration.steps[stepId].forEach(function BindStep(conf) {
-        $(conf.selector).on(conf.event, function (e) {
-          var option = null;
+    if (!checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) continue;
 
-          if (
-            typeof conf.option !== "undefined"
-            && typeof window[conf.option] === 'function'
-          ) {
-            option = window[conf.option].call(this);
-          }
+    checkoutStepsConfiguration.steps[stepId].forEach(function BindStep(conf) {
+      $(conf.selector).on(conf.event, function () {
+        var option = null;
 
-          enhancedEcommerceTrackCheckoutOption(stepId, option);
-        });
+        if (
+          typeof conf.option !== "undefined"
+          && typeof window[conf.option] === 'function'
+        ) {
+          option = window[conf.option].call(this);
+        }
+
+        enhancedEcommerceTrackCheckoutOption(stepId, option);
       });
-    }
+    });
   }
 })(jQuery);
 
@@ -39,7 +39,7 @@
  *
  * @returns {string}
  */
-function enhancedEcommerceCheckoutGetChoiceVal() {
+function enhancedEcommerceCheckoutGetChoiceValue() {
   return $('input[type=radio]:checked', this).val();
 }
 

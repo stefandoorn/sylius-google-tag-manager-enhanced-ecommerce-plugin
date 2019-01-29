@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
@@ -7,9 +7,9 @@ use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection\SyliusGtmEn
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
+final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
 {
-    public function testMinimalConfig()
+    public function testMinimalConfig(): void
     {
         $container = $this->getContainer();
         $extension = new SyliusGtmEnhancedEcommerceExtension();
@@ -46,7 +46,7 @@ class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         );
     }
 
-    public function testWithCacheResolver()
+    public function testWithCacheResolver(): void
     {
         $container = $this->getContainer();
         $extension = new SyliusGtmEnhancedEcommerceExtension();
@@ -62,7 +62,7 @@ class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         );
     }
 
-    private function getContainer()
+    private function getContainer(): ContainerBuilder
     {
         return new ContainerBuilder(new ParameterBag([
             'kernel.debug' => false,

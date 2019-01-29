@@ -48,14 +48,14 @@ final class Configuration implements ConfigurationInterface
                                             [
                                                 'event' => 'submit',
                                                 'selector' => 'form[name=sylius_checkout_select_shipping]',
-                                                'option' => 'enhancedEcommerceCheckoutGetChoiceVal',
+                                                'option' => 'enhancedEcommerceCheckoutGetChoiceValue',
                                             ]
                                         ],
                                         4 => [
                                             [
                                                 'event' => 'submit',
                                                 'selector' => 'form[name=sylius_checkout_select_payment]',
-                                                'option' => 'enhancedEcommerceCheckoutGetChoiceVal',
+                                                'option' => 'enhancedEcommerceCheckoutGetChoiceValue',
                                             ]
                                         ],
                                     ])

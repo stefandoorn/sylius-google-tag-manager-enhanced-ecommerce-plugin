@@ -20,11 +20,11 @@ sylius_gtm_enhanced_ecommerce:
                         selector: "form[name=sylius_checkout_address]"
                 3:
                     -
-                        option: "enhancedEcommerceCheckoutGetChoiceVal"
+                        option: "enhancedEcommerceCheckoutGetChoiceValue"
                         selector: "form[name=sylius_checkout_select_shipping]"
                 4:
                     -
-                        option: "enhancedEcommerceCheckoutGetChoiceVal"
+                        option: "enhancedEcommerceCheckoutGetChoiceValue"
                         selector: "form[name=sylius_checkout_select_payment]"
 ```
 
