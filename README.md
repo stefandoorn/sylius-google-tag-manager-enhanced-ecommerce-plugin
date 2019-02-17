@@ -6,6 +6,8 @@
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://scrutinizer-ci.com/g/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/)
 [![Coverage Status](https://coveralls.io/repos/github/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/badge.svg?branch=master)](https://coveralls.io/github/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin?branch=master)
 
+<p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="200"></a></p>
+
 ## Installation
 
 ### 1. Composer
