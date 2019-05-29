@@ -21,7 +21,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^2.0|^3.0",
         "phpspec/phpspec": "^4.0",
         "phpstan/phpstan": "^0.10.5",
-        "phpunit/phpunit": "^6.0|^7.0",
+        "phpunit/phpunit": "^8.1.6",
         "se/selenium-server-standalone": "^2.52",
         "symfony/debug-bundle": "^3.4|^4.1",
         "symfony/web-profiler-bundle": "^3.4|^4.1",
