@@ -60,7 +60,7 @@ final class AddTransaction implements AddTransactionInterface
                 'quantity' => $item->getQuantity(),
                 'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
                 'category' => $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
-                'price' => $item->getTotal() / 100,
+                'price' => $item->getUnitPrice() / 100,
             ];
         }
 

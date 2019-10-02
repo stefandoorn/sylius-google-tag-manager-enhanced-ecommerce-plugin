@@ -83,7 +83,7 @@ final class CheckoutStep implements CheckoutStepInterface
             'quantity' => $item->getQuantity(),
             'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
             'category' => $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
-            'price' => $item->getTotal() / 100,
+            'price' => $item->getUnitPrice() / 100,
         ];
     }
 }
