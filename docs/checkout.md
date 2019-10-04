@@ -1,5 +1,37 @@
 # Checkout
 
+## Configuration
+
+You can customize the steps of checkout by creating your own. This is the default one:
+
+```$yaml
+# config/packages/sylius_gtm_enhanced_ecommerce.yaml
+
+sylius_gtm_enhanced_ecommerce:
+    features:
+        checkout:
+            steps:
+                1:
+                    -
+                        event: "click"
+                        selector: "a[href$='/checkout/']"
+                2:
+                    -
+                        selector: "form[name=sylius_checkout_address]"
+                3:
+                    -
+                        option: "enhancedEcommerceCheckoutGetChoiceValue"
+                        selector: "form[name=sylius_checkout_select_shipping]"
+                4:
+                    -
+                        option: "enhancedEcommerceCheckoutGetChoiceValue"
+                        selector: "form[name=sylius_checkout_select_payment]"
+```
+
+The configuration allow you to add or remove steps, choice a specific js event to listen,
+a specific selector to put this event and finally allow you to give a global function which
+give you the possibility to add additional information to GA.
+
 ## Google Documentation
 
 https://developers.google.com/tag-manager/enhanced-ecommerce#checkout

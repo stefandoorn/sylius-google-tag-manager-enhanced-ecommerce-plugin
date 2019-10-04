@@ -45,3 +45,15 @@ services:
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail_impression:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactory
+        
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.twig.extension.parameters:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig\ParameterExtension
+        arguments:
+            - "%sylius_gtm_enhanced_ecommerce.features.purchases%"
+            - "%sylius_gtm_enhanced_ecommerce.features.product_impressions%"
+            - "%sylius_gtm_enhanced_ecommerce.features.product_detail_impressions%"
+            - "%sylius_gtm_enhanced_ecommerce.features.product_clicks%"
+            - "%sylius_gtm_enhanced_ecommerce.features.cart%"
+            - "%sylius_gtm_enhanced_ecommerce.features.checkout%"
+        tags:
+            - { name: "twig.extension" }

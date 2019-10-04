@@ -12,6 +12,13 @@ services:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step"
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+              
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout.listener.sylius.shop.layout.head:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - '@@SyliusGtmEnhancedEcommercePlugin/Checkout/head.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
 
     sylius.google_tag_manager_enhanced_ecommerce.checkout.block_event_listener.layout.javascripts:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
