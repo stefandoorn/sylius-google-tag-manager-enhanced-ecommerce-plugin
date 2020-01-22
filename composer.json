@@ -24,7 +24,7 @@
         "phpunit/phpunit": "^6.0|^7.0",
         "se/selenium-server-standalone": "^2.52",
         "symfony/debug-bundle": "^3.4|^4.1",
-        "symfony/web-profiler-bundle": "^3.4|^4.1",
+        "symfony/web-profiler-bundle": "^5.0.3",
         "symfony/web-server-bundle": "^3.4|^4.1"
     },
     "autoload": {
