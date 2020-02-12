@@ -23,7 +23,7 @@
         "phpstan/phpstan": "^0.12.9",
         "phpunit/phpunit": "^6.0|^7.0",
         "se/selenium-server-standalone": "^2.52",
-        "symfony/debug-bundle": "^3.4|^4.1",
+        "symfony/debug-bundle": "^5.0.4",
         "symfony/web-profiler-bundle": "^3.4|^4.1",
         "symfony/web-server-bundle": "^3.4|^4.1"
     },
