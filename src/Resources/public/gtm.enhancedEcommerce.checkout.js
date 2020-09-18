@@ -11,6 +11,7 @@
     if (!checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) continue;
 
     checkoutStepsConfiguration.steps[stepId].forEach(function BindStep(conf) {
+      conf.stepId = stepId;
       $(conf.selector).on(conf.event, function () {
         var option = null;
 
@@ -21,7 +22,7 @@
           option = window[conf.option].call(this);
         }
 
-        enhancedEcommerceTrackCheckoutOption(stepId, option);
+        enhancedEcommerceTrackCheckoutOption(conf.stepId, option);
       });
     });
   }
