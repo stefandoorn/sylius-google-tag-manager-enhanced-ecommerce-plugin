@@ -19,7 +19,7 @@
         "friends-of-behat/variadic-extension": "^1.1",
         "lakion/mink-debug-extension": "^1.2.3",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0|^3.0",
-        "phpspec/phpspec": "^4.0",
+        "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "^0.12.9",
         "phpunit/phpunit": "^6.0|^7.0",
         "se/selenium-server-standalone": "^2.52",
