@@ -23,6 +23,6 @@ services:
     sylius.google_tag_manager_enhanced_ecommerce.checkout.block_event_listener.layout.javascripts:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'SyliusGtmEnhancedEcommercePlugin::Checkout/javascripts.html.twig'
+            - '@@SyliusGtmEnhancedEcommercePlugin/Checkout/javascripts.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }

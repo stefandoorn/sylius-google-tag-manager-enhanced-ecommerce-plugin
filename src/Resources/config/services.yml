@@ -36,7 +36,7 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.global.listener.sylius.shop.layout.head:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'SyliusGtmEnhancedEcommercePlugin::Global/head.html.twig'
+            - '@@SyliusGtmEnhancedEcommercePlugin/Global/head.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
 
