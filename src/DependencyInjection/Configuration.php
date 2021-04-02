@@ -12,9 +12,8 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-
-        $rootNode = $treeBuilder->root('sylius_gtm_enhanced_ecommerce');
+        $treeBuilder = new TreeBuilder('sylius_gtm_enhanced_ecommerce');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
