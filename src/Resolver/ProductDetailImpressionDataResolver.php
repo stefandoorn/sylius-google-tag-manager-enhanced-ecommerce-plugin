@@ -76,7 +76,7 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
      */
     private function prepare(ProductInterface $product): \Generator
     {
-        foreach ($product->getVariants() as $variant) {
+        foreach ($product->getEnabledVariants() as $variant) {
             yield $this->createProductVariant($variant);
         }
     }
