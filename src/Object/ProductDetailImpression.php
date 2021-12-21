@@ -1,16 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object;
 
 /**
  * Class ProductDetailImpressionData
- * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object
  */
 final class ProductDetailImpression implements ProductDetailImpressionInterface
 {
-    /**
-     * @var array|ProductDetailInterface[]
-     */
+    /** @var array|ProductDetailInterface[] */
     private $variants = [];
 
     /**
@@ -26,7 +25,7 @@ final class ProductDetailImpression implements ProductDetailImpressionInterface
      */
     public function toArray(): array
     {
-        return array_map(function(ProductDetailInterface $productDetail) {
+        return \array_map(static function (ProductDetailInterface $productDetail): array {
             return $productDetail->toArray();
         }, $this->variants);
     }

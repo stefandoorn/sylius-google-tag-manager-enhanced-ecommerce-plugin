@@ -1,32 +1,35 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 /**
  * Class CheckoutStep
- * @package SyliusGoogleAnalyticsEnhancedEcommerceTrackingBundle\TagManager
  */
 final class CheckoutStep implements CheckoutStepInterface
 {
-    const STEP_CART = 1;
-    const STEP_ADDRESS = 2;
-    const STEP_SHIPPING = 3;
-    const STEP_PAYMENT = 4;
-    const STEP_CONFIRM = 5;
-    const STEP_THANKYOU = 6;
+    public const STEP_CART = 1;
 
-    /**
-     * @var GoogleTagManagerInterface
-     */
+    public const STEP_ADDRESS = 2;
+
+    public const STEP_SHIPPING = 3;
+
+    public const STEP_PAYMENT = 4;
+
+    public const STEP_CONFIRM = 5;
+
+    public const STEP_THANKYOU = 6;
+
+    /** @var GoogleTagManagerInterface */
     private $googleTagManager;
 
     /**
      * CheckoutStep constructor.
-     * @param GoogleTagManagerInterface $googleTagManager
      */
     public function __construct(GoogleTagManagerInterface $googleTagManager)
     {
@@ -56,10 +59,6 @@ final class CheckoutStep implements CheckoutStepInterface
         ]);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @return array
-     */
     private function getProducts(OrderInterface $order): array
     {
         $products = [];
@@ -71,10 +70,6 @@ final class CheckoutStep implements CheckoutStepInterface
         return $products;
     }
 
-    /**
-     * @param OrderItemInterface $item
-     * @return array
-     */
     private function createProduct(OrderItemInterface $item): array
     {
         return [
@@ -82,7 +77,7 @@ final class CheckoutStep implements CheckoutStepInterface
             'id' => $item->getProduct()->getId(),
             'quantity' => $item->getQuantity(),
             'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
-            'category' => $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
+            'category' => null !== $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
             'price' => $item->getUnitPrice() / 100,
         ];
     }

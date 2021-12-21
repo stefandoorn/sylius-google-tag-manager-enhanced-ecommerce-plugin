@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory;
 
@@ -7,7 +9,6 @@ use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionI
 
 /**
  * Class ProductDetailImpressionFactory
- * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory
  */
 final class ProductDetailImpressionFactory implements ProductDetailImpressionFactoryInterface
 {

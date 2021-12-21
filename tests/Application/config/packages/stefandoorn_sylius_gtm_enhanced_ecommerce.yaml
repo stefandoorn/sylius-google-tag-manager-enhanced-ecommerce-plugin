@@ -1,0 +1,3 @@
+sylius_gtm_enhanced_ecommerce:
+    features:
+        purchases: true

@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
+use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
-use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\Controller\OrderController;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -14,12 +16,11 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
 /**
  * Class ThankYouListenerTest
- * @package Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener
+ *
  * @covers \StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener
  */
 final class ThankYouListenerTest extends TestCase
 {
-
     public function testWrongController()
     {
         // Requirements
@@ -48,6 +49,7 @@ final class ThankYouListenerTest extends TestCase
         // Check result
         $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
     }
+
     /*
         public function testNoOrderFound()
         {

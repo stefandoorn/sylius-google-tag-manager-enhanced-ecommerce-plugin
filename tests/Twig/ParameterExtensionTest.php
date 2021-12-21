@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig;
 
@@ -13,13 +15,13 @@ final class ParameterExtensionTest extends TestCase
     {
         $twig = new Environment(
             new ArrayLoader([
-                'template' => $template
+                'template' => $template,
             ]),
             [
                 'debug' => true,
                 'cache' => false,
                 'autoescape' => 'html',
-                'optimizations' => 0
+                'optimizations' => 0,
             ]
         );
 

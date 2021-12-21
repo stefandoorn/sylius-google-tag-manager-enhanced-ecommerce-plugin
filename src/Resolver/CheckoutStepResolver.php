@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
@@ -7,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CheckoutStepResolver
- * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver
  */
 final class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
@@ -28,11 +29,7 @@ final class CheckoutStepResolver implements CheckoutStepResolverInterface
         return null;
     }
 
-    /**
-     * @param Request $request
-     * @return int|null
-     */
-    private static function updateAction(Request $request): ?int
+    private function updateAction(Request $request): ?int
     {
         $route = $request->get('_route');
 

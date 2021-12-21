@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\Cache;
 
@@ -9,36 +11,23 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 /**
  * Class ProductDetailImpressionCachedDataResolver
- * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\Cache
  */
 final class ProductDetailImpressionCachedDataResolver implements ProductDetailImpressionDataResolverInterface
 {
-    /**
-     * @var ProductDetailImpressionDataResolverInterface
-     */
+    /** @var ProductDetailImpressionDataResolverInterface */
     private $productDetailImpressionDataResolver;
 
-    /**
-     * @var AdapterInterface
-     */
+    /** @var AdapterInterface */
     private $cacheAdapter;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $cacheTtl;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $cacheKey;
 
     /**
      * ProductDetailImpressionCachedDataResolver constructor.
-     * @param ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver
-     * @param AdapterInterface $cacheAdapter
-     * @param int $cacheTtl
-     * @param string $cacheKey
      */
     public function __construct(
         ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver,
@@ -57,7 +46,7 @@ final class ProductDetailImpressionCachedDataResolver implements ProductDetailIm
      */
     public function get(ProductInterface $product): ProductDetailImpressionInterface
     {
-        $cacheKey = sprintf('%s.%d', $this->cacheKey, $product->getId());
+        $cacheKey = \sprintf('%s.%d', $this->cacheKey, $product->getId());
         $cache = $this->cacheAdapter->getItem($cacheKey);
 
         if (!$cache->isHit()) {

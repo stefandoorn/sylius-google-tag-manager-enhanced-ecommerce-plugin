@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
@@ -13,36 +15,23 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
  * Class ProductDetailImpressionDataResolver
- * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver
  */
 final class ProductDetailImpressionDataResolver implements ProductDetailImpressionDataResolverInterface
 {
-    /**
-     * @var ProductVariantPriceCalculatorInterface
-     */
+    /** @var ProductVariantPriceCalculatorInterface */
     private $productVariantPriceCalculator;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var ProductDetailImpressionFactoryInterface
-     */
+    /** @var ProductDetailImpressionFactoryInterface */
     private $productDetailImpressionFactory;
 
-    /**
-     * @var ProductDetailFactoryInterface
-     */
+    /** @var ProductDetailFactoryInterface */
     private $productDetailFactory;
 
     /**
      * ProductDetailImpressionDataResolver constructor.
-     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-     * @param ChannelContextInterface $channelContext
-     * @param ProductDetailImpressionFactoryInterface $productDetailImpressionFactory
-     * @param ProductDetailFactoryInterface $productDetailFactory
      */
     public function __construct(
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
@@ -63,7 +52,7 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
     {
         $vo = $this->productDetailImpressionFactory->create();
 
-        foreach($this->prepare($product) as $item) {
+        foreach ($this->prepare($product) as $item) {
             $vo->add($item);
         }
 
@@ -71,7 +60,6 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
     }
 
     /**
-     * @param ProductInterface $product
      * @return \Generator|ProductDetailInterface[]
      */
     private function prepare(ProductInterface $product): \Generator
@@ -81,10 +69,6 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
         }
     }
 
-    /**
-     * @param ProductVariantInterface $productVariant
-     * @return ProductDetailInterface
-     */
     private function createProductVariant(ProductVariantInterface $productVariant): ProductDetailInterface
     {
         /** @var ProductInterface $product */
@@ -95,19 +79,15 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
         $vo->setName($product->getName());
         $vo->setId($product->getId());
         $vo->setPrice($this->getPrice($productVariant));
-        $vo->setCategory($product->getMainTaxon() ? $product->getMainTaxon()->getName() : null);
+        $vo->setCategory(null !== $product->getMainTaxon() ? $product->getMainTaxon()->getName() : null);
         $vo->setVariant($productVariant->getCode());
 
         return $vo;
     }
 
-    /**
-     * @param ProductVariantInterface $productVariant
-     * @return float
-     */
     private function getPrice(ProductVariantInterface $productVariant): float
     {
-        return (float)round($this->productVariantPriceCalculator->calculate($productVariant, [
+        return \round($this->productVariantPriceCalculator->calculate($productVariant, [
                 'channel' => $this->channelContext->getChannel(),
             ]) / 100, 2);
     }

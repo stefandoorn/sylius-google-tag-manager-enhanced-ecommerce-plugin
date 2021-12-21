@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
@@ -10,25 +12,17 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 /**
  * Class ThankYouListener
- * @package GtmEnhancedEcommerce\EventListener
  */
 final class ThankYouListener
 {
-
-    /**
-     * @var AddTransactionInterface
-     */
+    /** @var AddTransactionInterface */
     private $transactionService;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
     /**
      * ThankYouListener constructor.
-     * @param AddTransactionInterface $transactionService
-     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         AddTransactionInterface $transactionService,
@@ -38,9 +32,6 @@ final class ThankYouListener
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * @param ControllerEvent $event
-     */
     public function onKernelController(ControllerEvent $event): void
     {
         $controller = $event->getController();
@@ -55,7 +46,7 @@ final class ThankYouListener
          * This is not usual in Symfony but it may happen.
          * If it is a class, it comes in array format
          */
-        if (!is_array($controller)) {
+        if (!\is_array($controller)) {
             return;
         }
 

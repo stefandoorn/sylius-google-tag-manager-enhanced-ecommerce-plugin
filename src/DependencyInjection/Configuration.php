@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
@@ -8,7 +10,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getConfigTreeBuilder()
     {
@@ -35,27 +37,27 @@ final class Configuration implements ConfigurationInterface
                                             [
                                                 'event' => 'click',
                                                 'selector' => 'a[href$=\'/checkout/\']',
-                                            ]
+                                            ],
                                         ],
                                         2 => [
                                             [
                                                 'event' => 'submit',
                                                 'selector' => 'form[name=sylius_checkout_address]',
-                                            ]
+                                            ],
                                         ],
                                         3 => [
                                             [
                                                 'event' => 'submit',
                                                 'selector' => 'form[name=sylius_checkout_select_shipping]',
                                                 'option' => 'enhancedEcommerceCheckoutGetChoiceValue',
-                                            ]
+                                            ],
                                         ],
                                         4 => [
                                             [
                                                 'event' => 'submit',
                                                 'selector' => 'form[name=sylius_checkout_select_payment]',
                                                 'option' => 'enhancedEcommerceCheckoutGetChoiceValue',
-                                            ]
+                                            ],
                                         ],
                                     ])
                                     ->arrayPrototype()

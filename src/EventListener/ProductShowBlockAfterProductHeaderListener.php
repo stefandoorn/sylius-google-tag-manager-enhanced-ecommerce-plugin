@@ -1,23 +1,19 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolverInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Model\ProductInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolverInterface;
 
 final class ProductShowBlockAfterProductHeaderListener
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
-    /**
-     * @var ProductDetailImpressionDataResolverInterface
-     */
+    /** @var ProductDetailImpressionDataResolverInterface */
     private $resolver;
 
     public function __construct(string $template, ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver)
@@ -28,14 +24,13 @@ final class ProductShowBlockAfterProductHeaderListener
 
     public function onProductShow(BlockEvent $event): void
     {
-        /** @var \AppBundle\Entity\Interfaces\ProductInterface $product */
         $product = $event->getSetting('product');
 
         $block = new Block();
-        $block->setId(uniqid('', true));
-        $block->setSettings(array_replace($event->getSettings(), [
+        $block->setId(\uniqid('', true));
+        $block->setSettings(\array_replace($event->getSettings(), [
             'template' => $this->template,
-            'resources' => $this->resolver->get($product)
+            'resources' => $this->resolver->get($product),
         ]));
 
         $block->setType('sonata.block.service.template');

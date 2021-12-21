@@ -1,0 +1,7 @@
+gtm:
+    inject: true
+    features:
+        environment: true
+        route: true
+        context: true
+        events: true
