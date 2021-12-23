@@ -20,7 +20,7 @@ https://github.com/stefandoorn/google-tag-manager-plugin
 
 ### 3. Load bundle
 
-Add to the bundle list in `app/AppKernel.php`:
+Add to the bundle list:
 
 ```php
 new StefanDoorn\SyliusGtmEnhancedEcommercePlugin\SyliusGtmEnhancedEcommercePlugin(),
