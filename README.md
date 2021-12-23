@@ -2,9 +2,7 @@
 
 [![License](https://img.shields.io/packagist/l/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
 [![Version](https://img.shields.io/packagist/v/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
-[![Build status on Linux](https://img.shields.io/travis/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/master.svg)](http://travis-ci.org/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://scrutinizer-ci.com/g/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/)
-[![Coverage Status](https://coveralls.io/repos/github/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/badge.svg?branch=master)](https://coveralls.io/github/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin?branch=master)
+[![Build](https://github.com/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/actions/workflows/build.yml)
 
 <p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="200"></a></p>
 
