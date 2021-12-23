@@ -39,7 +39,7 @@ final class ThankYouListenerTest extends TestCase
         $request = new Request();
 
         // Create event
-        $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MAIN_REQUEST);
+        $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
         $service = new AddTransaction($gtm, $channelContext, $currencyContext);
@@ -73,7 +73,7 @@ final class ThankYouListenerTest extends TestCase
         $controller->expects($this->any())->method('thankYouAction')->willReturn(new Response());
 
         // Create event
-        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MAIN_REQUEST);
+        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
         $service = new AddTransaction($gtm, $channelContext, $currencyContext);
@@ -108,7 +108,7 @@ final class ThankYouListenerTest extends TestCase
         $controller->expects($this->any())->method('thankYouAction')->willReturn(new Response());
 
         // Create event
-        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MAIN_REQUEST);
+        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
         $service = new AddTransaction($gtm, $channelContext, $currencyContext);
