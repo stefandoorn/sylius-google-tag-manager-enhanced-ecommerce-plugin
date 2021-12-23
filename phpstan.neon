@@ -1,6 +1,12 @@
 parameters:
+    reportUnmatchedIgnoredErrors: true
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+
     excludes_analyse:
         # Makes PHPStan crash
-        - '**/DependencyInjection/Configuration.php'
-        # Behat
-        - '**/Behat/*'
+        - 'src/DependencyInjection/Configuration.php'
+
+        # Test dependencies
+        - 'tests/Application/app/**.php'
+        - 'tests/Application/src/**.php'

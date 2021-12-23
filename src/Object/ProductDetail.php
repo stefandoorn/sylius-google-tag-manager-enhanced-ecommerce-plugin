@@ -1,36 +1,27 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object;
 
 /**
  * Class ProductDetail
- * @package StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object
  */
 final class ProductDetail implements ProductDetailInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $price;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $category;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $variant;
 
     /**

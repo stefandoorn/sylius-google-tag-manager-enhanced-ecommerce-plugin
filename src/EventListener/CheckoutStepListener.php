@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
@@ -8,33 +10,22 @@ use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
-
 /**
  * Class CheckoutStepListener
- * @package GtmEnhancedEcommerce\EventListener
  */
 final class CheckoutStepListener
 {
-    /**
-     * @var CheckoutStepInterface
-     */
+    /** @var CheckoutStepInterface */
     private $checkoutStep;
 
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
-    /**
-     * @var CheckoutStepResolverInterface
-     */
+    /** @var CheckoutStepResolverInterface */
     private $checkoutStepResolver;
 
     /**
      * CheckoutStepListener constructor.
-     * @param CheckoutStepInterface $checkoutStep
-     * @param CartContextInterface $cartContext
-     * @param CheckoutStepResolverInterface $checkoutStepResolver
      */
     public function __construct(
         CheckoutStepInterface $checkoutStep,
@@ -46,9 +37,6 @@ final class CheckoutStepListener
         $this->checkoutStepResolver = $checkoutStepResolver;
     }
 
-    /**
-     * @param ControllerEvent $event
-     */
     public function onKernelController(ControllerEvent $event): void
     {
         $controller = $event->getController();
@@ -63,7 +51,7 @@ final class CheckoutStepListener
          * This is not usual in Symfony but it may happen.
          * If it is a class, it comes in array format
          */
-        if (!is_array($controller)) {
+        if (!\is_array($controller)) {
             return;
         }
 

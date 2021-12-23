@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
@@ -52,7 +54,7 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         $extension = new SyliusGtmEnhancedEcommerceExtension();
 
         $config = [
-            'cache_resolvers'=>true,
+            'cache_resolvers' => true,
         ];
         $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
 
@@ -67,9 +69,9 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         return new ContainerBuilder(new ParameterBag([
             'kernel.debug' => false,
             'kernel.bundles' => [],
-            'kernel.cache_dir' => sys_get_temp_dir(),
+            'kernel.cache_dir' => \sys_get_temp_dir(),
             'kernel.environment' => 'test',
-            'kernel.root_dir' => __DIR__.'/../../src/',
+            'kernel.root_dir' => __DIR__ . '/../../src/',
         ]));
     }
 }

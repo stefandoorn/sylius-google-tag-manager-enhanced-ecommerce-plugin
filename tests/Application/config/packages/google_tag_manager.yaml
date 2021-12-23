@@ -1,0 +1,4 @@
+google_tag_manager:
+    enabled: true
+    id: "GTM-TESTTEST"
+    autoAppend: false

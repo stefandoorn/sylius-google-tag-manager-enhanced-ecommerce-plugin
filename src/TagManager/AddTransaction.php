@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
@@ -10,31 +12,20 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 /**
  * Class AddTransaction
- * @package SyliusGoogleAnalyticsEnhancedEcommerceTrackingBundle\TagManager
  */
 final class AddTransaction implements AddTransactionInterface
 {
-
-    /**
-     * @var GoogleTagManagerInterface
-     */
+    /** @var GoogleTagManagerInterface */
     private $googleTagManager;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var CurrencyContextInterface
-     */
+    /** @var CurrencyContextInterface */
     private $currencyContext;
 
     /**
      * AddTransaction constructor.
-     * @param GoogleTagManagerInterface $googleTagManager
-     * @param ChannelContextInterface $channelContext
-     * @param CurrencyContextInterface $currencyContext
      */
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
@@ -46,9 +37,6 @@ final class AddTransaction implements AddTransactionInterface
         $this->currencyContext = $currencyContext;
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     public function addTransaction(OrderInterface $order): void
     {
         $products = [];
@@ -59,7 +47,7 @@ final class AddTransaction implements AddTransactionInterface
                 'id' => $item->getProduct()->getId(),
                 'quantity' => $item->getQuantity(),
                 'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
-                'category' => $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
+                'category' => null !== $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
                 'price' => $item->getUnitPrice() / 100,
             ];
         }
