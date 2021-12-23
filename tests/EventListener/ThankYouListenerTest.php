@@ -15,13 +15,11 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
 /**
- * Class ThankYouListenerTest
- *
  * @covers \StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener
  */
 final class ThankYouListenerTest extends TestCase
 {
-    public function testWrongController()
+    public function testWrongController(): void
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');

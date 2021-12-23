@@ -13,13 +13,11 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
 /**
- * Class AddTransactionTest
- *
  * @covers \StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction
  */
 final class AddTransactionTest extends TestCase
 {
-    public function testSimpleTransaction()
+    public function testSimpleTransaction(): void
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
