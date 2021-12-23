@@ -10,23 +10,14 @@ use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
-/**
- * Class CheckoutStepListener
- */
 final class CheckoutStepListener
 {
-    /** @var CheckoutStepInterface */
-    private $checkoutStep;
+    private CheckoutStepInterface $checkoutStep;
 
-    /** @var CartContextInterface */
-    private $cartContext;
+    private CartContextInterface $cartContext;
 
-    /** @var CheckoutStepResolverInterface */
-    private $checkoutStepResolver;
+    private CheckoutStepResolverInterface $checkoutStepResolver;
 
-    /**
-     * CheckoutStepListener constructor.
-     */
     public function __construct(
         CheckoutStepInterface $checkoutStep,
         CartContextInterface $cartContext,

@@ -10,23 +10,14 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
-/**
- * Class AddTransaction
- */
 final class AddTransaction implements AddTransactionInterface
 {
-    /** @var GoogleTagManagerInterface */
-    private $googleTagManager;
+    private GoogleTagManagerInterface $googleTagManager;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var CurrencyContextInterface */
-    private $currencyContext;
+    private CurrencyContextInterface $currencyContext;
 
-    /**
-     * AddTransaction constructor.
-     */
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ChannelContextInterface $channelContext,

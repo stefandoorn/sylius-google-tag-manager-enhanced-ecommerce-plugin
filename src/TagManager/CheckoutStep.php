@@ -8,9 +8,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
-/**
- * Class CheckoutStep
- */
 final class CheckoutStep implements CheckoutStepInterface
 {
     public const STEP_CART = 1;
@@ -25,12 +22,8 @@ final class CheckoutStep implements CheckoutStepInterface
 
     public const STEP_THANKYOU = 6;
 
-    /** @var GoogleTagManagerInterface */
-    private $googleTagManager;
+    private GoogleTagManagerInterface $googleTagManager;
 
-    /**
-     * CheckoutStep constructor.
-     */
     public function __construct(GoogleTagManagerInterface $googleTagManager)
     {
         $this->googleTagManager = $googleTagManager;

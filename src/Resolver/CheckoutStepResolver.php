@@ -7,14 +7,8 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Class CheckoutStepResolver
- */
 final class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
-    /**
-     * @inheritdoc
-     */
     public function resolve(string $method, Request $request): ?int
     {
         switch ($method) {

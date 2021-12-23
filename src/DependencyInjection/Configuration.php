@@ -9,10 +9,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    /**
-     * @inheritdoc
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): void
     {
         $treeBuilder = new TreeBuilder('sylius_gtm_enhanced_ecommerce');
         $rootNode = $treeBuilder->getRootNode();

@@ -10,11 +10,9 @@ use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressio
 
 final class ProductShowBlockAfterProductHeaderListener
 {
-    /** @var string */
-    private $template;
+    private string $template;
 
-    /** @var ProductDetailImpressionDataResolverInterface */
-    private $resolver;
+    private ProductDetailImpressionDataResolverInterface $resolver;
 
     public function __construct(string $template, ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver)
     {

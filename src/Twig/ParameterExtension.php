@@ -9,8 +9,7 @@ use Twig\TwigFunction;
 
 final class ParameterExtension extends AbstractExtension
 {
-    /** @var array */
-    private $parameters;
+    private array $parameters;
 
     public function __construct(
         bool $purchases,
@@ -30,10 +29,7 @@ final class ParameterExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('sylius_gtm_enhanced_ecommerce_parameter', [$this, 'getParameter']),

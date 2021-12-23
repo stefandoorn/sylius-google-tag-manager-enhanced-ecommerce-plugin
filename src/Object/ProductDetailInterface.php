@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object;
 
-/**
- * Interface ProductDetailInterface
- */
 interface ProductDetailInterface
 {
     public function getName(): string;

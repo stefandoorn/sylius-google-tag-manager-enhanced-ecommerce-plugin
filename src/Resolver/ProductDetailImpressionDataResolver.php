@@ -13,26 +13,16 @@ use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * Class ProductDetailImpressionDataResolver
- */
 final class ProductDetailImpressionDataResolver implements ProductDetailImpressionDataResolverInterface
 {
-    /** @var ProductVariantPriceCalculatorInterface */
-    private $productVariantPriceCalculator;
+    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var ProductDetailImpressionFactoryInterface */
-    private $productDetailImpressionFactory;
+    private ProductDetailImpressionFactoryInterface $productDetailImpressionFactory;
 
-    /** @var ProductDetailFactoryInterface */
-    private $productDetailFactory;
+    private ProductDetailFactoryInterface $productDetailFactory;
 
-    /**
-     * ProductDetailImpressionDataResolver constructor.
-     */
     public function __construct(
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
         ChannelContextInterface $channelContext,
@@ -45,9 +35,6 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
         $this->productDetailFactory = $productDetailFactory;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function get(ProductInterface $product): ProductDetailImpressionInterface
     {
         $vo = $this->productDetailImpressionFactory->create();

@@ -6,9 +6,6 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
 
-/**
- * Interface ProductDetailImpressionFactoryInterface
- */
 interface ProductDetailImpressionFactoryInterface
 {
     public function create(): ProductDetailImpressionInterface;

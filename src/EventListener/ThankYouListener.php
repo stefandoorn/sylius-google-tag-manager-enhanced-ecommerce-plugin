@@ -10,20 +10,12 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
-/**
- * Class ThankYouListener
- */
 final class ThankYouListener
 {
-    /** @var AddTransactionInterface */
-    private $transactionService;
+    private AddTransactionInterface $transactionService;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /**
-     * ThankYouListener constructor.
-     */
     public function __construct(
         AddTransactionInterface $transactionService,
         OrderRepositoryInterface $orderRepository
