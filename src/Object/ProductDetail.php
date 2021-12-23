@@ -72,8 +72,8 @@ final class ProductDetail implements ProductDetailInterface
             'name' => $this->name,
             'id' => $this->id,
             'price' => $this->price,
-            'category' => $this->category ?? '',
-            'variant' => $this->variant ?? '',
+            'category' => $this->category,
+            'variant' => $this->variant,
         ];
     }
 }
