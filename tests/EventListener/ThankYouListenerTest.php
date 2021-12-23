@@ -7,11 +7,17 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
-use Sylius\Bundle\OrderBundle\Controller\OrderController;
+use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
 /**
@@ -28,14 +34,12 @@ final class ThankYouListenerTest extends TestCase
         $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
         $currencyContext = $this->getMockBuilder(CurrencyContextInterface::class)->getMock();
         $orderRepository = $this->getMockBuilder(OrderRepositoryInterface::class)->getMock();
-        $event = $this->getMockBuilder(FilterControllerEvent::class)->disableOriginalConstructor()->getMock();
         $controller = $this->getMockBuilder(OrderController::class)->disableOriginalConstructor()->getMock();
+        $kernel = $this->getMockBuilder(KernelInterface::class)->disableOriginalConstructor()->getMock();
+        $request = new Request();
 
-        // Mock expectations
-        $event->expects($this->once())->method('getController')->willReturn([
-            $controller,
-            'otherAction',
-        ]);
+        // Create event
+        $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MAIN_REQUEST);
 
         // Service and listener
         $service = new AddTransaction($gtm, $channelContext, $currencyContext);
@@ -48,76 +52,72 @@ final class ThankYouListenerTest extends TestCase
         $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
     }
 
-    /*
-        public function testNoOrderFound()
-        {
-            // Requirements
-            $gtm = new GoogleTagManager(true, 'id1234');
-            $order = new Order();
+    public function testNoOrderFound(): void
+    {
+        // Requirements
+        $gtm = new GoogleTagManager(true, 'id1234');
 
-            // Build base mocks
-            $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
-            $currencyContext = $this->getMockBuilder(CurrencyContextInterface::class)->getMock();
-            $orderRepository = $this->getMockBuilder(OrderRepositoryInterface::class)->getMock();
-            $event = $this->getMockBuilder(FilterControllerEvent::class)->disableOriginalConstructor()->getMock();
-            $controller = $this->getMockBuilder(OrderController::class)->disableOriginalConstructor()->getMock();
-            $session = $this->getMockBuilder(SessionInterface::class)->getMock();
-            $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        // Build base mocks
+        $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
+        $currencyContext = $this->getMockBuilder(CurrencyContextInterface::class)->getMock();
+        $orderRepository = $this->getMockBuilder(OrderRepositoryInterface::class)->getMock();
+        $controller = $this->getMockBuilder(OrderController::class)->disableOriginalConstructor()->getMock();
+        $session = $this->getMockBuilder(SessionInterface::class)->getMock();
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $kernel = $this->getMockBuilder(KernelInterface::class)->disableOriginalConstructor()->getMock();
 
-            // Mock expectations
-            $event->expects($this->once())->method('getController')->willReturn([
-                $controller,
-                'thankYouAction',
-            ]);
-            $event->expects($this->once())->method('getRequest')->willReturn($request);
-            $request->expects($this->once())->method('getSession')->willReturn($session);
-            $session->expects($this->once())->method('get')->with('sylius_order_id')->willReturn(88);
-            $orderRepository->expects($this->once())->method('find')->with(88)->willReturn(null);
+        // Mock expectations
+        $request->expects($this->once())->method('getSession')->willReturn($session);
+        $session->expects($this->once())->method('get')->with('sylius_order_id')->willReturn(88);
+        $orderRepository->expects($this->once())->method('find')->with(88)->willReturn(null);
+        $controller->expects($this->any())->method('thankYouAction')->willReturn(new Response());
 
-            // Service and listener
-            $service = new AddTransaction($gtm, $channelContext, $currencyContext);
-            $listener = new ThankYouListener($service,$orderRepository);
+        // Create event
+        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MAIN_REQUEST);
 
-            // Run listener
-            $listener->onKernelController($event);
+        // Service and listener
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext);
+        $listener = new ThankYouListener($service, $orderRepository);
 
-            // Check result
-            $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
-        }
+        // Run listener
+        $listener->onKernelController($event);
 
-        public function testEnvironmentIsAddedToGtmObject()
-        {
-            // Requirements
-            $gtm = new GoogleTagManager(true, 'id1234');
-            $order = new Order();
+        // Check result
+        $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
+    }
 
-            // Build base mocks
-            $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
-            $currencyContext = $this->getMockBuilder(CurrencyContextInterface::class)->getMock();
-            $orderRepository = $this->getMockBuilder(OrderRepositoryInterface::class)->getMock();
-            $event = $this->getMockBuilder(FilterControllerEvent::class)->disableOriginalConstructor()->getMock();
-            $controller = $this->getMockBuilder(OrderController::class)->disableOriginalConstructor()->getMock();
-            $session = $this->getMockBuilder(SessionInterface::class)->getMock();
-            $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+    public function testEnvironmentIsAddedToGtmObject(): void
+    {
+        // Requirements
+        $gtm = new GoogleTagManager(true, 'id1234');
+        $order = new Order();
 
-            // Mock expectations
-            $event->expects($this->once())->method('getController')->willReturn([
-                $controller,
-                'thankYouAction',
-            ]);
-            $event->expects($this->once())->method('getRequest')->willReturn($request);
-            $request->expects($this->once())->method('getSession')->willReturn($session);
-            $session->expects($this->once())->method('get')->with('sylius_order_id')->willReturn(88);
-            $orderRepository->expects($this->once())->method('find')->with(88)->willReturn($order);
+        // Build base mocks
+        $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
+        $currencyContext = $this->getMockBuilder(CurrencyContextInterface::class)->getMock();
+        $orderRepository = $this->getMockBuilder(OrderRepositoryInterface::class)->getMock();
+        $controller = $this->getMockBuilder(OrderController::class)->disableOriginalConstructor()->getMock();
+        $session = $this->getMockBuilder(SessionInterface::class)->getMock();
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $kernel = $this->getMockBuilder(KernelInterface::class)->disableOriginalConstructor()->getMock();
 
-            // Service and listener
-            $service = new AddTransaction($gtm, $channelContext, $currencyContext);
-            $listener = new ThankYouListener($service,$orderRepository);
+        // Mock expectations
+        $request->expects($this->once())->method('getSession')->willReturn($session);
+        $session->expects($this->once())->method('get')->with('sylius_order_id')->willReturn(88);
+        $orderRepository->expects($this->once())->method('find')->with(88)->willReturn($order);
+        $controller->expects($this->any())->method('thankYouAction')->willReturn(new Response());
 
-            // Run listener
-            $listener->onKernelController($event);
+        // Create event
+        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MAIN_REQUEST);
 
-            // Check result
-            $this->assertArrayHasKey('ecommerce', $gtm->getData());
-        }*/
+        // Service and listener
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext);
+        $listener = new ThankYouListener($service, $orderRepository);
+
+        // Run listener
+        $listener->onKernelController($event);
+
+        // Check result
+        $this->assertArrayHasKey('ecommerce', $gtm->getData());
+    }
 }

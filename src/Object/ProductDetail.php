@@ -12,9 +12,9 @@ final class ProductDetail implements ProductDetailInterface
 
     private float $price;
 
-    private ?string $category;
+    private string $category = '';
 
-    private ?string $variant;
+    private string $variant = '';
 
     public function getName(): string
     {
@@ -46,22 +46,22 @@ final class ProductDetail implements ProductDetailInterface
         $this->price = $price;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): string
     {
         return $this->category;
     }
 
-    public function setCategory(?string $category)
+    public function setCategory(string $category)
     {
         $this->category = $category;
     }
 
-    public function getVariant(): ?string
+    public function getVariant(): string
     {
         return $this->variant;
     }
 
-    public function setVariant(?string $variant)
+    public function setVariant(string $variant)
     {
         $this->variant = $variant;
     }
@@ -72,8 +72,8 @@ final class ProductDetail implements ProductDetailInterface
             'name' => $this->name,
             'id' => $this->id,
             'price' => $this->price,
-            'category' => isset($this->category) && $this->category ?? '',
-            'variant' => isset($this->variant) && $this->variant ?? '',
+            'category' => $this->category ?? '',
+            'variant' => $this->variant ?? '',
         ];
     }
 }

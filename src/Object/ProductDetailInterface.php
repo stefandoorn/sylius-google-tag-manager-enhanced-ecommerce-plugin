@@ -18,13 +18,13 @@ interface ProductDetailInterface
 
     public function setPrice(float $price): void;
 
-    public function getCategory(): ?string;
+    public function getCategory(): string;
 
-    public function setCategory(?string $category);
+    public function setCategory(string $category);
 
-    public function getVariant(): ?string;
+    public function getVariant(): string;
 
-    public function setVariant(?string $variant);
+    public function setVariant(string $variant);
 
     public function toArray(): array;
 }
