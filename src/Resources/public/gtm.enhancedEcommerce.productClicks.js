@@ -73,5 +73,6 @@ function enhancedEcommerceTrackProductClick(productObj, clickedUrl, actionFieldL
     }
 
     /** global: dataLayer */
+    dataLayer.push({ ecommerce: null });
     dataLayer.push(obj);
 }

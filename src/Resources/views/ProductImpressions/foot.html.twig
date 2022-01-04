@@ -4,8 +4,8 @@
             return;
         }
 
+        dataLayer.push({ ecommerce: null });
         dataLayer.push({
-            'event': 'productImpressions',
             'ecommerce': {
                 'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
                 'impressions': window.productImpressions
