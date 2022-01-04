@@ -2,7 +2,7 @@
 
 ## Google Documentation
 
-https://developers.google.com/tag-manager/enhanced-ecommerce#cart
+https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-ecommerce#cart
 
 ## Introduction
 
@@ -32,7 +32,7 @@ and trigger this method in the `onSuccess` method.
 
 ## Configuration in GTM
 
-Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/analytics/answer/6163791).
+Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/tagmanager/answer/6107124?hl=en).
 
 ### Add to Cart (1/2)
 

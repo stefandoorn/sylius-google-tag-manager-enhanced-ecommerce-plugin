@@ -2,7 +2,7 @@
 
 ## Google Documentation
 
-https://developers.google.com/tag-manager/enhanced-ecommerce#product-clicks
+https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-ecommerce#product-clicks
 
 ## Introduction
 
@@ -42,7 +42,7 @@ Becomes:
 
 ## Configuration in GTM
 
-Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/analytics/answer/6163791).
+Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/tagmanager/answer/6107124?hl=en).
 
 ### Trigger
 
