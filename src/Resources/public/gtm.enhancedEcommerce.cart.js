@@ -21,6 +21,7 @@ function enhancedEcommerceAddToCart(productObj, callbackOrRedirectUrl) {
     }
 
     /** global: dataLayer */
+    dataLayer.push({ ecommerce: null });
     dataLayer.push(obj);
 }
 
@@ -52,5 +53,6 @@ function enhancedEcommerceRemoveFromCart(productObj, callbackOrRedirectUrl) {
     }
 
     /** global: dataLayer */
+    dataLayer.push({ ecommerce: null });
     dataLayer.push(obj);
 }

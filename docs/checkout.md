@@ -34,7 +34,7 @@ give you the possibility to add additional information to GA.
 
 ## Google Documentation
 
-https://developers.google.com/tag-manager/enhanced-ecommerce#checkout
+https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-ecommerce#checkout
 
 ## Introduction
 
@@ -45,7 +45,7 @@ selected option will be sent to GTM. Keep this in mind when adjusting the checko
 
 ## Configuration in GTM
 
-Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/analytics/answer/6163791).
+Note that this configuration has to be added next to the [standard Google Tag Manager / Google Analytics implementation](https://support.google.com/tagmanager/answer/6107124?hl=en).
 
 ### Checkout (1/2)
 
