@@ -1,5 +1,12 @@
 # Upgrade
 
+Upgrade v1.0.0 -> 1.1.0
+-----------------------
+
+As we need to track only the first variant on product show page, ProductDetail twig directory has been refactored
+* `ProductDetail/variants.html.twig` renamed to `ProductDetail/variant.html.twig`
+* `ProductDetail/_variant.html.twig` is removed
+
 Upgrade v0.7.0 -> v0.8.0
 ------------------------
 
