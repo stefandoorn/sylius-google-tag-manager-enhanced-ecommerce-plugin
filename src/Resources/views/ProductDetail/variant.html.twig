@@ -1,0 +1,10 @@
+{% set product = settings.resources.toArray|first %}
+<script type="text/javascript">
+    productDetails.push({
+        'name': '{{ product.name }}',
+        'id': '{{ product.id }}',
+        'price': {{ product.price }},
+        'category': '{{ product.category }}',
+        'variant': '{{ product.variant }}'
+    });
+</script>
