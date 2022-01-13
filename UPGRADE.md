@@ -1,5 +1,10 @@
 # Upgrade
 
+Upgrade v1.1.0 -> 1.2.0
+-----------------------
+AddToCart and RemoveFromCart are now tracked automatically from backend without needs of javascript overrides
+The services `sylius.google_tag_manager_enhanced_ecommerce.cart.block_event_listener.sylius.shop.product.show.before_add_to_cart` is removed as also the twig templates and javascript associated   
+
 Upgrade v1.0.0 -> 1.1.0
 -----------------------
 
