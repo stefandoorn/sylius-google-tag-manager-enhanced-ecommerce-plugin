@@ -16,8 +16,6 @@ final class CheckoutStepResolver implements CheckoutStepResolverInterface
                 return CheckoutStep::STEP_CART;
             case 'updateAction':
                 return $this->updateAction($request);
-            case 'thankYouAction':
-                return CheckoutStep::STEP_THANKYOU;
         }
 
         return null;
