@@ -9,7 +9,7 @@ https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-eco
 To make this work, make sure to install the assets so the JS file will get loaded. Next to this, perform the following steps:
 
 * Add the following REQUIRED data attributes to the links you want to track:
-** `data-id`: ID of the product
+** `data-id`: Identifier of the product
 ** `data-name`: name of the product
 * Add the following class to the 'a' tags to be tracked:
 ** Class: `gtm-eh-track-product-click`
@@ -37,8 +37,10 @@ Normal link to product page:
 Becomes:
 
 ```
-<a data-id="{{ product.id}}" data-name="{{ product.name }}" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="header sylius-product-name gtm-eh-track-product-click">{{ product.name }}</a>
+<a data-id="{{ sylius_gtm_enhanced_ecommerce_product_identifier(product) }}" data-name="{{ product.name }}" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="header sylius-product-name gtm-eh-track-product-click">{{ product.name }}</a>
 ```
+
+You can look in the `tests/Application/templates/` folder to get an example of implementation. 
 
 ## Configuration in GTM
 

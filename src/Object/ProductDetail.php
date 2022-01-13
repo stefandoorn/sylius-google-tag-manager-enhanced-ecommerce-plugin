@@ -8,7 +8,7 @@ final class ProductDetail implements ProductDetailInterface
 {
     private string $name;
 
-    private int $id;
+    private string $id;
 
     private float $price;
 
@@ -26,12 +26,12 @@ final class ProductDetail implements ProductDetailInterface
         $this->name = $name;
     }
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(string $id): void
     {
         $this->id = $id;
     }

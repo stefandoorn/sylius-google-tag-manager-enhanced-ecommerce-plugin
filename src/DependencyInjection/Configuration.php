@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -16,6 +17,11 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->enumNode('product_identifier')
+                    ->info(\sprintf('Choose which product identifier you want to use between %s and %s', ProductDetailInterface::ID_IDENTIFIER, ProductDetailInterface::CODE_IDENTIFIER))
+                    ->values(ProductDetailInterface::IDENTIFIERS)
+                    ->defaultValue(ProductDetailInterface::ID_IDENTIFIER)
+                ->end()
                 ->arrayNode('features')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -72,7 +78,6 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-
                 ->arrayNode('cache_resolvers')
                     ->canBeEnabled()
                     ->children()

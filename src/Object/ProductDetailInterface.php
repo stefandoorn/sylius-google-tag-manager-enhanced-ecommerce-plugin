@@ -6,13 +6,19 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object;
 
 interface ProductDetailInterface
 {
+    public const ID_IDENTIFIER = 'id';
+
+    public const CODE_IDENTIFIER = 'code';
+
+    public const IDENTIFIERS = [self::ID_IDENTIFIER, self::CODE_IDENTIFIER];
+
     public function getName(): string;
 
     public function setName(string $name): void;
 
-    public function getId(): int;
+    public function getId(): string;
 
-    public function setId(int $id): void;
+    public function setId(string $id): void;
 
     public function getPrice(): float;
 

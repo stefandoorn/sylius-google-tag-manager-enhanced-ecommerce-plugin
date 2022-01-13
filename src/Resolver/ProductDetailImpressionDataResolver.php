@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactoryInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactoryInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailImpressionInterface;
@@ -23,16 +24,20 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
 
     private ProductDetailFactoryInterface $productDetailFactory;
 
+    private ProductIdentifierHelper $productIdentifierHelper;
+
     public function __construct(
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
         ChannelContextInterface $channelContext,
         ProductDetailImpressionFactoryInterface $productDetailImpressionFactory,
-        ProductDetailFactoryInterface $productDetailFactory
+        ProductDetailFactoryInterface $productDetailFactory,
+        ProductIdentifierHelper $productIdentifierHelper
     ) {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
         $this->channelContext = $channelContext;
         $this->productDetailImpressionFactory = $productDetailImpressionFactory;
         $this->productDetailFactory = $productDetailFactory;
+        $this->productIdentifierHelper = $productIdentifierHelper;
     }
 
     public function get(ProductInterface $product): ProductDetailImpressionInterface
@@ -63,8 +68,8 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
 
         $vo = $this->productDetailFactory->create();
 
+        $vo->setId($this->productIdentifierHelper->getProductIdentifier($product));
         $vo->setName($product->getName());
-        $vo->setId($product->getId());
         $vo->setPrice($this->getPrice($productVariant));
         $vo->setCategory(null !== $product->getMainTaxon() ? $product->getMainTaxon()->getName() : null);
         $vo->setVariant($productVariant->getCode());
