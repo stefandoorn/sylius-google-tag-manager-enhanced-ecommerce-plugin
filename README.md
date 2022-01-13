@@ -58,6 +58,26 @@ Make sure to check that the required 'sonata_block_render_events' template event
 
 This is only to be checked if you've been overriding templates yourselves.
 
+## Bootstrap a GTM container 
+You can find a GTM container fully configured that work with the test application in `docs/GTM-EXAMPLE.json`.
+This file can be imported to easily configure your container
+
+![](docs/img/gtm-setup-1.png)
+
+![](docs/img/gtm-setup-2.png)
+
+It will add thoses tags and triggers
+
+![](docs/img/gtm-setup-3.png)
+
+![](docs/img/gtm-setup-4.png)
+
+You will have to replace the UA-111111111-1 by your own Universal Analytics ID
+
+![](docs/img/gtm-setup-5.png)
+
+![](docs/img/gtm-setup-6.png)
+
 ## Features not supported (yet):
 
 * `promotion_impressions`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-impressions
