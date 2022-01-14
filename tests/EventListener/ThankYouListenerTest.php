@@ -6,6 +6,7 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -42,7 +43,7 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener
@@ -76,7 +77,7 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener
@@ -111,7 +112,7 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener

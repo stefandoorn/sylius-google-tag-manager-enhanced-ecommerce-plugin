@@ -18,6 +18,8 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension
 
         $loader->load('services.yml');
 
+        $container->setParameter('sylius_gtm_enhanced_ecommerce.product_identifier', $config['product_identifier']);
+
         foreach ($config['features'] as $feature => $setting) {
             $parameter = \sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature);
 
