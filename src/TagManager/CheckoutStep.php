@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use Sylius\Component\Core\Model\OrderItemInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 final class CheckoutStep implements CheckoutStepInterface
 {
+    use CreateProductTrait;
+
     public const STEP_CART = 1;
 
     public const STEP_ADDRESS = 2;
@@ -20,13 +22,14 @@ final class CheckoutStep implements CheckoutStepInterface
 
     public const STEP_CONFIRM = 5;
 
-    public const STEP_THANKYOU = 6;
-
     private GoogleTagManagerInterface $googleTagManager;
 
-    public function __construct(GoogleTagManagerInterface $googleTagManager)
+    private ProductIdentifierHelper $productIdentifierHelper;
+
+    public function __construct(GoogleTagManagerInterface $googleTagManager, ProductIdentifierHelper $productIdentifierHelper)
     {
         $this->googleTagManager = $googleTagManager;
+        $this->productIdentifierHelper = $productIdentifierHelper;
     }
 
     /**
@@ -40,7 +43,7 @@ final class CheckoutStep implements CheckoutStepInterface
             ],
         ];
 
-        if ($step < self::STEP_THANKYOU) {
+        if ($step <= self::STEP_CONFIRM) {
             $checkout['products'] = $this->getProducts($order);
         }
 
@@ -61,17 +64,5 @@ final class CheckoutStep implements CheckoutStepInterface
         }
 
         return $products;
-    }
-
-    private function createProduct(OrderItemInterface $item): array
-    {
-        return [
-            'name' => $item->getProduct()->getName(),
-            'id' => $item->getProduct()->getId(),
-            'quantity' => $item->getQuantity(),
-            'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
-            'category' => null !== $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
-            'price' => $item->getUnitPrice() / 100,
-        ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -12,20 +13,26 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 final class AddTransaction implements AddTransactionInterface
 {
+    use CreateProductTrait;
+
     private GoogleTagManagerInterface $googleTagManager;
 
     private ChannelContextInterface $channelContext;
 
     private CurrencyContextInterface $currencyContext;
 
+    private ProductIdentifierHelper $productIdentifierHelper;
+
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ChannelContextInterface $channelContext,
-        CurrencyContextInterface $currencyContext
+        CurrencyContextInterface $currencyContext,
+        ProductIdentifierHelper $productIdentifierHelper
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;
         $this->currencyContext = $currencyContext;
+        $this->productIdentifierHelper = $productIdentifierHelper;
     }
 
     public function addTransaction(OrderInterface $order): void
@@ -33,14 +40,7 @@ final class AddTransaction implements AddTransactionInterface
         $products = [];
         foreach ($order->getItems() as $item) {
             /** @var OrderItemInterface $item */
-            $products[] = [
-                'name' => $item->getProduct()->getName(),
-                'id' => $item->getProduct()->getId(),
-                'quantity' => $item->getQuantity(),
-                'variant' => $item->getVariant()->getName() ?? $item->getVariant()->getCode(),
-                'category' => null !== $item->getProduct()->getMainTaxon() ? $item->getProduct()->getMainTaxon()->getName() : '',
-                'price' => $item->getUnitPrice() / 100,
-            ];
+            $products[] = $this->createProduct($item);
         }
 
         $actionField = [

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use PHPUnit\Framework\TestCase;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -22,6 +23,9 @@ final class AddTransactionTest extends TestCase
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
+
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
+
         $order = new Order();
 
         // Mocks
@@ -32,7 +36,7 @@ final class AddTransactionTest extends TestCase
         $channelContext->expects($this->once())->method('getChannel')->willReturn(new Channel());
 
         // Build object
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
 
         // Run add
         $service->addTransaction($order);
