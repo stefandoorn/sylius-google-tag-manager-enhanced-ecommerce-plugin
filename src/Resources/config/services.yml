@@ -69,6 +69,13 @@ services:
         tags:
             - { name: "twig.extension" }
 
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.twig.extension.product_identifier:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig\ProductIdentifierExtension
+        arguments:
+            - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier'
+        tags:
+            - { name: "twig.extension" }
+
     sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper
         arguments:
