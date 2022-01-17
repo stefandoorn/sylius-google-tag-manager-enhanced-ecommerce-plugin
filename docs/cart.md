@@ -8,27 +8,11 @@ https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-eco
 
 ### Add to Cart
 
-In case you enable this feature, a JS method called 'enhancedEcommerceAddToCart' will be available on the product show page. Make sure this gets
-fired after adding something to the cart. As it requires changes to templates, we only provide the JS method
-and let you handle the templating and triggers, as every webshop probably differs and it's hard to maintain.
-
-The final triggering could be done by overriding the default `sylius-add-to-cart.js` and add in the `onSuccess` handler:
-
-```javascript
-enhancedEcommerceAddToCart(gtmAddToCartProductInfo);
-```
-
-The `gtmAddToCartProductInfo` is set on the product page and can be extended with additional information that's missing
-by default; e.g. the price, variant, dimensions and metrics. The quantity defaults to 1.
+`Add to Cart` event are registered from the backend code. Based on the default sylius event `sylius.order_item.post_add` and sent to GTM.
 
 ### Remove from Cart
 
-Same goes for remove from cart. As it needs customisation to templates which are not easy to do as every theme is different,
-a JS method `enhancedEcommerceRemoveFromCart` is available.
-
-Make sure to inject an object as from the GTM documentation, and you are good to go. You can override the default `sylius-remove-from-cart.js`
-and trigger this method in the `onSuccess` method.
-## Configuration in GTM
+`Remove from Cart` event are registered from the backend code. Based on the default sylius event `sylius.order_item.post_remove` and sent to GTM.
 
 ## Configuration in GTM
 
