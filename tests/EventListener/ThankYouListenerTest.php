@@ -6,6 +6,7 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
@@ -30,6 +31,7 @@ final class ThankYouListenerTest extends TestCase
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
 
         // Build base mocks
         $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
@@ -43,7 +45,7 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener
@@ -57,6 +59,8 @@ final class ThankYouListenerTest extends TestCase
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
+
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
 
         // Build base mocks
         $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
@@ -77,7 +81,7 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener
@@ -91,6 +95,9 @@ final class ThankYouListenerTest extends TestCase
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
+
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
+
         $order = new Order();
 
         // Build base mocks
@@ -112,7 +119,7 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, ProductDetailInterface::ID_IDENTIFIER);
+        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener

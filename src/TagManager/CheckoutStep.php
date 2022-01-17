@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
@@ -23,12 +24,12 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private GoogleTagManagerInterface $googleTagManager;
 
-    private string $productIdentifier;
+    private ProductIdentifierHelper $productIdentifierHelper;
 
-    public function __construct(GoogleTagManagerInterface $googleTagManager, string $productIdentifier)
+    public function __construct(GoogleTagManagerInterface $googleTagManager, ProductIdentifierHelper $productIdentifierHelper)
     {
         $this->googleTagManager = $googleTagManager;
-        $this->productIdentifier = $productIdentifier;
+        $this->productIdentifierHelper = $productIdentifierHelper;
     }
 
     /**
@@ -59,7 +60,7 @@ final class CheckoutStep implements CheckoutStepInterface
         $products = [];
 
         foreach ($order->getItems() as $item) {
-            $products[] = $this->createProduct($item, $this->productIdentifier);
+            $products[] = $this->createProduct($item);
         }
 
         return $products;
