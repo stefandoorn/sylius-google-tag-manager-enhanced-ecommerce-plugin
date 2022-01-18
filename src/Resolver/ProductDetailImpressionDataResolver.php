@@ -71,7 +71,7 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
         $vo->setId($this->productIdentifierHelper->getProductIdentifier($product));
         $vo->setName($product->getName());
         $vo->setPrice($this->getPrice($productVariant));
-        $vo->setCategory(null !== $product->getMainTaxon() ? $product->getMainTaxon()->getName() : null);
+        $vo->setCategory(null !== $product->getMainTaxon() ? $product->getMainTaxon()->getName() : '');
         $vo->setVariant($productVariant->getCode());
 
         return $vo;
