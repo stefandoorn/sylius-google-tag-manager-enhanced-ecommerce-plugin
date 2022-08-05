@@ -34,7 +34,7 @@ final class Kernel extends BaseKernel
     {
         foreach ($this->getConfigurationDirectories() as $confDir) {
             $bundlesFile = $confDir . '/bundles.php';
-            if (false === is_file($bundlesFile)) {
+            if (false === \is_file($bundlesFile)) {
                 continue;
             }
             yield from $this->registerBundlesFromFile($bundlesFile);
@@ -45,7 +45,7 @@ final class Kernel extends BaseKernel
     {
         foreach ($this->getConfigurationDirectories() as $confDir) {
             $bundlesFile = $confDir . '/bundles.php';
-            if (false === is_file($bundlesFile)) {
+            if (false === \is_file($bundlesFile)) {
                 continue;
             }
             $container->addResource(new FileResource($bundlesFile));
@@ -67,7 +67,7 @@ final class Kernel extends BaseKernel
 
     protected function getContainerBaseClass(): string
     {
-        if ($this->isTestEnvironment() && class_exists(MockerContainer::class)) {
+        if ($this->isTestEnvironment() && \class_exists(MockerContainer::class)) {
             return MockerContainer::class;
         }
 
@@ -76,7 +76,7 @@ final class Kernel extends BaseKernel
 
     private function isTestEnvironment(): bool
     {
-        return 0 === strpos($this->getEnvironment(), 'test');
+        return 0 === \strpos($this->getEnvironment(), 'test');
     }
 
     private function loadContainerConfiguration(LoaderInterface $loader, string $confDir): void
@@ -114,11 +114,11 @@ final class Kernel extends BaseKernel
     {
         yield $this->getProjectDir() . '/config';
         $syliusConfigDir = $this->getProjectDir() . '/config/sylius/' . SyliusKernel::MAJOR_VERSION . '.' . SyliusKernel::MINOR_VERSION;
-        if (is_dir($syliusConfigDir)) {
+        if (\is_dir($syliusConfigDir)) {
             yield $syliusConfigDir;
         }
         $symfonyConfigDir = $this->getProjectDir() . '/config/symfony/' . BaseKernel::MAJOR_VERSION . '.' . BaseKernel::MINOR_VERSION;
-        if (is_dir($symfonyConfigDir)) {
+        if (\is_dir($symfonyConfigDir)) {
             yield $symfonyConfigDir;
         }
     }
