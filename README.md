@@ -46,37 +46,44 @@ By default all features are enabled.
 
 Each feature has it's own specific documentation.
 
-* [purchases](docs/purchases.md): Send purchases to GTM.
-* [product_impressions](docs/product_impressions.md): Send impressions on product listings to GTM
-* [product_detail_impressions](docs/product_detail_impressions.md): Send impression on product detail pages to GTM
-* [product_clicks](docs/product_clicks.md): Send click events on product links to GTM
-* [cart](docs/cart.md): Send add to cart / remove from cart events to GTM
-* [checkout](docs/checkout.md): Send checkout steps & selected options to GTM
+*For Universal Analytics (deprecated by Google)*:
+
+* [purchases](docs/UA/purchases.md): Send purchases to GTM.
+* [product_impressions](docs/UA/product_impressions.md): Send impressions on product listings to GTM
+* [product_detail_impressions](docs/UA/product_detail_impressions.md): Send impression on product detail pages to GTM
+* [product_clicks](docs/UA/product_clicks.md): Send click events on product links to GTM
+* [cart](docs/UA/cart.md): Send add to cart / remove from cart events to GTM
+* [checkout](docs/UA/checkout.md): Send checkout steps & selected options to GTM
+
+*For GA4 (WIP)*:
+
+[@TODO]
 
 Make sure to check that the required 'sonata_block_render_events' template events are available. Check the
 `src/Resources/config/features/*.yml` & `src/Resources/config/services.yml` for the definitions.
 
 This is only to be checked if you've been overriding templates yourselves.
 
-## Bootstrap a GTM container 
-You can find a GTM container fully configured that work with the test application in `docs/GTM-EXAMPLE.json`.
-This file can be imported to easily configure your container
+## Bootstrap a GTM container (Universal Analytics)
+You can find a GTM container fully configured that work with the test application in `docs/UA/GTM-EXAMPLE.json`.
 
-![](docs/img/gtm-setup-1.png)
+This file can be imported to easily configure your container.
 
-![](docs/img/gtm-setup-2.png)
+![](docs/UA/img/gtm-setup-1.png)
+
+![](docs/UA/img/gtm-setup-2.png)
 
 It will add thoses tags and triggers
 
-![](docs/img/gtm-setup-3.png)
+![](docs/UA/img/gtm-setup-3.png)
 
-![](docs/img/gtm-setup-4.png)
+![](docs/UA/img/gtm-setup-4.png)
 
 You will have to replace the UA-111111111-1 by your own Universal Analytics ID
 
-![](docs/img/gtm-setup-5.png)
+![](docs/UA/img/gtm-setup-5.png)
 
-![](docs/img/gtm-setup-6.png)
+![](docs/UA/img/gtm-setup-6.png)
 
 ## Features not supported (yet):
 
