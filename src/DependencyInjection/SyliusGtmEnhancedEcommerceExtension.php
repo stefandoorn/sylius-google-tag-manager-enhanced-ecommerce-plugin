@@ -46,7 +46,7 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension implements Pre
         }
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
 

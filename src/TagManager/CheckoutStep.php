@@ -55,7 +55,7 @@ final class CheckoutStep implements CheckoutStepInterface
         ];
 
         if ($step <= self::STEP_CONFIRM) {
-            $checkout['products'] = $this->getProducts($order);
+            $checkout['products'] = $this->getProductsUA($order);
         }
 
         $this->googleTagManager->addPush([
@@ -66,12 +66,12 @@ final class CheckoutStep implements CheckoutStepInterface
         ]);
     }
 
-    private function getProducts(OrderInterface $order): array
+    private function getProductsUA(OrderInterface $order): array
     {
         $products = [];
 
         foreach ($order->getItems() as $item) {
-            $products[] = $this->createProduct($item);
+            $products[] = $this->createProductUA($item);
         }
 
         return $products;
