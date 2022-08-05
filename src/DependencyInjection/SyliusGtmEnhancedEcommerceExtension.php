@@ -50,14 +50,14 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension implements Pre
     {
         $bundles = $container->getParameter('kernel.bundles');
 
+        if (!isset($bundles['TwigBundle'])) {
+            return;
+        }
+
         $config = $this->processConfiguration($this->getConfiguration([], $container), []);
         foreach (['ua', 'ga4'] as $implementation) {
             $parameter = \sprintf('sylius_gtm_enhanced_ecommerce.google.%s', $implementation);
             $container->setParameter($parameter, $config[$implementation]);
-        }
-
-        if (!isset($bundles['TwigBundle'])) {
-            return;
         }
 
         $container->prependExtensionConfig('twig', [
