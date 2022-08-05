@@ -6,6 +6,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
@@ -27,22 +28,30 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private ProductIdentifierHelper $productIdentifierHelper;
 
+    private CurrencyContextInterface $currencyContext;
+
     private GoogleImplementationEnabled $googleImplementationEnabled;
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ProductIdentifierHelper $productIdentifierHelper,
+        CurrencyContextInterface $currencyContext,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
+        $this->currencyContext = $currencyContext;
     }
 
     public function addStep(OrderInterface $order, int $step): void
     {
         if ($this->googleImplementationEnabled->isUAEnabled()) {
             $this->addStepUA($order, $step);
+        }
+
+        if ($this->googleImplementationEnabled->isGA4Enabled()) {
+            $this->addStepGA4($order, $step);
         }
     }
 
@@ -75,5 +84,30 @@ final class CheckoutStep implements CheckoutStepInterface
         }
 
         return $products;
+    }
+
+    private function getProductsGA4(OrderInterface $order): array
+    {
+        $products = [];
+
+        foreach ($order->getItems() as $item) {
+            $products[] = $this->createProductGA4($item);
+        }
+
+        return $products;
+    }
+
+    private function addStepGA4(OrderInterface $order, int $step): void
+    {
+        if (self::STEP_CART !== $step) { // In GA4 only 'begin_checkout' is recorded
+            return;
+        }
+
+        $this->googleTagManager->addPush([
+            'event' => 'begin_checkout',
+            'currency' => $this->currencyContext->getCurrencyCode(),
+            'value' => $order->getTotal() / 100,
+            'items' => $this->getProductsGA4($order),
+        ]);
     }
 }
