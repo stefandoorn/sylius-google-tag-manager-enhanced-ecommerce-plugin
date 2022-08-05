@@ -24,6 +24,7 @@ services:
         arguments:
             - "@google_tag_manager"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
+            - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 

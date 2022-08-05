@@ -6,6 +6,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
@@ -30,18 +31,22 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private CurrencyContextInterface $currencyContext;
 
+    private ChannelContextInterface $channelContext;
+
     private GoogleImplementationEnabled $googleImplementationEnabled;
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ProductIdentifierHelper $productIdentifierHelper,
         CurrencyContextInterface $currencyContext,
+        ChannelContextInterface $channelContext,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
         $this->currencyContext = $currencyContext;
+        $this->channelContext = $channelContext;
     }
 
     public function addStep(OrderInterface $order, int $step): void
