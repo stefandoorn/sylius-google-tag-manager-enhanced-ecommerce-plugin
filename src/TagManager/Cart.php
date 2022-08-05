@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -22,16 +23,20 @@ final class Cart implements CartInterface
 
     private ProductIdentifierHelper $productIdentifierHelper;
 
+    private GoogleImplementationEnabled $googleImplementationEnabled;
+
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
-        ProductIdentifierHelper $productIdentifierHelper
+        ProductIdentifierHelper $productIdentifierHelper,
+        GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;
         $this->currencyContext = $currencyContext;
         $this->productIdentifierHelper = $productIdentifierHelper;
+        $this->googleImplementationEnabled = $googleImplementationEnabled;
     }
 
     public function getOrderItem(OrderItemInterface $orderItem): array
@@ -40,6 +45,13 @@ final class Cart implements CartInterface
     }
 
     public function add(array $productData): void
+    {
+        if ($this->googleImplementationEnabled->isUAEnabled()) {
+            $this->addUA($productData);
+        }
+    }
+
+    private function addUA(array $productData): void
     {
         $this->googleTagManager->addPush([
             'event' => 'addToCart',
@@ -53,6 +65,13 @@ final class Cart implements CartInterface
     }
 
     public function remove(array $productData): void
+    {
+        if ($this->googleImplementationEnabled->isUAEnabled()) {
+            $this->removeUA($productData);
+        }
+    }
+
+    private function removeUA(array $productData): void
     {
         $this->googleTagManager->addPush([
             'event' => 'removeFromCart',

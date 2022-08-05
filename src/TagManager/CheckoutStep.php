@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Order\Model\OrderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
@@ -26,16 +27,26 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private ProductIdentifierHelper $productIdentifierHelper;
 
-    public function __construct(GoogleTagManagerInterface $googleTagManager, ProductIdentifierHelper $productIdentifierHelper)
-    {
+    private GoogleImplementationEnabled $googleImplementationEnabled;
+
+    public function __construct(
+        GoogleTagManagerInterface $googleTagManager,
+        ProductIdentifierHelper $productIdentifierHelper,
+        GoogleImplementationEnabled $googleImplementationEnabled
+    ) {
         $this->googleTagManager = $googleTagManager;
         $this->productIdentifierHelper = $productIdentifierHelper;
+        $this->googleImplementationEnabled = $googleImplementationEnabled;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function addStep(OrderInterface $order, int $step): void
+    {
+        if ($this->googleImplementationEnabled->isUAEnabled()) {
+            $this->addStepUA($order, $step);
+        }
+    }
+
+    private function addStepUA(OrderInterface $order, int $step): void
     {
         $checkout = [
             'actionField' => [

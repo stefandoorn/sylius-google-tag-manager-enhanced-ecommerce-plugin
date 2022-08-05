@@ -4,6 +4,12 @@ services:
         autoconfigure: false
         public: false
 
+    sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled
+        arguments:
+            - "%sylius_gtm_enhanced_ecommerce.google.ua"
+            - "%sylius_gtm_enhanced_ecommerce.google.ga4"
+
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction
         arguments:
@@ -11,12 +17,14 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
+            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep
         arguments:
             - "@google_tag_manager"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
+            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart
@@ -25,6 +33,7 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
+            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver
