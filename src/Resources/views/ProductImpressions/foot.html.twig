@@ -1,15 +1,19 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        if (typeof window.productImpressions === 'undefined' || window.productImpressions.length === 0) {
-            return;
-        }
+        if (gtmEnhancedEcommerceUAEnabled) {
+            (function () {
+                if (typeof window.productImpressions === 'undefined' || window.productImpressions.length === 0) {
+                    return;
+                }
 
-        dataLayer.push({ ecommerce: null });
-        dataLayer.push({
-            'ecommerce': {
-                'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
-                'impressions': window.productImpressions
-            }
-        });
+                dataLayer.push({ecommerce: null});
+                dataLayer.push({
+                    'ecommerce': {
+                        'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
+                        'impressions': window.productImpressions
+                    }
+                });
+            })();
+        }
     });
 </script>

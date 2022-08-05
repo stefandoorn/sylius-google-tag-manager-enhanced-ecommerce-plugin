@@ -1,16 +1,20 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        if (typeof window.productDetails === 'undefined' || window.productDetails.length === 0) {
-            return;
-        }
-        dataLayer.push({ ecommerce: null });
-        dataLayer.push({
-            'ecommerce': {
-                'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
-                'detail': {
-                    'products': window.productDetails
+        if (gtmEnhancedEcommerceUAEnabled) {
+            (function() {
+                if (typeof window.productDetails === 'undefined' || window.productDetails.length === 0) {
+                    return;
                 }
-            }
-        });
+                dataLayer.push({ecommerce: null});
+                dataLayer.push({
+                    'ecommerce': {
+                        'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
+                        'detail': {
+                            'products': window.productDetails
+                        }
+                    }
+                });
+            })();
+        }
     });
 </script>

@@ -1,30 +1,33 @@
 'use strict';
 (function ($) {
+  if (gtmEnhancedEcommerceUAEnabled) {
+    (function () {
+      if (typeof checkoutStepsConfiguration === "undefined") return;
+      if (typeof checkoutStepsConfiguration !== "object") return;
+      if (!checkoutStepsConfiguration.hasOwnProperty('enabled')) return;
+      if (checkoutStepsConfiguration.enabled === false) return;
+      if (!checkoutStepsConfiguration.hasOwnProperty('steps')) return;
 
-  if (typeof checkoutStepsConfiguration === "undefined") return;
-  if (typeof checkoutStepsConfiguration !== "object") return;
-  if (!checkoutStepsConfiguration.hasOwnProperty('enabled')) return;
-  if (checkoutStepsConfiguration.enabled === false) return;
-  if (!checkoutStepsConfiguration.hasOwnProperty('steps')) return;
+      for (var stepId in checkoutStepsConfiguration.steps) {
+        if (!checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) continue;
 
-  for (var stepId in checkoutStepsConfiguration.steps) {
-    if (!checkoutStepsConfiguration.steps.hasOwnProperty(stepId)) continue;
+        checkoutStepsConfiguration.steps[stepId].forEach(function BindStep(conf) {
+          conf.stepId = stepId;
+          $(conf.selector).on(conf.event, function () {
+            var option = null;
 
-    checkoutStepsConfiguration.steps[stepId].forEach(function BindStep(conf) {
-      conf.stepId = stepId;
-      $(conf.selector).on(conf.event, function () {
-        var option = null;
+            if (
+                typeof conf.option !== "undefined"
+                && typeof window[conf.option] === 'function'
+            ) {
+              option = window[conf.option].call(this);
+            }
 
-        if (
-          typeof conf.option !== "undefined"
-          && typeof window[conf.option] === 'function'
-        ) {
-          option = window[conf.option].call(this);
-        }
-
-        enhancedEcommerceTrackCheckoutOption(conf.stepId, option);
-      });
-    });
+            enhancedEcommerceTrackCheckoutOption(conf.stepId, option);
+          });
+        });
+      }
+    })();
   }
 })(jQuery);
 
