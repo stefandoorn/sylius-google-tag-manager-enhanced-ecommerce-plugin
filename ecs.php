@@ -1,6 +1,7 @@
 <?php
 
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
+use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NativeFunctionInvocationFixer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
@@ -18,4 +19,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(
         NativeFunctionInvocationFixer::class
     )->call('configure', [['include' => ['@all'], 'scope' => 'all', 'strict' => \true]]);
+
+    // @PHP74: cannot combine this rule in PHP 7.4 & PHP ^8.0
+    $containerConfigurator->parameters()->set(Option::SKIP, [
+        TrailingCommaInMultilineFixer::class,
+    ]);
 };
