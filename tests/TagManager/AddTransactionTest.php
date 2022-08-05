@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use PHPUnit\Framework\TestCase;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
@@ -33,10 +34,19 @@ final class AddTransactionTest extends TestCase
         $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
 
         // Exceptations
-        $channelContext->expects($this->once())->method('getChannel')->willReturn(new Channel());
+        $channelContext->method('getChannel')->willReturn(new Channel());
 
         // Build object
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
+        $service = new AddTransaction(
+            $gtm,
+            $channelContext,
+            $currencyContext,
+            $productIdentifierHelper,
+            new GoogleImplementationEnabled(
+                true,
+                true,
+            ),
+        );
 
         // Run add
         $service->addTransaction($order);
