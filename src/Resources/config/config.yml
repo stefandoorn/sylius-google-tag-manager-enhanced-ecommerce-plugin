@@ -1,4 +1,0 @@
-twig:
-  globals:
-    sylius_gtm_enhanced_ecommerce.google.ua: "%sylius_gtm_enhanced_ecommerce.google.ua%"
-    sylius_gtm_enhanced_ecommerce.google.ga4: "%sylius_gtm_enhanced_ecommerce.google.ga4%"

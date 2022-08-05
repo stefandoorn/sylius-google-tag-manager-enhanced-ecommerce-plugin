@@ -18,7 +18,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->booleanNode('ua')
-                    ->info('Inject data into GTM in UA format (Univeral Analytics)')
+                    ->info('Inject data into GTM in UA format (Universal Analytics)')
                     ->defaultValue(true)
                 ->end()
                 ->booleanNode('ga4')
