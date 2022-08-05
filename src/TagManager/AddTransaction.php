@@ -103,7 +103,7 @@ final class AddTransaction implements AddTransactionInterface
         }
 
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtag#make_a_purchase_or_issue_a_refund
-        $this->googleTagManager->addPush(array_merge([
+        $this->googleTagManager->addPush(\array_merge([
             'event' => 'purchase',
             'items' => $products,
         ], $purchase));

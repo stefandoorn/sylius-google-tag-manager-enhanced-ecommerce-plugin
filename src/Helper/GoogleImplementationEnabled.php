@@ -7,6 +7,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper;
 final class GoogleImplementationEnabled
 {
     private bool $uaEnabled;
+
     private bool $ga4Enabled;
 
     public function __construct(

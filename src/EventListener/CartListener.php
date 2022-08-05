@@ -40,7 +40,7 @@ final class CartListener
     {
         if ($this->googleImplementationEnabled->isUAEnabled()) {
             $this->session->set(
-                self::POST_ADD_ORDER_ITEM_UA, 
+                self::POST_ADD_ORDER_ITEM_UA,
                 $this->cart->getOrderItemUA($event->getSubject())
             );
         }
@@ -57,7 +57,7 @@ final class CartListener
     {
         if ($this->googleImplementationEnabled->isUAEnabled()) {
             $this->session->set(
-                self::POST_REMOVE_ORDER_ITEM_UA, 
+                self::POST_REMOVE_ORDER_ITEM_UA,
                 $this->cart->getOrderItemUA($event->getSubject())
             );
         }
