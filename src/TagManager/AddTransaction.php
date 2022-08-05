@@ -45,6 +45,10 @@ final class AddTransaction implements AddTransactionInterface
         if ($this->googleImplementationEnabled->isUAEnabled()) {
             $this->addTransactionUA($order);
         }
+
+        if ($this->googleImplementationEnabled->isGA4Enabled()) {
+            $this->addTransactionGA4($order);
+        }
     }
 
     private function addTransactionUA(OrderInterface $order): void
@@ -52,7 +56,7 @@ final class AddTransaction implements AddTransactionInterface
         $products = [];
         foreach ($order->getItems() as $item) {
             /** @var OrderItemInterface $item */
-            $products[] = $this->createProduct($item);
+            $products[] = $this->createProductUA($item);
         }
 
         $actionField = [
@@ -76,5 +80,32 @@ final class AddTransaction implements AddTransactionInterface
             'currencyCode' => $this->currencyContext->getCurrencyCode(),
             'purchase' => $purchase,
         ]);
+    }
+
+    private function addTransactionGA4(OrderInterface $order): void
+    {
+        $products = [];
+        foreach ($order->getItems() as $index => $item) {
+            /** @var OrderItemInterface $item */
+            $products[] = $this->createProductGA4($item, $index);
+        }
+
+        $purchase = [
+            'transaction_id' => $order->getNumber(),
+            'affiliation' => $this->channelContext->getChannel()->getName(),
+            'value' => $order->getTotal() / 100,
+            'tax' => $order->getTaxTotal() / 100,
+            'shipping' => $order->getShippingTotal() / 100,
+            'currency' => $this->currencyContext->getCurrencyCode(),
+        ];
+        if ($order->getPromotionCoupon() !== null) {
+            $purchase['coupon'] = $order->getPromotionCoupon()->getCode();
+        }
+
+        // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtag#make_a_purchase_or_issue_a_refund
+        $this->googleTagManager->addPush(array_merge([
+            'event' => 'purchase',
+            'items' => $products,
+        ], $purchase));
     }
 }

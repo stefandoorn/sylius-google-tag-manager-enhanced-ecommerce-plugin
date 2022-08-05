@@ -39,19 +39,17 @@ final class Cart implements CartInterface
         $this->googleImplementationEnabled = $googleImplementationEnabled;
     }
 
-    public function getOrderItem(OrderItemInterface $orderItem): array
+    public function getOrderItemUA(OrderItemInterface $orderItem): array
     {
-        return $this->createProduct($orderItem);
+        return $this->createProductUA($orderItem);
     }
 
-    public function add(array $productData): void
+    public function getOrderItemGA4(OrderItemInterface $orderItem): array
     {
-        if ($this->googleImplementationEnabled->isUAEnabled()) {
-            $this->addUA($productData);
-        }
+        return $this->createProductGA4($orderItem);
     }
 
-    private function addUA(array $productData): void
+    public function addUA(array $productData): void
     {
         $this->googleTagManager->addPush([
             'event' => 'addToCart',
@@ -64,14 +62,15 @@ final class Cart implements CartInterface
         ]);
     }
 
-    public function remove(array $productData): void
+    public function addGA4(array $productData): void
     {
-        if ($this->googleImplementationEnabled->isUAEnabled()) {
-            $this->removeUA($productData);
-        }
+        $this->googleTagManager->addPush([
+            'event' => 'add_to_cart',
+            'items' => $productData,
+        ]);
     }
 
-    private function removeUA(array $productData): void
+    public function removeUA(array $productData): void
     {
         $this->googleTagManager->addPush([
             'event' => 'removeFromCart',
@@ -81,6 +80,14 @@ final class Cart implements CartInterface
                     'products' => [$productData],
                 ],
             ],
+        ]);
+    }
+
+    public function removeGA4(array $productData): void
+    {
+        $this->googleTagManager->addPush([
+            'event' => 'remove_from_cart',
+            'items' => $productData,
         ]);
     }
 }

@@ -17,7 +17,6 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services.yml');
-        $loader->load('config.yml');
 
         $container->setParameter('sylius_gtm_enhanced_ecommerce.product_identifier', $config['product_identifier']);
 
@@ -44,5 +43,7 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension
             $parameter = \sprintf('sylius_gtm_enhanced_ecommerce.google.%s', $implementation);
             $container->setParameter($parameter, $config[$implementation]);
         }
+
+        $loader->load('config.yml');
     }
 }
