@@ -5,9 +5,17 @@ Upgrade 1.2.0 -> 2.0.0
 
 Implemented the base set-up for GA4. 
 
-Unfortunately, to keep UA & GA4 working at the same time, some breaking changes had to be made.
+Unfortunately, to keep UA & GA4 working at the same time, some breaking changes had to be made. 
 
+Mostly an extra service had to be injected, to verify whether UA or GA4 (or both) are being enabled. This service is `GoogleImplementationEnabled`.
 
+In addition, a new configuration setting is available to enable/disable UA/GA4 as you wish:
+
+```yaml
+sylius_gtm_enhanced_ecommerce:
+    ua: true
+    ga4: true
+```
 
 Upgrade v1.1.0 -> 1.2.0
 -----------------------
