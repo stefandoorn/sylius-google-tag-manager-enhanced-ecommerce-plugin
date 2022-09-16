@@ -6,6 +6,7 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
@@ -45,7 +46,16 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
+        $service = new AddTransaction(
+            $gtm,
+            $channelContext,
+            $currencyContext,
+            $productIdentifierHelper,
+            new GoogleImplementationEnabled(
+                true,
+                true,
+            ),
+        );
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener
@@ -81,7 +91,16 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
+        $service = new AddTransaction(
+            $gtm,
+            $channelContext,
+            $currencyContext,
+            $productIdentifierHelper,
+            new GoogleImplementationEnabled(
+                true,
+                true,
+            ),
+        );
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener
@@ -119,7 +138,16 @@ final class ThankYouListenerTest extends TestCase
         $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
 
         // Service and listener
-        $service = new AddTransaction($gtm, $channelContext, $currencyContext, $productIdentifierHelper);
+        $service = new AddTransaction(
+            $gtm,
+            $channelContext,
+            $currencyContext,
+            $productIdentifierHelper,
+            new GoogleImplementationEnabled(
+                true,
+                true,
+            ),
+        );
         $listener = new ThankYouListener($service, $orderRepository);
 
         // Run listener

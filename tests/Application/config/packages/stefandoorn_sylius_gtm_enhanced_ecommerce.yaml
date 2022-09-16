@@ -1,3 +1,5 @@
 sylius_gtm_enhanced_ecommerce:
+    ua: true
+    ga4: true
     features:
         purchases: true

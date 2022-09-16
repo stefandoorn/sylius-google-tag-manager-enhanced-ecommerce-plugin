@@ -1,7 +1,17 @@
 # Upgrade
 
+Upgrade 1.2.0 -> 2.0.0
+----------------------
+
+Implemented the base set-up for GA4. 
+
+Unfortunately, to keep UA & GA4 working at the same time, some breaking changes had to be made.
+
+
+
 Upgrade v1.1.0 -> 1.2.0
 -----------------------
+
 AddToCart and RemoveFromCart are now tracked automatically from backend without needs of javascript overrides
 The services `sylius.google_tag_manager_enhanced_ecommerce.cart.block_event_listener.sylius.shop.product.show.before_add_to_cart` is removed as also the twig templates and javascript associated
 The `checkout` event is not fired anymore on the success page because it conflicts with the 'purchase' event.

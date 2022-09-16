@@ -55,24 +55,26 @@ function enhancedEcommerceTrackProductClick(productObj, clickedUrl, actionFieldL
         actionFieldList = window.actionFieldList || (window.actionFieldList = 'Product List');
     }
 
-    var obj = {
-        'event': 'productClick',
-        'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
-        'ecommerce': {
-            'click': {
-                'products': [productObj]
+    if (gtmEnhancedEcommerceUAEnabled) {
+        var obj = {
+            'event': 'productClick',
+            'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
+            'ecommerce': {
+                'click': {
+                    'products': [productObj]
+                }
+            },
+            'eventCallback': function () {
+                document.location = clickedUrl
             }
-        },
-        'eventCallback': function() {
-            document.location = clickedUrl
+        };
+
+        if (actionFieldList) {
+            obj.ecommerce.click.actionField = {'list': actionFieldList}; // Optional list property.
         }
-    };
 
-    if (actionFieldList) {
-        obj.ecommerce.click.actionField = {'list': actionFieldList}; // Optional list property.
+        /** global: dataLayer */
+        dataLayer.push({ecommerce: null});
+        dataLayer.push(obj);
     }
-
-    /** global: dataLayer */
-    dataLayer.push({ ecommerce: null });
-    dataLayer.push(obj);
 }

@@ -8,7 +8,8 @@
         "sylius-plugin"
     ],
     "require": {
-        "stefandoorn/google-tag-manager-plugin": "~1.0"
+        "stefandoorn/google-tag-manager-plugin": "~1.0",
+        "sylius/sylius": "^1.9"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -54,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-master": "2.0-dev"
         }
     },
     "autoload": {
@@ -79,8 +80,8 @@
             "php bin/create_node_symlink.php"
         ],
         "analyse": "bin/phpstan analyse -c phpstan.neon -l 3 src",
-        "check-style": "bin/ecs check --ansi src/ tests/",
-        "fix-style": "ecs check --ansi src/ tests/ --fix",
+        "check-style": "bin/ecs check --ansi src/",
+        "fix-style": "ecs check --ansi src/ --fix",
         "phpspec": "bin/phpspec run --ansi",
         "phpunit": "bin/phpunit",
         "psalm": "bin/psalm",

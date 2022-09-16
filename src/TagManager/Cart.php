@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -22,24 +23,33 @@ final class Cart implements CartInterface
 
     private ProductIdentifierHelper $productIdentifierHelper;
 
+    private GoogleImplementationEnabled $googleImplementationEnabled;
+
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
-        ProductIdentifierHelper $productIdentifierHelper
+        ProductIdentifierHelper $productIdentifierHelper,
+        GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;
         $this->currencyContext = $currencyContext;
         $this->productIdentifierHelper = $productIdentifierHelper;
+        $this->googleImplementationEnabled = $googleImplementationEnabled;
     }
 
-    public function getOrderItem(OrderItemInterface $orderItem): array
+    public function getOrderItemUA(OrderItemInterface $orderItem): array
     {
-        return $this->createProduct($orderItem);
+        return $this->createProductUA($orderItem);
     }
 
-    public function add(array $productData): void
+    public function getOrderItemGA4(OrderItemInterface $orderItem): array
+    {
+        return $this->createProductGA4($orderItem);
+    }
+
+    public function addUA(array $productData): void
     {
         $this->googleTagManager->addPush([
             'event' => 'addToCart',
@@ -52,7 +62,15 @@ final class Cart implements CartInterface
         ]);
     }
 
-    public function remove(array $productData): void
+    public function addGA4(array $productData): void
+    {
+        $this->googleTagManager->addPush([
+            'event' => 'add_to_cart',
+            'items' => $productData,
+        ]);
+    }
+
+    public function removeUA(array $productData): void
     {
         $this->googleTagManager->addPush([
             'event' => 'removeFromCart',
@@ -62,6 +80,14 @@ final class Cart implements CartInterface
                     'products' => [$productData],
                 ],
             ],
+        ]);
+    }
+
+    public function removeGA4(array $productData): void
+    {
+        $this->googleTagManager->addPush([
+            'event' => 'remove_from_cart',
+            'items' => $productData,
         ]);
     }
 }

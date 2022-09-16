@@ -17,6 +17,14 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->booleanNode('ua')
+                    ->info('Inject data into GTM in UA format (Universal Analytics)')
+                    ->defaultValue(true)
+                ->end()
+                ->booleanNode('ga4')
+                    ->info('Inject data into GTM in GA4 format')
+                    ->defaultValue(true)
+                ->end()
                 ->enumNode('product_identifier')
                     ->info(\sprintf('Choose which product identifier you want to use between %s and %s', ProductDetailInterface::ID_IDENTIFIER, ProductDetailInterface::CODE_IDENTIFIER))
                     ->values(ProductDetailInterface::IDENTIFIERS)
