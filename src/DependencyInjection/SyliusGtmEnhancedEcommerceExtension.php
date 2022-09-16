@@ -60,11 +60,13 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension implements Pre
             $container->setParameter($parameter, $config[$implementation]);
         }
 
-        $container->prependExtensionConfig('twig', [
+        $twig = [
             'globals' => [
-                'sylius_gtm_enhanced_ecommerce.google.ua' => '%sylius_gtm_enhanced_ecommerce.google.ua%',
-                'sylius_gtm_enhanced_ecommerce.google.ga4' => '%sylius_gtm_enhanced_ecommerce.google.ga4%',
+                'sylius_gtm_enhanced_ecommerce_google_ua' => '%sylius_gtm_enhanced_ecommerce.google.ua%',
+                'sylius_gtm_enhanced_ecommerce_google_ga4' => '%sylius_gtm_enhanced_ecommerce.google.ga4%',
             ],
-        ]);
+        ];
+
+        $container->prependExtensionConfig('twig', $twig);
     }
 }
