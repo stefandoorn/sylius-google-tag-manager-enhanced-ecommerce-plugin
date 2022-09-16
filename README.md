@@ -6,6 +6,12 @@
 
 <p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="200"></a></p>
 
+## Note
+
+This plugin now supports both UA (deprecated by Google) & GA4. Not all GA4 features are already implemented.
+
+The following migration guide has been used to move to GA4: https://support.google.com/analytics/answer/10119380?hl=en
+
 ## Installation
 
 ### 1. Composer
@@ -18,10 +24,10 @@ https://github.com/stefandoorn/google-tag-manager-plugin
 
 ### 3. Load bundle
 
-Add to the bundle list:
+Add to `bundles.php`:
 
 ```php
-new StefanDoorn\SyliusGtmEnhancedEcommercePlugin\SyliusGtmEnhancedEcommercePlugin(),
+StefanDoorn\SyliusGtmEnhancedEcommercePlugin\SyliusGtmEnhancedEcommercePlugin::class => ['all' => true],
 ```
 
 ### 4. Adjust configurations
@@ -44,7 +50,7 @@ By default all features are enabled.
 
 ## Features
 
-Each feature has it's own specific documentation.
+Features available:
 
 *For Universal Analytics (deprecated by Google)*:
 
@@ -55,16 +61,23 @@ Each feature has it's own specific documentation.
 * [cart](docs/UA/cart.md): Send add to cart / remove from cart events to GTM
 * [checkout](docs/UA/checkout.md): Send checkout steps & selected options to GTM
 
-*For GA4 (WIP)*:
+*For GA4*:
 
-[@TODO]
+References: https://support.google.com/analytics/answer/10119380?hl=en
+
+* `add_to_cart`
+* `remove_from_cart`
+* `begin_checkout`
+* `purchase`
+
+Other features included in UA, but not in GA4, are *Work In Progress*.
 
 Make sure to check that the required 'sonata_block_render_events' template events are available. Check the
 `src/Resources/config/features/*.yml` & `src/Resources/config/services.yml` for the definitions.
 
 This is only to be checked if you've been overriding templates yourselves.
 
-## Bootstrap a GTM container (Universal Analytics)
+## Bootstrap a GTM container (Universal Analytics (deprecated by Google))
 You can find a GTM container fully configured that work with the test application in `docs/UA/GTM-EXAMPLE.json`.
 
 This file can be imported to easily configure your container.
