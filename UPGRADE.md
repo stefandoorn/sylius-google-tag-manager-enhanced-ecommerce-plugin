@@ -26,6 +26,8 @@ On the JS side, two variables have been added which are regularly used to check 
 
 As well these global Twig variables are available that you see being used above, they are added in a `prepend` method call in the plugin Extension class.
 
+At several locations extra services had to be injected, mainly contexts. Best is to review these if you've been overriding classes.
+
 Upgrade v1.1.0 -> 1.2.0
 -----------------------
 
