@@ -10,11 +10,11 @@ final class MainRequest
 {
     public static function isMainRequest(ControllerEvent $event): bool
     {
-        if (method_exists($event, 'isMainRequest')) {
+        if (\method_exists($event, 'isMainRequest')) {
             return $event->isMainRequest();
         }
 
-        if (method_exists($event, 'isMasterRequest')) {
+        if (\method_exists($event, 'isMasterRequest')) {
             return $event->isMasterRequest();
         }
 
