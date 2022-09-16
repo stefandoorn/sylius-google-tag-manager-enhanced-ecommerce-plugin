@@ -8,7 +8,8 @@
         "sylius-plugin"
     ],
     "require": {
-        "stefandoorn/google-tag-manager-plugin": "~1.0"
+        "stefandoorn/google-tag-manager-plugin": "~1.0",
+        "sylius/sylius": "^1.9"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
