@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransactionInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -29,7 +30,7 @@ final class ThankYouListener
         $controller = $event->getController();
 
         // Only perform on the main request, not on subrequests
-        if (!$event->isMainRequest()) {
+        if (!MainRequest::isMainRequest($event)) {
             return;
         }
 

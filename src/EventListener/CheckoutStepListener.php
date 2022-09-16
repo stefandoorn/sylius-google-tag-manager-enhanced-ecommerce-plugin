@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolverInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
@@ -34,7 +35,7 @@ final class CheckoutStepListener
         $controller = $event->getController();
 
         // Only perform on the main request, not on subrequests
-        if (!$event->isMainRequest()) {
+        if (!MainRequest::isMainRequest($event)) {
             return;
         }
 
