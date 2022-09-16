@@ -38,15 +38,15 @@ final class CheckoutStep implements CheckoutStepInterface
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ProductIdentifierHelper $productIdentifierHelper,
-        CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
+        CurrencyContextInterface $currencyContext,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
-        $this->currencyContext = $currencyContext;
         $this->channelContext = $channelContext;
+        $this->currencyContext = $currencyContext;
     }
 
     public function addStep(OrderInterface $order, int $step): void
