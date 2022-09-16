@@ -12,9 +12,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::SKIP, [
         VisibilityRequiredFixer::class => ['*Spec.php'],
-        'tests/Application',
-        'tests/vendor',
-        'vendor',
     ]);
 
     $services = $containerConfigurator->services();
