@@ -17,6 +17,15 @@ sylius_gtm_enhanced_ecommerce:
     ga4: true
 ```
 
+On the JS side, two variables have been added which are regularly used to check whether UA/GA4 is enabled:
+
+```javascript
+    var gtmEnhancedEcommerceUAEnabled = '{{ sylius_gtm_enhanced_ecommerce.google.ua }}';
+    var gtmEnhancedEcommerceGA4Enabled = '{{ sylius_gtm_enhanced_ecommerce.google.ga4 }}';
+```
+
+As well these global Twig variables are available that you see being used above, they are added in a `prepend` method call in the plugin Extension class.
+
 Upgrade v1.1.0 -> 1.2.0
 -----------------------
 
