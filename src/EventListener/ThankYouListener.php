@@ -28,8 +28,8 @@ final class ThankYouListener
     {
         $controller = $event->getController();
 
-        // Only perform on master request
-        if (!$event->isMasterRequest()) {
+        // Only perform on the main request, not on subrequests
+        if (!$event->isMainRequest()) {
             return;
         }
 
