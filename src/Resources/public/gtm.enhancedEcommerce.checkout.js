@@ -1,6 +1,6 @@
 'use strict';
 (function ($) {
-  if (gtmEnhancedEcommerceUAEnabled) {
+  if (typeof gtmEnhancedEcommerceUAEnabled !== 'undefined' && gtmEnhancedEcommerceUAEnabled) {
     (function () {
       if (typeof checkoutStepsConfiguration === "undefined") return;
       if (typeof checkoutStepsConfiguration !== "object") return;

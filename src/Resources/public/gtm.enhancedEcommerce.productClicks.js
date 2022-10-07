@@ -55,7 +55,7 @@ function enhancedEcommerceTrackProductClick(productObj, clickedUrl, actionFieldL
         actionFieldList = window.actionFieldList || (window.actionFieldList = 'Product List');
     }
 
-    if (gtmEnhancedEcommerceUAEnabled) {
+    if (typeof gtmEnhancedEcommerceUAEnabled !== 'undefined' && gtmEnhancedEcommerceUAEnabled) {
         var obj = {
             'event': 'productClick',
             'currencyCode': window.gtmEnhancedEcommerceCurrencyCode || '',
