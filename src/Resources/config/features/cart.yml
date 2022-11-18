@@ -7,7 +7,7 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.add_to_cart:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CartListener
         arguments:
-            - '@session'
+            - '@request_stack'
             - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
             - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
         tags:
@@ -16,7 +16,7 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.remove_from_cart:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CartListener
         arguments:
-            - '@session'
+            - '@request_stack'
             - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
             - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
         tags:
@@ -25,7 +25,7 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.controller:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CartListener
         arguments:
-            - '@session'
+            - '@request_stack'
             - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
             - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
         tags:
