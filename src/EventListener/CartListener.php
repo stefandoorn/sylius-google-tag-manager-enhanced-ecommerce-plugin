@@ -29,7 +29,7 @@ final class CartListener
     public function __construct(
         RequestStack $requestStack,
         Cart $cart,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        GoogleImplementationEnabled $googleImplementationEnabled,
     ) {
         $this->requestStack = $requestStack;
         $this->cart = $cart;
@@ -41,14 +41,14 @@ final class CartListener
         if ($this->googleImplementationEnabled->isUAEnabled()) {
             $this->requestStack->getSession()->set(
                 self::POST_ADD_ORDER_ITEM_UA,
-                $this->cart->getOrderItemUA($event->getSubject())
+                $this->cart->getOrderItemUA($event->getSubject()),
             );
         }
 
         if ($this->googleImplementationEnabled->isGA4Enabled()) {
             $this->requestStack->getSession()->set(
                 self::POST_ADD_ORDER_ITEM_GA4,
-                $this->cart->getOrderItemGA4($event->getSubject())
+                $this->cart->getOrderItemGA4($event->getSubject()),
             );
         }
     }
@@ -58,14 +58,14 @@ final class CartListener
         if ($this->googleImplementationEnabled->isUAEnabled()) {
             $this->requestStack->getSession()->set(
                 self::POST_REMOVE_ORDER_ITEM_UA,
-                $this->cart->getOrderItemUA($event->getSubject())
+                $this->cart->getOrderItemUA($event->getSubject()),
             );
         }
 
         if ($this->googleImplementationEnabled->isGA4Enabled()) {
             $this->requestStack->getSession()->set(
                 self::POST_REMOVE_ORDER_ITEM_GA4,
-                $this->cart->getOrderItemGA4($event->getSubject())
+                $this->cart->getOrderItemGA4($event->getSubject()),
             );
         }
     }

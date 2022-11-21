@@ -33,7 +33,7 @@ final class ProductDetailImpressionCachedDataResolver implements ProductDetailIm
         ProductDetailImpressionDataResolverInterface $productDetailImpressionDataResolver,
         AdapterInterface $cacheAdapter,
         int $cacheTtl,
-        string $cacheKey
+        string $cacheKey,
     ) {
         $this->productDetailImpressionDataResolver = $productDetailImpressionDataResolver;
         $this->cacheAdapter = $cacheAdapter;
@@ -54,7 +54,8 @@ final class ProductDetailImpressionCachedDataResolver implements ProductDetailIm
 
             $cache
                 ->set($data)
-                ->expiresAfter($this->cacheTtl);
+                ->expiresAfter($this->cacheTtl)
+            ;
 
             $this->cacheAdapter->save($cache);
         }

@@ -30,7 +30,7 @@ final class Cart implements CartInterface
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
         ProductIdentifierHelper $productIdentifierHelper,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        GoogleImplementationEnabled $googleImplementationEnabled,
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;

@@ -31,7 +31,7 @@ final class ProductDetailImpressionDataResolver implements ProductDetailImpressi
         ChannelContextInterface $channelContext,
         ProductDetailImpressionFactoryInterface $productDetailImpressionFactory,
         ProductDetailFactoryInterface $productDetailFactory,
-        ProductIdentifierHelper $productIdentifierHelper
+        ProductIdentifierHelper $productIdentifierHelper,
     ) {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
         $this->channelContext = $channelContext;
