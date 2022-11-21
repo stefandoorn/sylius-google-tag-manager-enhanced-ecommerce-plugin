@@ -12,7 +12,6 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
 
 final class Kernel extends BaseKernel
 {
@@ -55,13 +54,6 @@ final class Kernel extends BaseKernel
 
         foreach ($this->getConfigurationDirectories() as $confDir) {
             $this->loadContainerConfiguration($loader, $confDir);
-        }
-    }
-
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
-    {
-        foreach ($this->getConfigurationDirectories() as $confDir) {
-            $this->loadRoutesConfiguration($routes, $confDir);
         }
     }
 
