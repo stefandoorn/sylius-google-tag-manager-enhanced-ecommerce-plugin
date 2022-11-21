@@ -33,7 +33,10 @@ jobs:
                         sylius: "~1.9.0"
                     -
                         php: "7.4"
-                        sylius: ["~1.10.0", "~1.11.0", "~1.12.0"]
+                        sylius: "~1.11.0"
+                    -
+                        php: "7.4"
+                        sylius: "~1.12.0"
 
         env:
             APP_ENV: test
