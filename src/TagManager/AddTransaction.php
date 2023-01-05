@@ -31,7 +31,7 @@ final class AddTransaction implements AddTransactionInterface
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
         ProductIdentifierHelper $productIdentifierHelper,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        GoogleImplementationEnabled $googleImplementationEnabled,
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;

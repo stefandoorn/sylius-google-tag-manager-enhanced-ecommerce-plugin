@@ -19,7 +19,7 @@ final class ThankYouListener
 
     public function __construct(
         AddTransactionInterface $transactionService,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ) {
         $this->transactionService = $transactionService;
         $this->orderRepository = $orderRepository;

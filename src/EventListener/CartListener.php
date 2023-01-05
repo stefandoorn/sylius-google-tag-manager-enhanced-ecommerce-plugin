@@ -7,7 +7,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 final class CartListener
@@ -20,18 +20,18 @@ final class CartListener
 
     public const POST_REMOVE_ORDER_ITEM_GA4 = 'post_remove_order_item_ga4';
 
-    private SessionInterface $session;
+    private RequestStack $requestStack;
 
     private Cart $cart;
 
     private GoogleImplementationEnabled $googleImplementationEnabled;
 
     public function __construct(
-        SessionInterface $session,
+        RequestStack $requestStack,
         Cart $cart,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        GoogleImplementationEnabled $googleImplementationEnabled,
     ) {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
         $this->cart = $cart;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
     }
@@ -39,16 +39,16 @@ final class CartListener
     public function onAddToCart(ResourceControllerEvent $event): void
     {
         if ($this->googleImplementationEnabled->isUAEnabled()) {
-            $this->session->set(
+            $this->requestStack->getSession()->set(
                 self::POST_ADD_ORDER_ITEM_UA,
-                $this->cart->getOrderItemUA($event->getSubject())
+                $this->cart->getOrderItemUA($event->getSubject()),
             );
         }
 
         if ($this->googleImplementationEnabled->isGA4Enabled()) {
-            $this->session->set(
+            $this->requestStack->getSession()->set(
                 self::POST_ADD_ORDER_ITEM_GA4,
-                $this->cart->getOrderItemGA4($event->getSubject())
+                $this->cart->getOrderItemGA4($event->getSubject()),
             );
         }
     }
@@ -56,16 +56,16 @@ final class CartListener
     public function onRemoveFromCart(ResourceControllerEvent $event): void
     {
         if ($this->googleImplementationEnabled->isUAEnabled()) {
-            $this->session->set(
+            $this->requestStack->getSession()->set(
                 self::POST_REMOVE_ORDER_ITEM_UA,
-                $this->cart->getOrderItemUA($event->getSubject())
+                $this->cart->getOrderItemUA($event->getSubject()),
             );
         }
 
         if ($this->googleImplementationEnabled->isGA4Enabled()) {
-            $this->session->set(
+            $this->requestStack->getSession()->set(
                 self::POST_REMOVE_ORDER_ITEM_GA4,
-                $this->cart->getOrderItemGA4($event->getSubject())
+                $this->cart->getOrderItemGA4($event->getSubject()),
             );
         }
     }
@@ -73,29 +73,29 @@ final class CartListener
     public function onKernelController(ControllerEvent $event): void
     {
         if ($this->googleImplementationEnabled->isUAEnabled()) {
-            if ($this->session->has(self::POST_ADD_ORDER_ITEM_UA)) {
-                $orderItem = $this->session->get(self::POST_ADD_ORDER_ITEM_UA);
-                $this->session->remove(self::POST_ADD_ORDER_ITEM_UA);
+            if ($this->requestStack->getSession()->has(self::POST_ADD_ORDER_ITEM_UA)) {
+                $orderItem = $this->requestStack->getSession()->get(self::POST_ADD_ORDER_ITEM_UA);
+                $this->requestStack->getSession()->remove(self::POST_ADD_ORDER_ITEM_UA);
                 $this->cart->addUA($orderItem);
             }
 
-            if ($this->session->has(self::POST_REMOVE_ORDER_ITEM_UA)) {
-                $orderItem = $this->session->get(self::POST_REMOVE_ORDER_ITEM_UA);
-                $this->session->remove(self::POST_REMOVE_ORDER_ITEM_UA);
+            if ($this->requestStack->getSession()->has(self::POST_REMOVE_ORDER_ITEM_UA)) {
+                $orderItem = $this->requestStack->getSession()->get(self::POST_REMOVE_ORDER_ITEM_UA);
+                $this->requestStack->getSession()->remove(self::POST_REMOVE_ORDER_ITEM_UA);
                 $this->cart->removeUA($orderItem);
             }
         }
 
         if ($this->googleImplementationEnabled->isGA4Enabled()) {
-            if ($this->session->has(self::POST_ADD_ORDER_ITEM_GA4)) {
-                $orderItem = $this->session->get(self::POST_ADD_ORDER_ITEM_GA4);
-                $this->session->remove(self::POST_ADD_ORDER_ITEM_GA4);
+            if ($this->requestStack->getSession()->has(self::POST_ADD_ORDER_ITEM_GA4)) {
+                $orderItem = $this->requestStack->getSession()->get(self::POST_ADD_ORDER_ITEM_GA4);
+                $this->requestStack->getSession()->remove(self::POST_ADD_ORDER_ITEM_GA4);
                 $this->cart->addGA4($orderItem);
             }
 
-            if ($this->session->has(self::POST_REMOVE_ORDER_ITEM_GA4)) {
-                $orderItem = $this->session->get(self::POST_REMOVE_ORDER_ITEM_GA4);
-                $this->session->remove(self::POST_REMOVE_ORDER_ITEM_GA4);
+            if ($this->requestStack->getSession()->has(self::POST_REMOVE_ORDER_ITEM_GA4)) {
+                $orderItem = $this->requestStack->getSession()->get(self::POST_REMOVE_ORDER_ITEM_GA4);
+                $this->requestStack->getSession()->remove(self::POST_REMOVE_ORDER_ITEM_GA4);
                 $this->cart->removeGA4($orderItem);
             }
         }
