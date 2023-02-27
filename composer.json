@@ -38,7 +38,7 @@
         "symfony/dotenv": "^5.4 || ^6.0",
         "symfony/intl": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
-        "vimeo/psalm": "5.4.0",
+        "vimeo/psalm": "5.7.7",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
