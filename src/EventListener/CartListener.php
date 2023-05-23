@@ -30,7 +30,7 @@ final class CartListener
     public function __construct(
         RequestStack $requestStack,
         Cart $cart,
-        GoogleImplementationEnabled $googleImplementationEnabled,
+        GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->requestStack = $requestStack;
         $this->cart = $cart;

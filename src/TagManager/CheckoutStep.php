@@ -40,7 +40,7 @@ final class CheckoutStep implements CheckoutStepInterface
         ProductIdentifierHelper $productIdentifierHelper,
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
-        GoogleImplementationEnabled $googleImplementationEnabled,
+        GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->productIdentifierHelper = $productIdentifierHelper;

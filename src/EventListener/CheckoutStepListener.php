@@ -23,7 +23,7 @@ final class CheckoutStepListener
     public function __construct(
         CheckoutStepInterface $checkoutStep,
         CartContextInterface $cartContext,
-        CheckoutStepResolverInterface $checkoutStepResolver,
+        CheckoutStepResolverInterface $checkoutStepResolver
     ) {
         $this->checkoutStep = $checkoutStep;
         $this->cartContext = $cartContext;

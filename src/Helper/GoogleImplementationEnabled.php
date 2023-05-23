@@ -12,7 +12,7 @@ final class GoogleImplementationEnabled
 
     public function __construct(
         bool $uaEnabled,
-        bool $ga4Enabled,
+        bool $ga4Enabled
     ) {
         $this->uaEnabled = $uaEnabled;
         $this->ga4Enabled = $ga4Enabled;
