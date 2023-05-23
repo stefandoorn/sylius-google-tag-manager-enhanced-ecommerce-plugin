@@ -50,7 +50,6 @@ trait CreateProductTrait
             'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
             'item_name' => $product->getName(),
             'affiliation' => $this->channelContext->getChannel()->getName(),
-            'currency' => $this->currencyContext->getCurrencyCode(),
             'item_category' => null !== $mainTaxon ? $mainTaxon->getName() : '',
             'item_variant' => $variant->getName() ?? $variant->getCode(),
             'price' => $item->getUnitPrice() / 100,
