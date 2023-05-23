@@ -7,6 +7,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -25,15 +26,19 @@ final class CartListener
 
     private Cart $cart;
 
+    private FirewallMap $firewallMap;
+
     private GoogleImplementationEnabled $googleImplementationEnabled;
 
     public function __construct(
         RequestStack $requestStack,
         Cart $cart,
+        FirewallMap $firewallMap,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->requestStack = $requestStack;
         $this->cart = $cart;
+        $this->firewallMap = $firewallMap;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
     }
 
@@ -83,6 +88,11 @@ final class CartListener
 
     public function onKernelController(ControllerEvent $event): void
     {
+        $firewallConfig = $this->firewallMap->getFirewallConfig($event->getRequest());
+        if (null !== $firewallConfig && 'shop' !== $firewallConfig->getName()) {
+            return;
+        }
+
         $session = $this->getSession();
         if (null === $session) {
             return;
