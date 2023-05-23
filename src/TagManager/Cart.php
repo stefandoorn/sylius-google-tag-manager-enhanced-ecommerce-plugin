@@ -66,7 +66,9 @@ final class Cart implements CartInterface
     {
         $this->googleTagManager->addPush([
             'event' => 'add_to_cart',
-            'items' => $productData,
+            'currency' => $this->currencyContext->getCurrencyCode(),
+            'value' => $productData['price'] * $productData['quantity'],
+            'items' => [$productData],
         ]);
     }
 
@@ -87,7 +89,9 @@ final class Cart implements CartInterface
     {
         $this->googleTagManager->addPush([
             'event' => 'remove_from_cart',
-            'items' => $productData,
+            'currency' => $this->currencyContext->getCurrencyCode(),
+            'value' => $productData['price'] * $productData['quantity'],
+            'items' => [$productData],
         ]);
     }
 }
