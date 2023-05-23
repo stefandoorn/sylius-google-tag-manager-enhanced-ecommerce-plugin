@@ -8,6 +8,7 @@
         "sylius-plugin"
     ],
     "require": {
+        "php": "^7.4 || ^8.0",
         "stefandoorn/google-tag-manager-plugin": "~1.0",
         "sylius/sylius": "^1.9"
     },
