@@ -17,7 +17,7 @@ final class ParameterExtension extends AbstractExtension
         bool $product_detail_impressions,
         bool $product_clicks,
         bool $cart,
-        array $checkout,
+        array $checkout
     ) {
         $this->parameters = [
             'purchases' => $purchases,
