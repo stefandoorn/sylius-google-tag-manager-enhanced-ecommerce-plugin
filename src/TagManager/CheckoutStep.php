@@ -108,11 +108,23 @@ final class CheckoutStep implements CheckoutStepInterface
             return;
         }
 
+        // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#initiate_the_checkout_process
         $this->googleTagManager->addPush([
-            'event' => 'begin_checkout',
+            'ecommerce' => null,
+        ]);
+
+        $cart = [
             'currency' => $this->currencyContext->getCurrencyCode(),
             'value' => $order->getTotal() / 100,
             'items' => $this->getProductsGA4($order),
+        ];
+        if ($order->getPromotionCoupon() !== null) {
+            $cart['coupon'] = $order->getPromotionCoupon()->getCode();
+        }
+
+        $this->googleTagManager->addPush([
+            'event' => 'begin_checkout',
+            'ecommerce' => $cart,
         ]);
     }
 }
