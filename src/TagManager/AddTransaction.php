@@ -104,6 +104,10 @@ final class AddTransaction implements AddTransactionInterface
 
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#make_a_purchase_or_issue_a_refund
         $this->googleTagManager->addPush([
+            'ecommerce' => null,
+        ]);
+
+        $this->googleTagManager->addPush([
             'event' => 'purchase',
             'ecommerce' => $purchase,
         ]);
