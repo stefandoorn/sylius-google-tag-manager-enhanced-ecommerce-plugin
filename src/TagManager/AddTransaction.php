@@ -92,20 +92,20 @@ final class AddTransaction implements AddTransactionInterface
 
         $purchase = [
             'transaction_id' => $order->getNumber(),
-            'affiliation' => $this->channelContext->getChannel()->getName(),
             'value' => $order->getTotal() / 100,
             'tax' => $order->getTaxTotal() / 100,
             'shipping' => $order->getShippingTotal() / 100,
             'currency' => $this->currencyContext->getCurrencyCode(),
+            'items' => $products,
         ];
         if ($order->getPromotionCoupon() !== null) {
             $purchase['coupon'] = $order->getPromotionCoupon()->getCode();
         }
 
-        // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtag#make_a_purchase_or_issue_a_refund
-        $this->googleTagManager->addPush(\array_merge([
+        // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#make_a_purchase_or_issue_a_refund
+        $this->googleTagManager->addPush([
             'event' => 'purchase',
-            'items' => $products,
-        ], $purchase));
+            'ecommerce' => $purchase,
+        ]);
     }
 }
