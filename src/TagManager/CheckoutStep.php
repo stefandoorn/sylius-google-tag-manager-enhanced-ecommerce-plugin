@@ -104,8 +104,18 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private function addStepGA4(OrderInterface $order, int $step): void
     {
-        if (self::STEP_CART !== $step) { // In GA4 only 'begin_checkout' is recorded
-            return;
+        // Triggers allowed:
+        // -----------------
+        // 1. Cart -> begin_checkout
+
+        $additionalData = [];
+        switch($step) {
+            case self::STEP_CART:
+                $event = 'begin_checkout';
+
+                break;
+            default:
+                return;
         }
 
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#initiate_the_checkout_process
@@ -123,8 +133,11 @@ final class CheckoutStep implements CheckoutStepInterface
         }
 
         $this->googleTagManager->addPush([
-            'event' => 'begin_checkout',
-            'ecommerce' => $cart,
+            'event' => $event,
+            'ecommerce' => \array_merge(
+                $additionalData,
+                $cart,
+            ),
         ]);
     }
 }
