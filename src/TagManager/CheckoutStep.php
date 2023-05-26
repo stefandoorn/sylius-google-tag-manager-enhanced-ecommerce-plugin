@@ -64,6 +64,11 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private function addStepUA(OrderInterface $order, int $step): void
     {
+        // Do not call this on the confirmation page as it's not seen as a checkout step
+        if (self::STEP_CONFIRM === $step) {
+            return;
+        }
+
         $checkout = [
             'actionField' => [
                 'step' => $step,
