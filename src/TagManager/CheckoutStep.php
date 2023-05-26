@@ -8,6 +8,7 @@ use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnab
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
@@ -109,6 +110,7 @@ final class CheckoutStep implements CheckoutStepInterface
         // -----------------
         // 2. Address -> begin_checkout (customer moved past the cart)
         // 4. Payment -> add_shipping_info (customer moved past the shipping step)
+        // 5. Confirm -> add_payment_info (customer moved past the payment step)
 
         $additionalData = [];
         switch ($step) {
@@ -122,6 +124,16 @@ final class CheckoutStep implements CheckoutStepInterface
                     ', ',
                     $order->getShipments()->map(function (ShipmentInterface $shipment) {
                         return $shipment->getMethod()->getName();
+                    })->toArray()
+                );
+
+                break;
+            case self::STEP_CONFIRM:
+                $event = 'add_payment_info';
+                $additionalData['payment_type'] = implode(
+                    ', ',
+                    $order->getPayments()->map(function (PaymentInterface $payment) {
+                        return $payment->getMethod()->getName();
                     })->toArray()
                 );
 
