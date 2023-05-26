@@ -95,8 +95,8 @@ final class CheckoutStep implements CheckoutStepInterface
     {
         $products = [];
 
-        foreach ($order->getItems() as $item) {
-            $products[] = $this->createProductGA4($item);
+        foreach ($order->getItems() as $index => $item) {
+            $products[] = $this->createProductGA4($item, $index);
         }
 
         return $products;
