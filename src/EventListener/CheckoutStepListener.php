@@ -6,7 +6,6 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolverInterface;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -56,11 +55,6 @@ final class CheckoutStepListener
         // Resolve step
         $step = $this->checkoutStepResolver->resolve($controller[1], $event->getRequest());
         if ($step === null) {
-            return;
-        }
-
-        // Do not call this on the confirmation page as it's not seen as a checkout step
-        if (CheckoutStep::STEP_CONFIRM === $step) {
             return;
         }
 
