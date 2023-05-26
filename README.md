@@ -68,6 +68,7 @@ References: https://support.google.com/analytics/answer/10119380?hl=en
 * `add_to_cart`
 * `remove_from_cart`
 * `begin_checkout`
+* `add_shipping_info`
 * `purchase`
 
 Other features included in UA, but not in GA4, are *Work In Progress*.
