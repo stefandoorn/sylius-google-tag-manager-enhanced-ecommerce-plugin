@@ -8,6 +8,7 @@ use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnab
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
@@ -107,11 +108,22 @@ final class CheckoutStep implements CheckoutStepInterface
         // Triggers allowed:
         // -----------------
         // 2. Address -> begin_checkout (customer moved past the cart)
+        // 4. Payment -> add_shipping_info (customer moved past the shipping step)
 
         $additionalData = [];
-        switch($step) {
+        switch ($step) {
             case self::STEP_ADDRESS:
                 $event = 'begin_checkout';
+
+                break;
+            case self::STEP_PAYMENT:
+                $event = 'add_shipping_info';
+                $additionalData['shipping_tier'] = implode(
+                    ', ',
+                    $order->getShipments()->map(function (ShipmentInterface $shipment) {
+                        return $shipment->getMethod()->getName();
+                    })->toArray()
+                );
 
                 break;
             default:
