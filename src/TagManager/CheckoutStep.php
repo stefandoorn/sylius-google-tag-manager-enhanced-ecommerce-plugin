@@ -106,11 +106,11 @@ final class CheckoutStep implements CheckoutStepInterface
     {
         // Triggers allowed:
         // -----------------
-        // 1. Cart -> begin_checkout
+        // 2. Address -> begin_checkout (customer moved past the cart)
 
         $additionalData = [];
         switch($step) {
-            case self::STEP_CART:
+            case self::STEP_ADDRESS:
                 $event = 'begin_checkout';
 
                 break;
