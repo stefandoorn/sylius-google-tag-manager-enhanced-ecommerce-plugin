@@ -64,11 +64,18 @@ final class Cart implements CartInterface
 
     public function addGA4(array $productData): void
     {
+        // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#add_or_remove_an_item_from_a_shopping_cart
+        $this->googleTagManager->addPush([
+            'ecommerce' => null,
+        ]);
+
         $this->googleTagManager->addPush([
             'event' => 'add_to_cart',
-            'currency' => $this->currencyContext->getCurrencyCode(),
-            'value' => $productData['price'] * $productData['quantity'],
-            'items' => [$productData],
+            'ecommerce' => [
+                'currency' => $this->currencyContext->getCurrencyCode(),
+                'value' => $productData['price'] * $productData['quantity'],
+                'items' => [$productData],
+            ],
         ]);
     }
 
@@ -87,11 +94,18 @@ final class Cart implements CartInterface
 
     public function removeGA4(array $productData): void
     {
+        // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#add_or_remove_an_item_from_a_shopping_cart
+        $this->googleTagManager->addPush([
+            'ecommerce' => null,
+        ]);
+
         $this->googleTagManager->addPush([
             'event' => 'remove_from_cart',
-            'currency' => $this->currencyContext->getCurrencyCode(),
-            'value' => $productData['price'] * $productData['quantity'],
-            'items' => [$productData],
+            'ecommerce' => [
+                'currency' => $this->currencyContext->getCurrencyCode(),
+                'value' => $productData['price'] * $productData['quantity'],
+                'items' => [$productData],
+            ],
         ]);
     }
 }
