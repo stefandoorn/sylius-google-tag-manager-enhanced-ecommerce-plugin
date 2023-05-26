@@ -25,7 +25,7 @@ final class ParameterExtension extends AbstractExtension
             'product_detail_impressions' => $product_detail_impressions,
             'product_clicks' => $product_clicks,
             'cart' => $cart,
-            'checkout' => $checkout
+            'checkout' => $checkout,
         ];
     }
 
