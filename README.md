@@ -63,7 +63,9 @@ Features available:
 
 *For GA4*:
 
-References: https://support.google.com/analytics/answer/10119380?hl=en
+References + examples of how to set-up yoyur GTM container: https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm
+
+Supported events:
 
 * `add_to_cart`
 * `remove_from_cart`
