@@ -113,12 +113,17 @@ final class CheckoutStep implements CheckoutStepInterface
     {
         // Triggers allowed:
         // -----------------
+        // 1. Cart -> view_cart
         // 2. Address -> begin_checkout (customer moved past the cart)
         // 4. Payment -> add_shipping_info (customer moved past the shipping step)
         // 5. Confirm -> add_payment_info (customer moved past the payment step)
 
         $additionalData = [];
         switch ($step) {
+            case self::STEP_CART:
+                $event = 'view_cart';
+
+                break;
             case self::STEP_ADDRESS:
                 $event = 'begin_checkout';
 
