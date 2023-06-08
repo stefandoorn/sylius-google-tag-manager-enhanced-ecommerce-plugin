@@ -19,6 +19,17 @@ services:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
             - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItem
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.channel"
+            - "@sylius.context.currency"
+            - "@sylius.product_variant_resolver.default"
+            - "@sylius.calculator.product_variant_price"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
+            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
+
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep
         arguments:
