@@ -7,6 +7,7 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.view_item.listener:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ViewItemListener
         arguments:
+            - "@request_stack"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item"
         tags:
             - { name: kernel.event_listener, event: sylius.product.show }
