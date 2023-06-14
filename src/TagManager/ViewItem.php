@@ -62,26 +62,31 @@ final class ViewItem implements ViewItemInterface
         /** @var TaxonInterface|null $mainTaxon */
         $mainTaxon = $product->getMainTaxon();
 
-        $productVariant = $this->productVariantResolver->getVariant($product);
-        $productVariantPrice = $this->productVariantPriceCalculator->calculate(
-            $productVariant,
-            [
-                'channel' => $this->channelContext->getChannel(),
-            ]
-        );
-
         $data = [
             'items' => [
                 'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
                 'item_name' => $product->getName(),
                 'affiliation' => $this->channelContext->getChannel()->getName(),
                 'item_category' => null !== $mainTaxon ? $mainTaxon->getName() : '',
-                'price' => $productVariantPrice / 100,
                 'index' => 0,
             ],
-            'currency' => $this->currencyContext->getCurrencyCode(),
-            'value' => $productVariantPrice / 100,
         ];
+
+        $productVariant = $this->productVariantResolver->getVariant($product);
+
+        if ($productVariant) {
+            $productVariantPrice = $this->productVariantPriceCalculator->calculate(
+                $productVariant,
+                [
+                    'channel' => $this->channelContext->getChannel(),
+                ]
+            );
+
+            $data['items'][0]['price'] = $productVariantPrice / 100;
+
+            $data['currency'] = $this->currencyContext->getCurrencyCode();
+            $data['value'] = $productVariantPrice / 100;
+        }
 
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#view_item_details
         $this->googleTagManager->addPush([
