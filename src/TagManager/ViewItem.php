@@ -63,7 +63,7 @@ final class ViewItem implements ViewItemInterface
         $mainTaxon = $product->getMainTaxon();
 
         $productVariant = $this->productVariantResolver->getVariant($product);
-        if ($productVariant) {
+        if (isset($productVariant)) {
             $productVariantPrice = $this->productVariantPriceCalculator->calculate(
                 $productVariant,
                 [
