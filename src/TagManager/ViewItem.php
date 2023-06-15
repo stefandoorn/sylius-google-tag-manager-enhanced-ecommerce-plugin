@@ -74,7 +74,7 @@ final class ViewItem implements ViewItemInterface
 
         $productVariant = $this->productVariantResolver->getVariant($product);
 
-        if ($productVariant) {
+        if (null !== $productVariant) {
             $productVariantPrice = $this->productVariantPriceCalculator->calculate(
                 $productVariant,
                 [
