@@ -7,7 +7,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -32,7 +32,7 @@ final class ViewItemList implements ViewItemListInterface
 
     private GoogleImplementationEnabled $googleImplementationEnabled;
 
-    private ProductVariantPriceHelper $productVariantPriceHelper;
+    private ProductVariantPriceHelperInterface $productVariantPriceHelper;
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
@@ -41,7 +41,7 @@ final class ViewItemList implements ViewItemListInterface
         LocaleContextInterface $localeContext,
         ProductIdentifierHelper $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
-        ProductVariantPriceHelper $productVariantPriceHelper,
+        ProductVariantPriceHelperInterface $productVariantPriceHelper,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;

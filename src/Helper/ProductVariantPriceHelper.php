@@ -8,7 +8,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductVariantPriceHelper
+final class ProductVariantPriceHelper implements ProductVariantPriceHelperInterface
 {
     private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator;
 
