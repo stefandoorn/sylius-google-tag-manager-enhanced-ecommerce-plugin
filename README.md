@@ -67,6 +67,8 @@ References + examples of how to set-up your GTM container: https://developers.go
 
 Supported events:
 
+* `view_item`
+* `view_item_list`
 * `add_to_cart`
 * `remove_from_cart`
 * `view_cart`
