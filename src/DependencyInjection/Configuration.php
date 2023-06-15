@@ -39,6 +39,7 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('product_clicks')->defaultTrue()->end()
                         ->booleanNode('cart')->defaultTrue()->end()
                         ->booleanNode('view_item')->defaultTrue()->end()
+                        ->booleanNode('view_item_list')->defaultTrue()->end()
                         ->arrayNode('checkout')
                             ->canBeDisabled()
                             ->addDefaultsIfNotSet()
