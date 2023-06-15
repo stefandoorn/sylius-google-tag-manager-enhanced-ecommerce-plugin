@@ -6,8 +6,8 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
@@ -26,9 +26,9 @@ final class ViewItem implements ViewItemInterface
 
     private ProductVariantResolverInterface $productVariantResolver;
 
-    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
-
     private GoogleImplementationEnabled $googleImplementationEnabled;
+
+    private ProductVariantPriceHelper $productVariantPriceHelper;
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
@@ -36,7 +36,7 @@ final class ViewItem implements ViewItemInterface
         CurrencyContextInterface $currencyContext,
         ProductIdentifierHelper $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
+        ProductVariantPriceHelper $productVariantPriceHelper,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
@@ -44,8 +44,8 @@ final class ViewItem implements ViewItemInterface
         $this->currencyContext = $currencyContext;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->productVariantResolver = $productVariantResolver;
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
+        $this->productVariantPriceHelper = $productVariantPriceHelper;
     }
 
     public function add(ProductInterface $product): void
@@ -73,19 +73,11 @@ final class ViewItem implements ViewItemInterface
         ];
 
         $productVariant = $this->productVariantResolver->getVariant($product);
-
         if (null !== $productVariant) {
-            $productVariantPrice = $this->productVariantPriceCalculator->calculate(
-                $productVariant,
-                [
-                    'channel' => $this->channelContext->getChannel(),
-                ]
-            );
-
-            $data['items'][0]['price'] = $productVariantPrice / 100;
-
+            $data['value'] = $this->productVariantPriceHelper->getProductVariantPrice($productVariant) / 100;
             $data['currency'] = $this->currencyContext->getCurrencyCode();
-            $data['value'] = $productVariantPrice / 100;
+
+            $data['items'][0]['price'] = $data['value'];
         }
 
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#view_item_details

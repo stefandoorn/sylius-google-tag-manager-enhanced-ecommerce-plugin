@@ -7,8 +7,8 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -30,9 +30,9 @@ final class ViewItemList implements ViewItemListInterface
 
     private ProductVariantResolverInterface $productVariantResolver;
 
-    private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator;
-
     private GoogleImplementationEnabled $googleImplementationEnabled;
+
+    private ProductVariantPriceHelper $productVariantPriceHelper;
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
@@ -41,7 +41,7 @@ final class ViewItemList implements ViewItemListInterface
         LocaleContextInterface $localeContext,
         ProductIdentifierHelper $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
+        ProductVariantPriceHelper $productVariantPriceHelper,
         GoogleImplementationEnabled $googleImplementationEnabled
     ) {
         $this->googleTagManager = $googleTagManager;
@@ -50,8 +50,8 @@ final class ViewItemList implements ViewItemListInterface
         $this->localeContext = $localeContext;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->productVariantResolver = $productVariantResolver;
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
         $this->googleImplementationEnabled = $googleImplementationEnabled;
+        $this->productVariantPriceHelper = $productVariantPriceHelper;
     }
 
     public function add(TaxonInterface $taxon, ?string $listId = null): void
@@ -95,16 +95,8 @@ final class ViewItemList implements ViewItemListInterface
                 ];
 
                 $productVariant = $this->productVariantResolver->getVariant($product);
-
                 if (null !== $productVariant) {
-                    $productVariantPrice = $this->productVariantPriceCalculator->calculate(
-                        $productVariant,
-                        [
-                            'channel' => $this->channelContext->getChannel(),
-                        ]
-                    );
-
-                    $productData['price'] = $productVariantPrice / 100;
+                    $productData['price'] = $this->productVariantPriceHelper->getProductVariantPrice($productVariant) / 100;
                 }
 
                 return $productData;
