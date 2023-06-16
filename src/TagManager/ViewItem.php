@@ -64,11 +64,13 @@ final class ViewItem implements ViewItemInterface
 
         $data = [
             'items' => [
-                'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
-                'item_name' => $product->getName(),
-                'affiliation' => $this->channelContext->getChannel()->getName(),
-                'item_category' => null !== $mainTaxon ? $mainTaxon->getName() : '',
-                'index' => 0,
+                [
+                    'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
+                    'item_name' => $product->getName(),
+                    'affiliation' => $this->channelContext->getChannel()->getName(),
+                    'item_category' => null !== $mainTaxon ? $mainTaxon->getName() : '',
+                    'index' => 0,
+                ],
             ],
         ];
 
