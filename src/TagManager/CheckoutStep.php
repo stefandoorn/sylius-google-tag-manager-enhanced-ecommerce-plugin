@@ -48,22 +48,6 @@ final class CheckoutStep implements CheckoutStepInterface
 
     public function addStep(OrderInterface $order, int $step): void
     {
-        $this->addStepGA4($order, $step);
-    }
-
-    private function getProducts(OrderInterface $order): array
-    {
-        $products = [];
-
-        foreach ($order->getItems() as $index => $item) {
-            $products[] = $this->createProduct($item, $index);
-        }
-
-        return $products;
-    }
-
-    private function addStepGA4(OrderInterface $order, int $step): void
-    {
         // Triggers allowed:
         // -----------------
         // 1. Cart -> view_cart
@@ -126,5 +110,16 @@ final class CheckoutStep implements CheckoutStepInterface
                 $cart,
             ),
         ]);
+    }
+
+    private function getProducts(OrderInterface $order): array
+    {
+        $products = [];
+
+        foreach ($order->getItems() as $index => $item) {
+            $products[] = $this->createProduct($item, $index);
+        }
+
+        return $products;
     }
 }
