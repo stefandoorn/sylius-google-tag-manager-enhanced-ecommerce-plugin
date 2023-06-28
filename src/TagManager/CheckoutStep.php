@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -35,67 +34,21 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private ChannelContextInterface $channelContext;
 
-    private GoogleImplementationEnabled $googleImplementationEnabled;
-
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ProductIdentifierHelper $productIdentifierHelper,
         ChannelContextInterface $channelContext,
-        CurrencyContextInterface $currencyContext,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        CurrencyContextInterface $currencyContext
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->productIdentifierHelper = $productIdentifierHelper;
-        $this->googleImplementationEnabled = $googleImplementationEnabled;
         $this->channelContext = $channelContext;
         $this->currencyContext = $currencyContext;
     }
 
     public function addStep(OrderInterface $order, int $step): void
     {
-        if ($this->googleImplementationEnabled->isUAEnabled()) {
-            $this->addStepUA($order, $step);
-        }
-
-        if ($this->googleImplementationEnabled->isGA4Enabled()) {
-            $this->addStepGA4($order, $step);
-        }
-    }
-
-    private function addStepUA(OrderInterface $order, int $step): void
-    {
-        // Do not call this on the confirmation page as it's not seen as a checkout step
-        if (self::STEP_CONFIRM === $step) {
-            return;
-        }
-
-        $checkout = [
-            'actionField' => [
-                'step' => $step,
-            ],
-        ];
-
-        if ($step <= self::STEP_CONFIRM) {
-            $checkout['products'] = $this->getProductsUA($order);
-        }
-
-        $this->googleTagManager->addPush([
-            'event' => 'checkout',
-            'ecommerce' => [
-                'checkout' => $checkout,
-            ],
-        ]);
-    }
-
-    private function getProductsUA(OrderInterface $order): array
-    {
-        $products = [];
-
-        foreach ($order->getItems() as $item) {
-            $products[] = $this->createProductUA($item);
-        }
-
-        return $products;
+        $this->addStepGA4($order, $step);
     }
 
     private function getProductsGA4(OrderInterface $order): array

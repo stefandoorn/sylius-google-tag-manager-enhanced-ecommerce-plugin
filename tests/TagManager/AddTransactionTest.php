@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use PHPUnit\Framework\TestCase;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
@@ -41,11 +40,7 @@ final class AddTransactionTest extends TestCase
             $gtm,
             $channelContext,
             $currencyContext,
-            $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
+            $productIdentifierHelper
         );
 
         // Run add

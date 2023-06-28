@@ -10,7 +10,6 @@ services:
             - '@request_stack'
             - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
             - "@security.firewall.map"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
         tags:
             - { name: kernel.event_listener, event: sylius.order_item.post_add, method: onAddToCart }
 
@@ -20,7 +19,6 @@ services:
             - '@request_stack'
             - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
             - "@security.firewall.map"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
         tags:
             - { name: kernel.event_listener, event: sylius.order_item.post_remove, method: onRemoveFromCart }
 
@@ -30,6 +28,5 @@ services:
             - '@request_stack'
             - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
             - "@security.firewall.map"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

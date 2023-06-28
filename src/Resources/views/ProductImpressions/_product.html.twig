@@ -1,9 +1,0 @@
-{# @var product \Sylius\Component\Core\Model\ProductInterface #}
-productImpressions.push({
-    'name': '{{ product.name }}',
-    'id': '{{ sylius_gtm_enhanced_ecommerce_product_identifier(product) }}',
-    'price': {{ product|sylius_resolve_variant|sylius_calculate_price({'channel': sylius.channel}) / 100 }},
-    'category': '{{ product.mainTaxon ? product.mainTaxon.name : '' }}',
-    'list': productListType,
-    'position': {{ loop.index }}
-});
