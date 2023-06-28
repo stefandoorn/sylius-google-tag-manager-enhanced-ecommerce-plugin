@@ -16,16 +16,6 @@ final class CheckoutStep implements CheckoutStepInterface
 {
     use CreateProductTrait;
 
-    public const STEP_CART = 1;
-
-    public const STEP_ADDRESS = 2;
-
-    public const STEP_SHIPPING = 3;
-
-    public const STEP_PAYMENT = 4;
-
-    public const STEP_CONFIRM = 5;
-
     private GoogleTagManagerInterface $googleTagManager;
 
     private ProductIdentifierHelper $productIdentifierHelper;
@@ -57,15 +47,15 @@ final class CheckoutStep implements CheckoutStepInterface
 
         $additionalData = [];
         switch ($step) {
-            case self::STEP_CART:
+            case CheckoutStepInterface::STEP_CART:
                 $event = 'view_cart';
 
                 break;
-            case self::STEP_ADDRESS:
+            case CheckoutStepInterface::STEP_ADDRESS:
                 $event = 'begin_checkout';
 
                 break;
-            case self::STEP_PAYMENT:
+            case CheckoutStepInterface::STEP_PAYMENT:
                 $event = 'add_shipping_info';
                 $additionalData['shipping_tier'] = implode(
                     ', ',
@@ -75,7 +65,7 @@ final class CheckoutStep implements CheckoutStepInterface
                 );
 
                 break;
-            case self::STEP_CONFIRM:
+            case CheckoutStepInterface::STEP_CONFIRM:
                 $event = 'add_payment_info';
                 $additionalData['payment_type'] = implode(
                     ', ',

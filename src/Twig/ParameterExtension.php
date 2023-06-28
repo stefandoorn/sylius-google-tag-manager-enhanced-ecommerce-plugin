@@ -12,20 +12,26 @@ final class ParameterExtension extends AbstractExtension
     private array $parameters;
 
     public function __construct(
-        bool $purchases,
-        bool $product_impressions,
-        bool $product_detail_impressions,
-        bool $product_clicks,
-        bool $cart,
-        array $checkout
+        bool $add_payment_info,
+        bool $add_shipping_info,
+        bool $add_to_cart,
+        bool $begin_checkout,
+        bool $purchase,
+        bool $remove_from_cart,
+        bool $view_cart,
+        bool $view_item,
+        bool $view_item_list
     ) {
         $this->parameters = [
-            'purchases' => $purchases,
-            'product_impressions' => $product_impressions,
-            'product_detail_impressions' => $product_detail_impressions,
-            'product_clicks' => $product_clicks,
-            'cart' => $cart,
-            'checkout' => $checkout,
+            'add_payment_info' => $add_payment_info,
+            'add_shipping_info' => $add_shipping_info,
+            'add_to_cart' => $add_to_cart,
+            'begin_checkout' => $begin_checkout,
+            'purchase' => $purchase,
+            'remove_from_cart' => $remove_from_cart,
+            'view_cart' => $view_cart,
+            'view_item' => $view_item,
+            'view_item_list' => $view_item_list,
         ];
     }
 
@@ -36,10 +42,7 @@ final class ParameterExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @return bool|array|null
-     */
-    public function getParameter(string $name)
+    public function getParameter(string $name): ?bool
     {
         return $this->hasParameter($name) ? $this->parameters[$name] : null;
     }

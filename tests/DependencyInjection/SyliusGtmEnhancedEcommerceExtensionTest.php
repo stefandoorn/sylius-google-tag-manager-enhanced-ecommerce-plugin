@@ -11,7 +11,10 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
 {
-    public function testMinimalConfig(): void
+    /**
+     * @dataProvider dataProviderConfigFeatures
+     */
+    public function testMinimalConfigFeatures(string $feature): void
     {
         $container = $this->getContainer();
         $extension = new SyliusGtmEnhancedEcommerceExtension();
@@ -21,27 +24,33 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
 
         $this->assertTrue(
-            $container->getParameter('sylius_gtm_enhanced_ecommerce.features.purchases')
+            $container->getParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature))
         );
+    }
 
-        $this->assertTrue(
-            $container->getParameter('sylius_gtm_enhanced_ecommerce.features.product_impressions')
-        );
+    public function dataProviderConfigFeatures(): array
+    {
+        return [
+            ['add_payment_info'],
+            ['add_shipping_info'],
+            ['add_to_cart'],
+            ['begin_checkout'],
+            ['purchase'],
+            ['remove_from_cart'],
+            ['view_cart'],
+            ['view_item'],
+            ['view_item_list'],
+        ];
+    }
 
-        $this->assertTrue(
-            $container->getParameter('sylius_gtm_enhanced_ecommerce.features.product_detail_impressions')
-        );
+    public function testMinimalConfig(): void
+    {
+        $container = $this->getContainer();
+        $extension = new SyliusGtmEnhancedEcommerceExtension();
 
-        $this->assertTrue(
-            $container->getParameter('sylius_gtm_enhanced_ecommerce.features.product_clicks')
-        );
+        $config = [];
 
-        $this->assertTrue(
-            $container->getParameter('sylius_gtm_enhanced_ecommerce.features.cart')
-        );
-
-        $conf = $container->getParameter('sylius_gtm_enhanced_ecommerce.features.checkout');
-        $this->assertTrue($conf['enabled']);
+        $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
 
         $this->assertFalse(
             $container->hasParameter('sylius_gtm_enhanced_ecommerce.cache_resolver.product_detail_impressions')

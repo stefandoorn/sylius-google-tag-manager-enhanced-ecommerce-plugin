@@ -19,14 +19,18 @@ final class CheckoutStepListener
 
     private CheckoutStepResolverInterface $checkoutStepResolver;
 
+    private int $step;
+
     public function __construct(
         CheckoutStepInterface $checkoutStep,
         CartContextInterface $cartContext,
-        CheckoutStepResolverInterface $checkoutStepResolver
+        CheckoutStepResolverInterface $checkoutStepResolver,
+        int $step
     ) {
         $this->checkoutStep = $checkoutStep;
         $this->cartContext = $cartContext;
         $this->checkoutStepResolver = $checkoutStepResolver;
+        $this->step = $step;
     }
 
     public function onKernelController(ControllerEvent $event): void
@@ -55,6 +59,11 @@ final class CheckoutStepListener
         // Resolve step
         $step = $this->checkoutStepResolver->resolve($controller[1], $event->getRequest());
         if ($step === null) {
+            return;
+        }
+
+        // Only allow to happen on certain steps, due to service configuration (feature toggles)
+        if ($step !== $this->step) {
             return;
         }
 

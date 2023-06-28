@@ -1,15 +1,15 @@
 services:
-    _defaults:
-        autowire: false
-        autoconfigure: false
-        public: false
+  _defaults:
+    autowire: false
+    autoconfigure: false
+    public: false
 
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.view_item_list.listener:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ViewItemListListener
-        arguments:
-            - "@sylius.repository.taxon"
-            - "@sylius.context.locale"
-            - "@security.firewall.map"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list"
-        tags:
-            - { name: kernel.event_listener, event: kernel.controller }
+  sylius.google_tag_manager.enhanced_ecommerce_tracking.view_item_list.listener:
+    class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ViewItemListListener
+    arguments:
+      - "@sylius.repository.taxon"
+      - "@sylius.context.locale"
+      - "@security.firewall.map"
+      - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list"
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller }

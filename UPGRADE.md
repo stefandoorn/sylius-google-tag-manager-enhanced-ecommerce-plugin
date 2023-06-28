@@ -7,6 +7,12 @@ UA implementation has been removed.
 
 Mainly the items from the below upgrade (1.2.0 -> 2.0.0) have been removed, as well as the remaining UA items.
 
+Feature files have been adjusted to align with GA4. If you enable or disable specific features, please review the config. If you enable (default) all features, then there is no need to review this.
+
+Checkout settings have been removed from the config.
+
+`CheckoutStep` constants have been moved to the `CheckoutStepInterface`.
+
 Upgrade 1.2.0 -> 2.0.0
 ----------------------
 
