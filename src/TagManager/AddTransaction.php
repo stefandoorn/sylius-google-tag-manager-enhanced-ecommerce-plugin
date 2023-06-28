@@ -37,11 +37,6 @@ final class AddTransaction implements AddTransactionInterface
 
     public function addTransaction(OrderInterface $order): void
     {
-        $this->addTransactionGA4($order);
-    }
-
-    private function addTransactionGA4(OrderInterface $order): void
-    {
         $products = [];
         foreach ($order->getItems() as $index => $item) {
             /** @var OrderItemInterface $item */

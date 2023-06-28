@@ -57,7 +57,8 @@ final class ThankYouListenerTest extends TestCase
         $listener->onKernelController($event);
 
         // Check result
-        $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
+        $push = $gtm->getPush();
+        $this->assertEmpty($push);
     }
 
     public function testNoOrderFound(): void
@@ -98,7 +99,8 @@ final class ThankYouListenerTest extends TestCase
         $listener->onKernelController($event);
 
         // Check result
-        $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
+        $push = $gtm->getPush();
+        $this->assertEmpty($push);
     }
 
     public function testEnvironmentIsAddedToGtmObject(): void
@@ -141,6 +143,9 @@ final class ThankYouListenerTest extends TestCase
         $listener->onKernelController($event);
 
         // Check result
-        $this->assertArrayHasKey('ecommerce', $gtm->getData());
+        $push = $gtm->getPush();
+        $lastPush = array_pop($push);
+
+        $this->assertArrayHasKey('ecommerce', $lastPush);
     }
 }
