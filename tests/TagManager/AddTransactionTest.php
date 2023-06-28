@@ -47,10 +47,12 @@ final class AddTransactionTest extends TestCase
         $service->addTransaction($order);
 
         // Test result
-        $this->assertArrayHasKey('ecommerce', $gtm->getData());
-        $this->assertArrayHasKey('currencyCode', $gtm->getData()['ecommerce']);
-        $this->assertArrayHasKey('purchase', $gtm->getData()['ecommerce']);
-        $this->assertArrayHasKey('actionField', $gtm->getData()['ecommerce']['purchase']);
-        $this->assertArrayHasKey('products', $gtm->getData()['ecommerce']['purchase']);
+        $push = $gtm->getPush();
+        $lastPush = array_pop($push);
+
+        $this->assertEquals('purhcase', $push['event']);
+        $this->assertArrayHasKey('ecommerce', $lastPush);
+        $this->assertArrayHasKey('currency', $lastPush['ecommerce']);
+        $this->assertArrayHasKey('items', $lastPush['ecommerce']);
     }
 }
