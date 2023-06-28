@@ -77,12 +77,15 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.twig.extension.parameters:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig\ParameterExtension
         arguments:
-            - "%sylius_gtm_enhanced_ecommerce.features.purchases%"
-            - "%sylius_gtm_enhanced_ecommerce.features.product_impressions%"
-            - "%sylius_gtm_enhanced_ecommerce.features.product_detail_impressions%"
-            - "%sylius_gtm_enhanced_ecommerce.features.product_clicks%"
-            - "%sylius_gtm_enhanced_ecommerce.features.cart%"
-            - "%sylius_gtm_enhanced_ecommerce.features.checkout%"
+            - "%sylius_gtm_enhanced_ecommerce.features.add_payment_info%"
+            - "%sylius_gtm_enhanced_ecommerce.features.add_shipping_info%"
+            - "%sylius_gtm_enhanced_ecommerce.features.add_to_cart%"
+            - "%sylius_gtm_enhanced_ecommerce.features.begin_checkout%"
+            - "%sylius_gtm_enhanced_ecommerce.features.purchase%"
+            - "%sylius_gtm_enhanced_ecommerce.features.remove_from_cart%"
+            - "%sylius_gtm_enhanced_ecommerce.features.view_cart%"
+            - "%sylius_gtm_enhanced_ecommerce.features.view_item%"
+            - "%sylius_gtm_enhanced_ecommerce.features.view_item_list%"
         tags:
             - { name: "twig.extension" }
 

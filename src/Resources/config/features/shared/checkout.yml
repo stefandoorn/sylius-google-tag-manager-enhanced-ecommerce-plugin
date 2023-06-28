@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: false
+    autoconfigure: false
+    public: false
+
+  sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout_step.abstract:
+    class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CheckoutStepListener
+    abstract: true
+    arguments:
+      - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step"
+      - "@sylius.context.cart"
+      - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step"

@@ -31,22 +31,18 @@ final class ParameterExtensionTest extends TestCase
             true,
             true,
             true,
-            []
+            true,
+            true,
+            true,
+            true,
         ));
 
         return $twig;
     }
 
-    public function testParameterCreationForArrayResult(): void
-    {
-        $template = "{{ sylius_gtm_enhanced_ecommerce_parameter('checkout')|json_encode }}";
-        $output = $this->initTwigForTemplateParameter($template)->render('template');
-        $this->assertEquals('[]', $output);
-    }
-
     public function testParameterCreationForBoolResult(): void
     {
-        $template = "{{ sylius_gtm_enhanced_ecommerce_parameter('purchases') }}";
+        $template = "{{ sylius_gtm_enhanced_ecommerce_parameter('purchase') }}";
         $output = $this->initTwigForTemplateParameter($template)->render('template');
         $this->assertEquals('1', $output);
     }

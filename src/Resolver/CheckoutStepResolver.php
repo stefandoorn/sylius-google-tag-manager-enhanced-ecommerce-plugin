@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CheckoutStepResolver implements CheckoutStepResolverInterface
@@ -13,7 +13,7 @@ final class CheckoutStepResolver implements CheckoutStepResolverInterface
     {
         switch ($method) {
             case 'summaryAction':
-                return CheckoutStep::STEP_CART;
+                return CheckoutStepInterface::STEP_CART;
             case 'updateAction':
                 return $this->updateAction($request);
         }
@@ -27,13 +27,13 @@ final class CheckoutStepResolver implements CheckoutStepResolverInterface
 
         switch ($route) {
             case 'sylius_shop_checkout_address':
-                return CheckoutStep::STEP_ADDRESS;
+                return CheckoutStepInterface::STEP_ADDRESS;
             case 'sylius_shop_checkout_select_shipping':
-                return CheckoutStep::STEP_SHIPPING;
+                return CheckoutStepInterface::STEP_SHIPPING;
             case 'sylius_shop_checkout_select_payment':
-                return CheckoutStep::STEP_PAYMENT;
+                return CheckoutStepInterface::STEP_PAYMENT;
             case 'sylius_shop_checkout_complete':
-                return CheckoutStep::STEP_CONFIRM;
+                return CheckoutStepInterface::STEP_CONFIRM;
         }
 
         return null;
