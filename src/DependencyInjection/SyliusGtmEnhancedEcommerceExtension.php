@@ -7,10 +7,9 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-final class SyliusGtmEnhancedEcommerceExtension extends Extension implements PrependExtensionInterface
+final class SyliusGtmEnhancedEcommerceExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -39,34 +38,5 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension implements Pre
                 $container->setParameter($parameter, $ttl);
             }
         }
-
-        foreach (['ua', 'ga4'] as $implementation) {
-            $parameter = \sprintf('sylius_gtm_enhanced_ecommerce.google.%s', $implementation);
-            $container->setParameter($parameter, $config[$implementation]);
-        }
-    }
-
-    public function prepend(ContainerBuilder $container): void
-    {
-        $bundles = $container->getParameter('kernel.bundles');
-
-        if (!isset($bundles['TwigBundle'])) {
-            return;
-        }
-
-        $config = $this->processConfiguration($this->getConfiguration([], $container), []);
-        foreach (['ua', 'ga4'] as $implementation) {
-            $parameter = \sprintf('sylius_gtm_enhanced_ecommerce.google.%s', $implementation);
-            $container->setParameter($parameter, $config[$implementation]);
-        }
-
-        $twig = [
-            'globals' => [
-                'sylius_gtm_enhanced_ecommerce_google_ua' => '%sylius_gtm_enhanced_ecommerce.google.ua%',
-                'sylius_gtm_enhanced_ecommerce_google_ga4' => '%sylius_gtm_enhanced_ecommerce.google.ga4%',
-            ],
-        ];
-
-        $container->prependExtensionConfig('twig', $twig);
     }
 }

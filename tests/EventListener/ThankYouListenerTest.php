@@ -6,7 +6,6 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
@@ -51,10 +50,6 @@ final class ThankYouListenerTest extends TestCase
             $channelContext,
             $currencyContext,
             $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
         );
         $listener = new ThankYouListener($service, $orderRepository);
 
@@ -62,7 +57,8 @@ final class ThankYouListenerTest extends TestCase
         $listener->onKernelController($event);
 
         // Check result
-        $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
+        $push = $gtm->getPush();
+        $this->assertEmpty($push);
     }
 
     public function testNoOrderFound(): void
@@ -96,10 +92,6 @@ final class ThankYouListenerTest extends TestCase
             $channelContext,
             $currencyContext,
             $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
         );
         $listener = new ThankYouListener($service, $orderRepository);
 
@@ -107,7 +99,8 @@ final class ThankYouListenerTest extends TestCase
         $listener->onKernelController($event);
 
         // Check result
-        $this->assertArrayNotHasKey('ecommerce', $gtm->getData());
+        $push = $gtm->getPush();
+        $this->assertEmpty($push);
     }
 
     public function testEnvironmentIsAddedToGtmObject(): void
@@ -143,10 +136,6 @@ final class ThankYouListenerTest extends TestCase
             $channelContext,
             $currencyContext,
             $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
         );
         $listener = new ThankYouListener($service, $orderRepository);
 
@@ -154,6 +143,9 @@ final class ThankYouListenerTest extends TestCase
         $listener->onKernelController($event);
 
         // Check result
-        $this->assertArrayHasKey('ecommerce', $gtm->getData());
+        $push = $gtm->getPush();
+        $lastPush = array_pop($push);
+
+        $this->assertArrayHasKey('ecommerce', $lastPush);
     }
 }

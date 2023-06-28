@@ -1,5 +1,12 @@
 # Upgrade
 
+Upgrade 2.0.0 -> 3.0.0
+----------------------
+
+UA implementation has been removed. 
+
+Mainly the items from the below upgrade (1.2.0 -> 2.0.0) have been removed, as well as the remaining UA items.
+
 Upgrade 1.2.0 -> 2.0.0
 ----------------------
 

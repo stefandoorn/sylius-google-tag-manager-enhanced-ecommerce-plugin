@@ -4,12 +4,6 @@ services:
         autoconfigure: false
         public: false
 
-    sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled
-        arguments:
-            - "%sylius_gtm_enhanced_ecommerce.google.ua"
-            - "%sylius_gtm_enhanced_ecommerce.google.ga4"
-
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction
         arguments:
@@ -17,7 +11,6 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItem
@@ -28,7 +21,6 @@ services:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
             - "@sylius.product_variant_resolver.default"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_variant_price"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemList
@@ -40,7 +32,6 @@ services:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
             - "@sylius.product_variant_resolver.default"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_variant_price"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep
@@ -49,7 +40,6 @@ services:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
             - "@sylius.context.channel"
             - "@sylius.context.currency"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart
@@ -58,7 +48,6 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
-            - "@sylius.google_tag_manager.enhanced_ecommerce.tracking.google_implementation_enabled"
 
     sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver
@@ -71,12 +60,6 @@ services:
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver
-
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.currency_code:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CurrencyCode
-        arguments:
-            - "@google_tag_manager"
-            - "@sylius.context.currency"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.global.listener.sylius.shop.layout.head:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
@@ -100,13 +83,6 @@ services:
             - "%sylius_gtm_enhanced_ecommerce.features.product_clicks%"
             - "%sylius_gtm_enhanced_ecommerce.features.cart%"
             - "%sylius_gtm_enhanced_ecommerce.features.checkout%"
-        tags:
-            - { name: "twig.extension" }
-
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.twig.extension.product_identifier:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig\ProductIdentifierExtension
-        arguments:
-            - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier'
         tags:
             - { name: "twig.extension" }
 

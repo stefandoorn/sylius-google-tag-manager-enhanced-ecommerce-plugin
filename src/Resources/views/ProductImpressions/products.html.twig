@@ -1,7 +1,0 @@
-<script type="text/javascript">
-    var productListType = window.productListType || (window.productListType = 'Category Product List');
-
-    {%- for product in settings.products -%}
-        {% include '@SyliusGtmEnhancedEcommercePlugin/ProductImpressions/_product.html.twig' with {'product': product, 'loop': loop} only %}
-    {%- endfor -%}
-</script>

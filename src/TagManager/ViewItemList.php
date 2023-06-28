@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -30,8 +29,6 @@ final class ViewItemList implements ViewItemListInterface
 
     private ProductVariantResolverInterface $productVariantResolver;
 
-    private GoogleImplementationEnabled $googleImplementationEnabled;
-
     private ProductVariantPriceHelperInterface $productVariantPriceHelper;
 
     public function __construct(
@@ -41,8 +38,7 @@ final class ViewItemList implements ViewItemListInterface
         LocaleContextInterface $localeContext,
         ProductIdentifierHelper $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
-        ProductVariantPriceHelperInterface $productVariantPriceHelper,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        ProductVariantPriceHelperInterface $productVariantPriceHelper
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->productRepository = $productRepository;
@@ -50,16 +46,11 @@ final class ViewItemList implements ViewItemListInterface
         $this->localeContext = $localeContext;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->productVariantResolver = $productVariantResolver;
-        $this->googleImplementationEnabled = $googleImplementationEnabled;
         $this->productVariantPriceHelper = $productVariantPriceHelper;
     }
 
     public function add(TaxonInterface $taxon, ?string $listId = null): void
     {
-        if (!$this->googleImplementationEnabled->isGA4Enabled()) {
-            return;
-        }
-
         $this->addViewItemListData($taxon, $listId);
     }
 

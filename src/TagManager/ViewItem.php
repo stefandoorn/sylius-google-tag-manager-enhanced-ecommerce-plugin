@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -26,8 +25,6 @@ final class ViewItem implements ViewItemInterface
 
     private ProductVariantResolverInterface $productVariantResolver;
 
-    private GoogleImplementationEnabled $googleImplementationEnabled;
-
     private ProductVariantPriceHelperInterface $productVariantPriceHelper;
 
     public function __construct(
@@ -36,24 +33,18 @@ final class ViewItem implements ViewItemInterface
         CurrencyContextInterface $currencyContext,
         ProductIdentifierHelper $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
-        ProductVariantPriceHelperInterface $productVariantPriceHelper,
-        GoogleImplementationEnabled $googleImplementationEnabled
+        ProductVariantPriceHelperInterface $productVariantPriceHelper
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;
         $this->currencyContext = $currencyContext;
         $this->productIdentifierHelper = $productIdentifierHelper;
         $this->productVariantResolver = $productVariantResolver;
-        $this->googleImplementationEnabled = $googleImplementationEnabled;
         $this->productVariantPriceHelper = $productVariantPriceHelper;
     }
 
     public function add(ProductInterface $product): void
     {
-        if (!$this->googleImplementationEnabled->isGA4Enabled()) {
-            return;
-        }
-
         $this->addViewItemData($product);
     }
 
