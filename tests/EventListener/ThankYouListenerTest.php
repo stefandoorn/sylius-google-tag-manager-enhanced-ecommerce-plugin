@@ -7,7 +7,6 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -31,7 +30,7 @@ final class ThankYouListenerTest extends TestCase
     {
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
-        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductIdentifierHelper::ID_IDENTIFIER);
 
         // Build base mocks
         $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
@@ -66,7 +65,7 @@ final class ThankYouListenerTest extends TestCase
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
 
-        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductIdentifierHelper::ID_IDENTIFIER);
 
         // Build base mocks
         $channelContext = $this->getMockBuilder(ChannelContextInterface::class)->getMock();
@@ -108,7 +107,7 @@ final class ThankYouListenerTest extends TestCase
         // Requirements
         $gtm = new GoogleTagManager(true, 'id1234');
 
-        $productIdentifierHelper = new ProductIdentifierHelper(ProductDetailInterface::ID_IDENTIFIER);
+        $productIdentifierHelper = new ProductIdentifierHelper(ProductIdentifierHelper::ID_IDENTIFIER);
 
         $order = new Order();
 
