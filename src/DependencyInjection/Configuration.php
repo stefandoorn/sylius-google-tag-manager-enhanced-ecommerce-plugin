@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -18,9 +18,9 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->enumNode('product_identifier')
-                    ->info(\sprintf('Choose which product identifier you want to use between %s and %s', ProductDetailInterface::ID_IDENTIFIER, ProductDetailInterface::CODE_IDENTIFIER))
-                    ->values(ProductDetailInterface::IDENTIFIERS)
-                    ->defaultValue(ProductDetailInterface::ID_IDENTIFIER)
+                    ->info(\sprintf('Choose which product identifier you want to use between %s and %s', ProductIdentifierHelper::ID_IDENTIFIER, ProductIdentifierHelper::CODE_IDENTIFIER))
+                    ->values(ProductIdentifierHelper::IDENTIFIERS)
+                    ->defaultValue(ProductIdentifierHelper::ID_IDENTIFIER)
                 ->end()
                 ->arrayNode('features')
                     ->addDefaultsIfNotSet()
@@ -34,17 +34,6 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('view_cart')->defaultTrue()->end()
                         ->booleanNode('view_item')->defaultTrue()->end()
                         ->booleanNode('view_item_list')->defaultTrue()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('cache_resolvers')
-                    ->canBeEnabled()
-                    ->children()
-                        ->arrayNode('ttl')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->integerNode('product_detail_impressions')->defaultValue(3600)->end()
-                            ->end()
-                        ->end()
                     ->end()
                 ->end()
             ->end()

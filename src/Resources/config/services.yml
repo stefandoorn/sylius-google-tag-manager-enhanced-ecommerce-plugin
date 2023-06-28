@@ -49,15 +49,6 @@ services:
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
 
-    sylius.google_tag_manager.enhanced_ecommerce.tracking.resolver.product_detail_impression_data:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\ProductDetailImpressionDataResolver
-        arguments:
-            - "@sylius.calculator.product_variant_price"
-            - "@sylius.context.channel"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail_impression"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
-
     sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver
 
@@ -67,12 +58,6 @@ services:
             - '@@SyliusGtmEnhancedEcommercePlugin/Global/head.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
-
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailFactory
-
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.object.factory.product_detail_impression:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\Factory\ProductDetailImpressionFactory
         
     sylius.google_tag_manager.enhanced_ecommerce_tracking.twig.extension.parameters:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig\ParameterExtension

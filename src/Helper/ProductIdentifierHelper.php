@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductIdentifierHelper
 {
+    public const ID_IDENTIFIER = 'id';
+
+    public const CODE_IDENTIFIER = 'code';
+
+    public const IDENTIFIERS = [self::ID_IDENTIFIER, self::CODE_IDENTIFIER];
+
     private string $productIdentifier;
 
     public function __construct(string $productIdentifier)
@@ -19,9 +24,9 @@ final class ProductIdentifierHelper
     public function getProductIdentifier(ProductInterface $product): string
     {
         switch ($this->productIdentifier) {
-            case ProductDetailInterface::ID_IDENTIFIER:
+            case self::ID_IDENTIFIER:
                 return (string) $product->getId();
-            case ProductDetailInterface::CODE_IDENTIFIER:
+            case self::CODE_IDENTIFIER:
                 return $product->getCode();
         }
 

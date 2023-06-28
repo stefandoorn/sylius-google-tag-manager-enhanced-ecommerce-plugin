@@ -43,36 +43,6 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         ];
     }
 
-    public function testMinimalConfig(): void
-    {
-        $container = $this->getContainer();
-        $extension = new SyliusGtmEnhancedEcommerceExtension();
-
-        $config = [];
-
-        $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
-
-        $this->assertFalse(
-            $container->hasParameter('sylius_gtm_enhanced_ecommerce.cache_resolver.product_detail_impressions')
-        );
-    }
-
-    public function testWithCacheResolver(): void
-    {
-        $container = $this->getContainer();
-        $extension = new SyliusGtmEnhancedEcommerceExtension();
-
-        $config = [
-            'cache_resolvers' => true,
-        ];
-        $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
-
-        $this->assertEquals(
-            3600,
-            $container->getParameter('sylius_gtm_enhanced_ecommerce.cache_resolver.product_detail_impressions')
-        );
-    }
-
     private function getContainer(): ContainerBuilder
     {
         return new ContainerBuilder(new ParameterBag([

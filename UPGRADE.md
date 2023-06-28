@@ -13,6 +13,8 @@ Checkout settings have been removed from the config.
 
 `CheckoutStep` constants have been moved to the `CheckoutStepInterface`.
 
+Several services/classes have been removed (because they became unused), including the cache services including their configs.
+
 Upgrade 1.2.0 -> 2.0.0
 ----------------------
 
