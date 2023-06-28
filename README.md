@@ -6,12 +6,6 @@
 
 <p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="200"></a></p>
 
-## Note
-
-This plugin now supports both UA (deprecated by Google) & GA4. Not all GA4 features are already implemented.
-
-The following migration guide has been used to move to GA4: https://support.google.com/analytics/answer/10119380?hl=en
-
 ## Installation
 
 ### 1. Composer
@@ -50,19 +44,6 @@ By default all features are enabled.
 
 ## Features
 
-Features available:
-
-*For Universal Analytics (deprecated by Google)*:
-
-* [purchases](docs/UA/purchases.md): Send purchases to GTM.
-* [product_impressions](docs/UA/product_impressions.md): Send impressions on product listings to GTM
-* [product_detail_impressions](docs/UA/product_detail_impressions.md): Send impression on product detail pages to GTM
-* [product_clicks](docs/UA/product_clicks.md): Send click events on product links to GTM
-* [cart](docs/UA/cart.md): Send add to cart / remove from cart events to GTM
-* [checkout](docs/UA/checkout.md): Send checkout steps & selected options to GTM
-
-*For GA4*:
-
 References + examples of how to set-up your GTM container: https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm
 
 Supported events:
@@ -77,39 +58,10 @@ Supported events:
 * `add_payment_info`
 * `purchase`
 
-Other features included in UA, but not in GA4, are *Work In Progress*.
-
 Make sure to check that the required 'sonata_block_render_events' template events are available. Check the
 `src/Resources/config/features/*.yml` & `src/Resources/config/services.yml` for the definitions.
 
 This is only to be checked if you've been overriding templates yourselves.
-
-## Bootstrap a GTM container (Universal Analytics (deprecated by Google))
-You can find a GTM container fully configured that work with the test application in `docs/UA/GTM-EXAMPLE.json`.
-
-This file can be imported to easily configure your container.
-
-![](docs/UA/img/gtm-setup-1.png)
-
-![](docs/UA/img/gtm-setup-2.png)
-
-It will add thoses tags and triggers
-
-![](docs/UA/img/gtm-setup-3.png)
-
-![](docs/UA/img/gtm-setup-4.png)
-
-You will have to replace the UA-111111111-1 by your own Universal Analytics ID
-
-![](docs/UA/img/gtm-setup-5.png)
-
-![](docs/UA/img/gtm-setup-6.png)
-
-## Features not supported (yet):
-
-* `promotion_impressions`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-impressions
-* `promotion_clicks`: https://developers.google.com/tag-manager/enhanced-ecommerce#promo-clicks
-* `refunds`: https://developers.google.com/tag-manager/enhanced-ecommerce#refunds
 
 ## Cache Resolvers
 
