@@ -32,14 +32,6 @@ Configure the features you would like to use/not. Find a base configuration refe
 bin/console config:dump-reference SyliusGtmEnhancedEcommercePlugin
 ```
 
-### 5. Install assets
-
-```
-bin/console assets:install
-bin/console sylius:install:assets
-bin/console sylius:theme:assets:install
-```
-
 By default all features are enabled.
 
 ## Features
