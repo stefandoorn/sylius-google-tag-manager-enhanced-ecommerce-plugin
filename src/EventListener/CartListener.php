@@ -74,13 +74,13 @@ final class CartListener
         if ($session->has(self::POST_ADD_ORDER_ITEM)) {
             $orderItem = $session->get(self::POST_ADD_ORDER_ITEM);
             $session->remove(self::POST_ADD_ORDER_ITEM);
-            $this->cart->addGA4($orderItem);
+            $this->cart->add($orderItem);
         }
 
         if ($session->has(self::POST_REMOVE_ORDER_ITEM)) {
             $orderItem = $session->get(self::POST_REMOVE_ORDER_ITEM);
             $session->remove(self::POST_REMOVE_ORDER_ITEM);
-            $this->cart->removeGA4($orderItem);
+            $this->cart->remove($orderItem);
         }
     }
 

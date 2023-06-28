@@ -51,12 +51,12 @@ final class CheckoutStep implements CheckoutStepInterface
         $this->addStepGA4($order, $step);
     }
 
-    private function getProductsGA4(OrderInterface $order): array
+    private function getProducts(OrderInterface $order): array
     {
         $products = [];
 
         foreach ($order->getItems() as $index => $item) {
-            $products[] = $this->createProductGA4($item, $index);
+            $products[] = $this->createProduct($item, $index);
         }
 
         return $products;
@@ -113,7 +113,7 @@ final class CheckoutStep implements CheckoutStepInterface
         $cart = [
             'currency' => $this->currencyContext->getCurrencyCode(),
             'value' => $order->getTotal() / 100,
-            'items' => $this->getProductsGA4($order),
+            'items' => $this->getProducts($order),
         ];
         if ($order->getPromotionCoupon() !== null) {
             $cart['coupon'] = $order->getPromotionCoupon()->getCode();

@@ -45,7 +45,7 @@ final class AddTransaction implements AddTransactionInterface
         $products = [];
         foreach ($order->getItems() as $index => $item) {
             /** @var OrderItemInterface $item */
-            $products[] = $this->createProductGA4($item, $index);
+            $products[] = $this->createProduct($item, $index);
         }
 
         $purchase = [
