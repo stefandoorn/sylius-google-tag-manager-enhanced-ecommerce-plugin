@@ -34,9 +34,9 @@ final class Cart implements CartInterface
         $this->productIdentifierHelper = $productIdentifierHelper;
     }
 
-    public function getOrderItemGA4(OrderItemInterface $orderItem): array
+    public function getOrderItem(OrderItemInterface $orderItem): array
     {
-        return $this->createProductGA4($orderItem);
+        return $this->createProduct($orderItem);
     }
 
     public function add(array $productData): void

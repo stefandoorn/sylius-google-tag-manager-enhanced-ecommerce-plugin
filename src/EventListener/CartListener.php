@@ -13,13 +13,9 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 final class CartListener
 {
-    public const POST_ADD_ORDER_ITEM_UA = 'post_add_order_item_ua';
+    public const POST_ADD_ORDER_ITEM = 'post_add_order_item';
 
-    public const POST_REMOVE_ORDER_ITEM_UA = 'post_remove_order_item_ua';
-
-    public const POST_ADD_ORDER_ITEM_GA4 = 'post_add_order_item_ga4';
-
-    public const POST_REMOVE_ORDER_ITEM_GA4 = 'post_remove_order_item_ga4';
+    public const POST_REMOVE_ORDER_ITEM = 'post_remove_order_item';
 
     private RequestStack $requestStack;
 
@@ -45,8 +41,8 @@ final class CartListener
         }
 
         $session->set(
-            self::POST_ADD_ORDER_ITEM_GA4,
-            $this->cart->getOrderItemGA4($event->getSubject()),
+            self::POST_ADD_ORDER_ITEM,
+            $this->cart->getOrderItem($event->getSubject()),
         );
     }
 
@@ -58,8 +54,8 @@ final class CartListener
         }
 
         $session->set(
-            self::POST_REMOVE_ORDER_ITEM_GA4,
-            $this->cart->getOrderItemGA4($event->getSubject()),
+            self::POST_REMOVE_ORDER_ITEM,
+            $this->cart->getOrderItem($event->getSubject()),
         );
     }
 
@@ -75,15 +71,15 @@ final class CartListener
             return;
         }
 
-        if ($session->has(self::POST_ADD_ORDER_ITEM_GA4)) {
-            $orderItem = $session->get(self::POST_ADD_ORDER_ITEM_GA4);
-            $session->remove(self::POST_ADD_ORDER_ITEM_GA4);
+        if ($session->has(self::POST_ADD_ORDER_ITEM)) {
+            $orderItem = $session->get(self::POST_ADD_ORDER_ITEM);
+            $session->remove(self::POST_ADD_ORDER_ITEM);
             $this->cart->addGA4($orderItem);
         }
 
-        if ($session->has(self::POST_REMOVE_ORDER_ITEM_GA4)) {
-            $orderItem = $session->get(self::POST_REMOVE_ORDER_ITEM_GA4);
-            $session->remove(self::POST_REMOVE_ORDER_ITEM_GA4);
+        if ($session->has(self::POST_REMOVE_ORDER_ITEM)) {
+            $orderItem = $session->get(self::POST_REMOVE_ORDER_ITEM);
+            $session->remove(self::POST_REMOVE_ORDER_ITEM);
             $this->cart->removeGA4($orderItem);
         }
     }

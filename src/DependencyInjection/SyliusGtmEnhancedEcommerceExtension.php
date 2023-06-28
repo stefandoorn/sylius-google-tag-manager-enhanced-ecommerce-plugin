@@ -38,10 +38,5 @@ final class SyliusGtmEnhancedEcommerceExtension extends Extension
                 $container->setParameter($parameter, $ttl);
             }
         }
-
-        foreach (['ua', 'ga4'] as $implementation) {
-            $parameter = \sprintf('sylius_gtm_enhanced_ecommerce.google.%s', $implementation);
-            $container->setParameter($parameter, $config[$implementation]);
-        }
     }
 }
