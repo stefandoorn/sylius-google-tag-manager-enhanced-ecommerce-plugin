@@ -40,7 +40,7 @@ final class AddTransactionTest extends TestCase
             $gtm,
             $channelContext,
             $currencyContext,
-            $productIdentifierHelper
+            $productIdentifierHelper,
         );
 
         // Run add

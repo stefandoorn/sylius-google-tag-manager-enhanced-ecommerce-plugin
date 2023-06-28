@@ -6,7 +6,6 @@ namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\GoogleImplementationEnabled;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Object\ProductDetailInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
@@ -51,10 +50,6 @@ final class ThankYouListenerTest extends TestCase
             $channelContext,
             $currencyContext,
             $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
         );
         $listener = new ThankYouListener($service, $orderRepository);
 
@@ -96,10 +91,6 @@ final class ThankYouListenerTest extends TestCase
             $channelContext,
             $currencyContext,
             $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
         );
         $listener = new ThankYouListener($service, $orderRepository);
 
@@ -143,10 +134,6 @@ final class ThankYouListenerTest extends TestCase
             $channelContext,
             $currencyContext,
             $productIdentifierHelper,
-            new GoogleImplementationEnabled(
-                true,
-                true,
-            ),
         );
         $listener = new ThankYouListener($service, $orderRepository);
 
