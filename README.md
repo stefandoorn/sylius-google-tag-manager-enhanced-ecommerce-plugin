@@ -54,9 +54,3 @@ Make sure to check that the required 'sonata_block_render_events' template event
 `src/Resources/config/features/*.yml` & `src/Resources/config/services.yml` for the definitions.
 
 This is only to be checked if you've been overriding templates yourselves.
-
-## Cache Resolvers
-
-It might be that your data resolvers give a performance hit, e.g. on the product show page.
-There are decorators available that allow you to cache the results for a set time in order. Take a look
-at the service definitions in `cache_services.yml` & the default configuration on how to enable this setting.
