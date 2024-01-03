@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\RequestStackMainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -26,7 +28,9 @@ final class ViewItemListener
 
     public function __invoke(ResourceControllerEvent $event): void
     {
-        if ($this->requestStack->getCurrentRequest() !== $this->getMainRequest()) {
+        if ($this->requestStack->getCurrentRequest() !== RequestStackMainRequest::getMainRequest(
+                $this->requestStack
+            )) {
             return;
         }
 
@@ -34,18 +38,5 @@ final class ViewItemListener
         $product = $event->getSubject();
 
         $this->viewItem->add($product);
-    }
-
-    private function getMainRequest(): Request
-    {
-        if (\method_exists($this->requestStack, 'getMainRequest')) {
-            return $this->requestStack->getMainRequest();
-        }
-
-        if (\method_exists($this->requestStack, 'getMasterRequest')) {
-            return $this->requestStack->getMasterRequest();
-        }
-
-        throw new \Exception('Neither "getMainRequest" or "getMasterRequest" exists');
     }
 }

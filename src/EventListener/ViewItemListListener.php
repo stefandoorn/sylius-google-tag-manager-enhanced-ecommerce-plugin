@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemListInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -36,7 +36,7 @@ final class ViewItemListListener
 
     public function __invoke(ControllerEvent $event): void
     {
-        if (!MainRequest::isMainRequest($event)) {
+        if (!ControllerEventMainRequest::isMainRequest($event)) {
             return;
         }
 
