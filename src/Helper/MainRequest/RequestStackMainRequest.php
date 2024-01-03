@@ -21,4 +21,9 @@ final class RequestStackMainRequest
 
         throw new \Exception('Neither "getMainRequest" or "getMasterRequest" exists');
     }
+
+    public static function isMainRequest(RequestStack $requestStack): bool
+    {
+        return $requestStack->getCurrentRequest() === self::getMainRequest($requestStack);
+    }
 }
