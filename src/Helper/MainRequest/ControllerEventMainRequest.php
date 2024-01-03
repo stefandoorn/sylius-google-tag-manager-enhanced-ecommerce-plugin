@@ -20,5 +20,4 @@ final class ControllerEventMainRequest
 
         throw new \Exception('Neither "isMainRequest" or "isMasterRequest" exists');
     }
-
 }
