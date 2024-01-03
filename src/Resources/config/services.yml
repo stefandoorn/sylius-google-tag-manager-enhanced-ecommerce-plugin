@@ -58,21 +58,6 @@ services:
             - '@@SyliusGtmEnhancedEcommercePlugin/Global/head.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.head, method: onBlockEvent }
-        
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.twig.extension.parameters:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Twig\ParameterExtension
-        arguments:
-            - "%sylius_gtm_enhanced_ecommerce.features.add_payment_info%"
-            - "%sylius_gtm_enhanced_ecommerce.features.add_shipping_info%"
-            - "%sylius_gtm_enhanced_ecommerce.features.add_to_cart%"
-            - "%sylius_gtm_enhanced_ecommerce.features.begin_checkout%"
-            - "%sylius_gtm_enhanced_ecommerce.features.purchase%"
-            - "%sylius_gtm_enhanced_ecommerce.features.remove_from_cart%"
-            - "%sylius_gtm_enhanced_ecommerce.features.view_cart%"
-            - "%sylius_gtm_enhanced_ecommerce.features.view_item%"
-            - "%sylius_gtm_enhanced_ecommerce.features.view_item_list%"
-        tags:
-            - { name: "twig.extension" }
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper
