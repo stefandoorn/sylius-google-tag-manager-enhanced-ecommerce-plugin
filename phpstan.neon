@@ -10,3 +10,19 @@ parameters:
         # Test dependencies
         - 'tests/Application/app/**.php'
         - 'tests/Application/src/**.php'
+
+    ignoreErrors:
+        -
+            message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\ControllerEvent and 'isMainRequest' will always evaluate to true\\.$#"
+            count: 1
+            path: src/Helper/MainRequest/ControllerEventMainRequest.php
+
+        -
+            message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\ControllerEvent and 'isMasterRequest' will always evaluate to false\\.$#"
+            count: 1
+            path: src/Helper/MainRequest/ControllerEventMainRequest.php
+
+        -
+            message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\HttpFoundation\\\\RequestStack and 'getMainRequest' will always evaluate to true\\.$#"
+            count: 1
+            path: src/Helper/MainRequest/RequestStackMainRequest.php

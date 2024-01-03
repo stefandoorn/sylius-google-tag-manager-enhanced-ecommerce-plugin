@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\RequestStackMainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
@@ -86,15 +87,9 @@ final class CartListener
 
     private function getSession(): ?SessionInterface
     {
-        $request = null;
-        if (method_exists($this->requestStack, 'getMasterRequest')) {
-            $request = $this->requestStack->getMasterRequest();
-        }
-        if (method_exists($this->requestStack, 'getMainRequest')) {
-            $request = $this->requestStack->getMainRequest();
-        }
-
-        if (null === $request) {
+        try {
+            $request = RequestStackMainRequest::getMainRequest($this->requestStack);
+        } catch (\Exception $exception) {
             return null;
         }
 

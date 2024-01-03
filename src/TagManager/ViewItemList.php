@@ -71,17 +71,16 @@ final class ViewItemList implements ViewItemListInterface
         }
 
         $index = 0;
-        $taxonName = null !== $taxon ? $taxon->getName() : '';
 
         $data = [
             'item_list_id' => $listId,
             'item_list_name' => $taxon->getName(),
-            'items' => $products->map(function (ProductInterface $product) use ($taxonName, &$index): array {
+            'items' => $products->map(function (ProductInterface $product) use ($taxon, &$index): array {
                 $productData = [
                     'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
                     'item_name' => $product->getName(),
                     'affiliation' => $this->channelContext->getChannel()->getName(),
-                    'item_category' => $taxonName,
+                    'item_category' => $taxon->getName(),
                     'index' => $index++,
                 ];
 
