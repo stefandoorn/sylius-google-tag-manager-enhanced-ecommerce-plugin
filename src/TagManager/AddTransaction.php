@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -21,13 +21,13 @@ final class AddTransaction implements AddTransactionInterface
 
     private CurrencyContextInterface $currencyContext;
 
-    private ProductIdentifierHelper $productIdentifierHelper;
+    private ProductIdentifierHelperInterface $productIdentifierHelper;
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
-        ProductIdentifierHelper $productIdentifierHelper
+        ProductIdentifierHelperInterface $productIdentifierHelper
     ) {
         $this->googleTagManager = $googleTagManager;
         $this->channelContext = $channelContext;

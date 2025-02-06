@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -18,7 +18,7 @@ final class CheckoutStep implements CheckoutStepInterface
 
     private GoogleTagManagerInterface $googleTagManager;
 
-    private ProductIdentifierHelper $productIdentifierHelper;
+    private ProductIdentifierHelperInterface $productIdentifierHelper;
 
     private CurrencyContextInterface $currencyContext;
 
@@ -26,7 +26,7 @@ final class CheckoutStep implements CheckoutStepInterface
 
     public function __construct(
         GoogleTagManagerInterface $googleTagManager,
-        ProductIdentifierHelper $productIdentifierHelper,
+        ProductIdentifierHelperInterface $productIdentifierHelper,
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext
     ) {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -21,7 +21,7 @@ final class ViewItem implements ViewItemInterface
 
     private CurrencyContextInterface $currencyContext;
 
-    private ProductIdentifierHelper $productIdentifierHelper;
+    private ProductIdentifierHelperInterface $productIdentifierHelper;
 
     private ProductVariantResolverInterface $productVariantResolver;
 
@@ -31,7 +31,7 @@ final class ViewItem implements ViewItemInterface
         GoogleTagManagerInterface $googleTagManager,
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
-        ProductIdentifierHelper $productIdentifierHelper,
+        ProductIdentifierHelperInterface $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
         ProductVariantPriceHelperInterface $productVariantPriceHelper
     ) {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -25,7 +25,7 @@ final class ViewItemList implements ViewItemListInterface
 
     private LocaleContextInterface $localeContext;
 
-    private ProductIdentifierHelper $productIdentifierHelper;
+    private ProductIdentifierHelperInterface $productIdentifierHelper;
 
     private ProductVariantResolverInterface $productVariantResolver;
 
@@ -36,7 +36,7 @@ final class ViewItemList implements ViewItemListInterface
         ProductRepositoryInterface $productRepository,
         ChannelContextInterface $channelContext,
         LocaleContextInterface $localeContext,
-        ProductIdentifierHelper $productIdentifierHelper,
+        ProductIdentifierHelperInterface $productIdentifierHelper,
         ProductVariantResolverInterface $productVariantResolver,
         ProductVariantPriceHelperInterface $productVariantPriceHelper
     ) {
