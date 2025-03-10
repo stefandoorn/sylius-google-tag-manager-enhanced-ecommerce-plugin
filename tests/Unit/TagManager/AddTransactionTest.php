@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
+namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit\TagManager;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;

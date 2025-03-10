@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection;
+namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection\SyliusGtmEnhancedEcommerceExtension;
