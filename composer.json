@@ -37,15 +37,15 @@
         "sort-packages": true,
         "bin-dir": "bin",
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "symfony/thanks": true,
-            "symfony/flex": true,
-            "phpstan/extension-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "phpstan/extension-installer": true,
+            "symfony/flex": false,
+            "symfony/runtime": true
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "4.0-dev"
         }
     },
     "autoload": {
