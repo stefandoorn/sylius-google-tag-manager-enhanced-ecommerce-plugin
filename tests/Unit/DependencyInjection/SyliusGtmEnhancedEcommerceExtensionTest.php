@@ -4,27 +4,41 @@ declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit\DependencyInjection;
 
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection\SyliusGtmEnhancedEcommerceExtension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 
-final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
+final class SyliusGtmEnhancedEcommerceExtensionTest extends AbstractExtensionTestCase
 {
+    public function testProductIdentifierSetAsCode(): void
+    {
+        $this->load([
+            'product_identifier' => ProductIdentifierHelper::CODE_IDENTIFIER,
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius_gtm_enhanced_ecommerce.product_identifier', ProductIdentifierHelper::CODE_IDENTIFIER);
+    }
+
     #[DataProvider('dataProviderConfigFeatures')]
     public function testMinimalConfigFeatures(string $feature): void
     {
-        $container = $this->getContainer();
-        $extension = new SyliusGtmEnhancedEcommerceExtension();
+        $this->load();
 
-        $config = [];
+        $this->assertContainerBuilderHasParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature), true);
+        $this->assertContainerBuilderHasParameter('sylius_gtm_enhanced_ecommerce.product_identifier', ProductIdentifierHelper::ID_IDENTIFIER);
+    }
 
-        $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
+    #[DataProvider('dataProviderConfigFeatures')]
+    public function testDisabledFeatures(string $feature): void
+    {
+        $this->load([
+            'features' => [
+                $feature => false,
+            ]
+        ]);
 
-        self::assertTrue(
-            $container->getParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature)),
-        );
+        $this->assertContainerBuilderHasParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature), false);
     }
 
     /**
@@ -45,14 +59,10 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         ];
     }
 
-    private function getContainer(): ContainerBuilder
+    protected function getContainerExtensions(): array
     {
-        return new ContainerBuilder(new ParameterBag([
-            'kernel.debug' => false,
-            'kernel.bundles' => [],
-            'kernel.cache_dir' => \sys_get_temp_dir(),
-            'kernel.environment' => 'test',
-            'kernel.root_dir' => __DIR__ . '/../../src/',
-        ]));
+        return [
+            new SyliusGtmEnhancedEcommerceExtension(),
+        ];
     }
 }
