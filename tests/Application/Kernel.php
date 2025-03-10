@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\GtmPlugin\Application;
+namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Application;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;

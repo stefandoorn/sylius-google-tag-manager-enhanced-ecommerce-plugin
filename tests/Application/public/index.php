@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tests\GtmPlugin\Application\Kernel;
+use Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Application\Kernel;
 
 require_once dirname(__DIR__) . '/../../vendor/autoload_runtime.php';
 
