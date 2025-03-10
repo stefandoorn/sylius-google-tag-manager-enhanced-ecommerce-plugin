@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestStackMainRequest
 {
-    public static function getMainRequest(RequestStack $requestStack): Request
+    public static function getMainRequest(RequestStack $requestStack): ?Request
     {
         return $requestStack->getMainRequest();
     }

@@ -1,8 +1,4 @@
 services:
-  _defaults:
-    autowire: false
-    autoconfigure: false
-    public: false
 
   sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout_step.abstract:
     class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CheckoutStepListener

@@ -1,11 +1,7 @@
 imports:
-  - { resource: shared/checkout.yml }
+  - { resource: shared/checkout.yaml }
 
 services:
-  _defaults:
-    autowire: false
-    autoconfigure: false
-    public: false
 
   sylius.google_tag_manager.enhanced_ecommerce_tracking.add_payment_info:
     parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout_step.abstract

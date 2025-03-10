@@ -1,8 +1,4 @@
 services:
-  _defaults:
-    autowire: false
-    autoconfigure: false
-    public: false
 
   sylius.google_tag_manager.enhanced_ecommerce_tracking.view_item.listener:
     class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ViewItemListener

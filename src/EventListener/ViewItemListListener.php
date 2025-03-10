@@ -14,24 +14,15 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 final class ViewItemListListener
 {
-    private TaxonRepositoryInterface $taxonRepository;
-
-    private LocaleContextInterface $localeContext;
-
-    private FirewallMap $firewallMap;
-
-    private ViewItemListInterface $viewItemList;
-
+    /**
+     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     */
     public function __construct(
-        TaxonRepositoryInterface $taxonRepository,
-        LocaleContextInterface $localeContext,
-        FirewallMap $firewallMap,
-        ViewItemListInterface $viewItemList
+        private TaxonRepositoryInterface $taxonRepository,
+        private LocaleContextInterface $localeContext,
+        private FirewallMap $firewallMap,
+        private ViewItemListInterface $viewItemList,
     ) {
-        $this->taxonRepository = $taxonRepository;
-        $this->localeContext = $localeContext;
-        $this->firewallMap = $firewallMap;
-        $this->viewItemList = $viewItemList;
     }
 
     public function __invoke(ControllerEvent $event): void
@@ -51,7 +42,8 @@ final class ViewItemListListener
             return;
         }
 
-        $slug = $request->get('slug', null);
+        /** @var string|null $slug */
+        $slug = $request->get('slug');
 
         if (null === $slug) {
             return;

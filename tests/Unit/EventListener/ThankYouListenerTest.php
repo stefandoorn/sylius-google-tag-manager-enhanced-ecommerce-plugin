@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit\EventListener;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
@@ -21,9 +22,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
-/**
- * @covers \StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener
- */
+#[CoversClass(ThankYouListener::class)]
 final class ThankYouListenerTest extends TestCase
 {
     public function testWrongController(): void

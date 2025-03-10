@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit\DependencyInjection;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\DependencyInjection\SyliusGtmEnhancedEcommerceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,9 +12,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
 {
-    /**
-     * @dataProvider dataProviderConfigFeatures
-     */
+    #[DataProvider('dataProviderConfigFeatures')]
     public function testMinimalConfigFeatures(string $feature): void
     {
         $container = $this->getContainer();
@@ -24,11 +23,14 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
         $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
 
         self::assertTrue(
-            $container->getParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature))
+            $container->getParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature)),
         );
     }
 
-    public function dataProviderConfigFeatures(): array
+    /**
+     * @return iterable<array<string>>
+     */
+    public static function dataProviderConfigFeatures(): iterable
     {
         return [
             ['add_payment_info'],

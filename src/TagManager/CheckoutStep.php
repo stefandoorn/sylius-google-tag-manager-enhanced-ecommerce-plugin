@@ -7,33 +7,21 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 final class CheckoutStep implements CheckoutStepInterface
 {
     use CreateProductTrait;
 
-    private GoogleTagManagerInterface $googleTagManager;
-
-    private ProductIdentifierHelperInterface $productIdentifierHelper;
-
-    private CurrencyContextInterface $currencyContext;
-
-    private ChannelContextInterface $channelContext;
-
     public function __construct(
-        GoogleTagManagerInterface $googleTagManager,
-        ProductIdentifierHelperInterface $productIdentifierHelper,
-        ChannelContextInterface $channelContext,
-        CurrencyContextInterface $currencyContext
+        private GoogleTagManagerInterface $googleTagManager,
+        private ProductIdentifierHelperInterface $productIdentifierHelper,
+        private ChannelContextInterface $channelContext,
+        private CurrencyContextInterface $currencyContext,
     ) {
-        $this->googleTagManager = $googleTagManager;
-        $this->productIdentifierHelper = $productIdentifierHelper;
-        $this->channelContext = $channelContext;
-        $this->currencyContext = $currencyContext;
     }
 
     public function addStep(OrderInterface $order, int $step): void
@@ -60,8 +48,8 @@ final class CheckoutStep implements CheckoutStepInterface
                 $additionalData['shipping_tier'] = implode(
                     ', ',
                     $order->getShipments()->map(function (ShipmentInterface $shipment) {
-                        return $shipment->getMethod()->getName();
-                    })->toArray()
+                        return $shipment->getMethod()?->getName();
+                    })->toArray(),
                 );
 
                 break;
@@ -70,8 +58,8 @@ final class CheckoutStep implements CheckoutStepInterface
                 $additionalData['payment_type'] = implode(
                     ', ',
                     $order->getPayments()->map(function (PaymentInterface $payment) {
-                        return $payment->getMethod()->getName();
-                    })->toArray()
+                        return $payment->getMethod()?->getName();
+                    })->toArray(),
                 );
 
                 break;
@@ -102,6 +90,9 @@ final class CheckoutStep implements CheckoutStepInterface
         ]);
     }
 
+    /**
+     * @return array<array<string, mixed>>
+     */
     private function getProducts(OrderInterface $order): array
     {
         $products = [];

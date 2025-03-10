@@ -11,6 +11,9 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 trait CreateProductTrait
 {
+    /**
+     * @return array<string, mixed>
+     */
     private function createProduct(OrderItemInterface $item, ?int $index = null): array
     {
         /** @var ProductVariantInterface $variant */

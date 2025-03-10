@@ -8,7 +8,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -17,36 +19,18 @@ use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 final class ViewItemList implements ViewItemListInterface
 {
-    private GoogleTagManagerInterface $googleTagManager;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private ChannelContextInterface $channelContext;
-
-    private LocaleContextInterface $localeContext;
-
-    private ProductIdentifierHelperInterface $productIdentifierHelper;
-
-    private ProductVariantResolverInterface $productVariantResolver;
-
-    private ProductVariantPriceHelperInterface $productVariantPriceHelper;
-
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     */
     public function __construct(
-        GoogleTagManagerInterface $googleTagManager,
-        ProductRepositoryInterface $productRepository,
-        ChannelContextInterface $channelContext,
-        LocaleContextInterface $localeContext,
-        ProductIdentifierHelperInterface $productIdentifierHelper,
-        ProductVariantResolverInterface $productVariantResolver,
-        ProductVariantPriceHelperInterface $productVariantPriceHelper
+        private GoogleTagManagerInterface $googleTagManager,
+        private ProductRepositoryInterface $productRepository,
+        private ChannelContextInterface $channelContext,
+        private LocaleContextInterface $localeContext,
+        private ProductIdentifierHelperInterface $productIdentifierHelper,
+        private ProductVariantResolverInterface $productVariantResolver,
+        private ProductVariantPriceHelperInterface $productVariantPriceHelper,
     ) {
-        $this->googleTagManager = $googleTagManager;
-        $this->productRepository = $productRepository;
-        $this->channelContext = $channelContext;
-        $this->localeContext = $localeContext;
-        $this->productIdentifierHelper = $productIdentifierHelper;
-        $this->productVariantResolver = $productVariantResolver;
-        $this->productVariantPriceHelper = $productVariantPriceHelper;
     }
 
     public function add(TaxonInterface $taxon, ?string $listId = null): void
@@ -56,14 +40,14 @@ final class ViewItemList implements ViewItemListInterface
 
     private function addViewItemListData(TaxonInterface $taxon, ?string $listId = null): void
     {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
         $products = new ArrayCollection(
             $this->productRepository->createShopListQueryBuilder(
-                $this->channelContext->getChannel(),
+                $channel,
                 $taxon,
                 $this->localeContext->getLocaleCode(),
-                [],
-                false,
-            )->getQuery()->getResult()
+            )->getQuery()->getResult(),
         );
 
         if (0 === $products->count()) {
@@ -84,6 +68,7 @@ final class ViewItemList implements ViewItemListInterface
                     'index' => $index++,
                 ];
 
+                /** @var ProductVariantInterface|null $productVariant */
                 $productVariant = $this->productVariantResolver->getVariant($product);
                 if (null !== $productVariant) {
                     $productData['price'] = $this->productVariantPriceHelper->getProductVariantPrice($productVariant) / 100;

@@ -18,7 +18,7 @@ final class ViewItemListener
 
     public function __construct(
         RequestStack $requestStack,
-        ViewItemInterface $viewItem
+        ViewItemInterface $viewItem,
     ) {
         $this->requestStack = $requestStack;
         $this->viewItem = $viewItem;

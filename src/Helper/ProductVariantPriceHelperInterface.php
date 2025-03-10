@@ -9,6 +9,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 interface ProductVariantPriceHelperInterface
 {
     public function getProductVariantPrice(
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): int;
 }

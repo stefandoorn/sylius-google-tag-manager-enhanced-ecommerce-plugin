@@ -10,20 +10,14 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantPriceHelper implements ProductVariantPriceHelperInterface
 {
-    private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator;
-
-    private ChannelContextInterface $channelContext;
-
     public function __construct(
-        ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
-        ChannelContextInterface $channelContext
+        private ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
+        private ChannelContextInterface $channelContext,
     ) {
-        $this->productVariantPricesCalculator = $productVariantPricesCalculator;
-        $this->channelContext = $channelContext;
     }
 
     public function getProductVariantPrice(
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): int {
         return $this->productVariantPricesCalculator->calculate(
             $productVariant,

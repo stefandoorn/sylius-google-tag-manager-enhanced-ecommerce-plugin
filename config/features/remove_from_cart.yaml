@@ -1,11 +1,7 @@
 imports:
-  - { resource: shared/cart.yml }
+  - { resource: shared/cart.yaml }
 
 services:
-  _defaults:
-    autowire: false
-    autoconfigure: false
-    public: false
 
   sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.remove_from_cart:
     class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CartListener

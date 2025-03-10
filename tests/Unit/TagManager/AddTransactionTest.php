@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit\TagManager;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelper;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction;
@@ -13,9 +14,7 @@ use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManager;
 
-/**
- * @covers \StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction
- */
+#[CoversClass(AddTransaction::class)]
 final class AddTransactionTest extends TestCase
 {
     public function testSimpleTransaction(): void
