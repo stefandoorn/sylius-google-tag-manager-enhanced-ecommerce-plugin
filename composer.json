@@ -44,11 +44,6 @@
             "symfony/runtime": true
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.0-dev"
-        }
-    },
     "autoload": {
         "psr-4": {
             "StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": "src/",
@@ -81,6 +76,9 @@
         ]
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "4.0-dev"
+        },
         "runtime": {
             "project_dir": "tests/Application",
             "dotenv_path": "tests/Application/.env"
