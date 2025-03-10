@@ -1,4 +1,0 @@
-suites:
-    main:
-        namespace: StefanDoorn\SyliusGtmEnhancedEcommercePlugin
-        psr4_prefix: StefanDoorn\SyliusGtmEnhancedEcommercePlugin

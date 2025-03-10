@@ -1,0 +1,13 @@
+parameters:
+    reportUnmatchedIgnoredErrors: false
+
+    level: max
+
+    paths:
+        - src
+        - tests/Application/src
+        - tests/Behat
+        - tests/Unit
+        - tests/Functional
+
+    ignoreErrors: []

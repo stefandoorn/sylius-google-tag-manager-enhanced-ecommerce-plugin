@@ -10,7 +10,9 @@
 
 ### 1. Composer
 
-`composer require stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin`
+```shell
+composer require stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin`
+```
 
 ### 2. Follow installation instructions of required sub bundle
 
@@ -32,11 +34,11 @@ Configure the features you would like to use/not. Find a base configuration refe
 bin/console config:dump-reference SyliusGtmEnhancedEcommercePlugin
 ```
 
-By default all features are enabled.
+By default, all features are enabled.
 
 ## Features
 
-References + examples of how to set-up your GTM container: https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm
+References + examples of how to set up your GTM container: https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm
 
 Supported events:
 

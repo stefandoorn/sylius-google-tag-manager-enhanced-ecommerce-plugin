@@ -7,29 +7,31 @@
         "sylius",
         "sylius-plugin"
     ],
-    "conflict": {
-        "symfony/http-foundation": "<5.3"
-    },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/Prometee/google-tag-manager-plugin.git"
+        }
+    ],
     "require": {
-        "php": "^8.0",
-        "stefandoorn/google-tag-manager-plugin": "~1.0",
-        "sylius/sylius": "^1.9"
+        "sylius/sylius": "^2.0",
+        "stefandoorn/google-tag-manager-plugin": "dev-sylius-2.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^1.2",
         "phpstan/phpstan-doctrine": "^1.0",
         "phpstan/phpstan-strict-rules": "^1.1",
         "phpstan/phpstan-symfony": "^1.0",
         "phpstan/phpstan-webmozart-assert": "^1.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^11.0",
         "sylius-labs/coding-standard": "^4.0",
-        "symfony/browser-kit": "^5.4 || ^6.0",
-        "symfony/debug-bundle": "^5.4 || ^6.0",
-        "symfony/dotenv": "^5.4 || ^6.0",
-        "symfony/intl": "^5.4 || ^6.0",
-        "symfony/web-profiler-bundle": "^5.4 || ^6.0"
+        "symfony/browser-kit": "^6.4 || ^7.2",
+        "symfony/debug-bundle": "^6.4 || ^7.2",
+        "symfony/dotenv": "^6.4 || ^7.2",
+        "symfony/intl": "^6.4 || ^7.2",
+        "symfony/runtime": "^6.4 || ^7.2",
+        "symfony/web-profiler-bundle": "^6.4 || ^7.2"
     },
     "config": {
         "sort-packages": true,
@@ -67,14 +69,20 @@
         "post-create-project-cmd": [
             "php bin/create_node_symlink.php"
         ],
-        "analyse": "bin/phpstan analyse -c phpstan.neon -l 4 src",
-        "check-style": "bin/ecs check --ansi src/",
-        "fix-style": "ecs check --ansi src/ --fix",
+        "analyse": "bin/phpstan analyse",
+        "check-style": "bin/ecs check --ansi",
+        "fix-style": "ecs check --ansi --fix",
         "phpspec": "bin/phpspec run --ansi",
         "phpunit": "bin/phpunit",
         "test": [
             "@phpunit",
             "@phpspec"
         ]
+    },
+    "extra": {
+        "runtime": {
+            "project_dir": "tests/Application",
+            "dotenv_path": "tests/Application/.env"
+        }
     }
 }
