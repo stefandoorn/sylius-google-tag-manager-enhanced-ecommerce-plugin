@@ -49,9 +49,9 @@ final class AddTransactionTest extends TestCase
         $push = $gtm->getPush();
         $lastPush = array_pop($push);
 
-        $this->assertEquals('purchase', $lastPush['event']);
-        $this->assertArrayHasKey('ecommerce', $lastPush);
-        $this->assertArrayHasKey('currency', $lastPush['ecommerce']);
-        $this->assertArrayHasKey('items', $lastPush['ecommerce']);
+        self::assertEquals('purchase', $lastPush['event']);
+        self::assertArrayHasKey('ecommerce', $lastPush);
+        self::assertArrayHasKey('currency', $lastPush['ecommerce']);
+        self::assertArrayHasKey('items', $lastPush['ecommerce']);
     }
 }

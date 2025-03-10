@@ -23,7 +23,7 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends TestCase
 
         $extension->load(['sylius_gtm_enhanced_ecommerce' => $config], $container);
 
-        $this->assertTrue(
+        self::assertTrue(
             $container->getParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature))
         );
     }

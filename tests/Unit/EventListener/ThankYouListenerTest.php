@@ -41,7 +41,7 @@ final class ThankYouListenerTest extends TestCase
         $request = new Request();
 
         // Create event
-        $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MASTER_REQUEST);
+        $event = new ControllerEvent($kernel, [$controller, 'indexAction'], $request, HttpKernelInterface::MAIN_REQUEST);
 
         // Service and listener
         $service = new AddTransaction(
@@ -57,7 +57,7 @@ final class ThankYouListenerTest extends TestCase
 
         // Check result
         $push = $gtm->getPush();
-        $this->assertEmpty($push);
+        self::assertEmpty($push);
     }
 
     public function testNoOrderFound(): void
@@ -83,7 +83,7 @@ final class ThankYouListenerTest extends TestCase
         $controller->expects($this->any())->method('thankYouAction')->willReturn(new Response());
 
         // Create event
-        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
+        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MAIN_REQUEST);
 
         // Service and listener
         $service = new AddTransaction(
@@ -99,7 +99,7 @@ final class ThankYouListenerTest extends TestCase
 
         // Check result
         $push = $gtm->getPush();
-        $this->assertEmpty($push);
+        self::assertEmpty($push);
     }
 
     public function testEnvironmentIsAddedToGtmObject(): void
@@ -127,7 +127,7 @@ final class ThankYouListenerTest extends TestCase
         $controller->expects($this->any())->method('thankYouAction')->willReturn(new Response());
 
         // Create event
-        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MASTER_REQUEST);
+        $event = new ControllerEvent($kernel, [$controller, 'thankYouAction'], $request, HttpKernelInterface::MAIN_REQUEST);
 
         // Service and listener
         $service = new AddTransaction(
@@ -145,6 +145,6 @@ final class ThankYouListenerTest extends TestCase
         $push = $gtm->getPush();
         $lastPush = array_pop($push);
 
-        $this->assertArrayHasKey('ecommerce', $lastPush);
+        self::assertArrayHasKey('ecommerce', $lastPush);
     }
 }
