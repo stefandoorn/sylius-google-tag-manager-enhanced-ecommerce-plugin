@@ -68,11 +68,9 @@
         "analyse": "bin/phpstan analyse",
         "check-style": "bin/ecs check --ansi",
         "fix-style": "ecs check --ansi --fix",
-        "phpspec": "bin/phpspec run --ansi",
         "phpunit": "bin/phpunit",
         "test": [
-            "@phpunit",
-            "@phpspec"
+            "@phpunit"
         ]
     },
     "extra": {
