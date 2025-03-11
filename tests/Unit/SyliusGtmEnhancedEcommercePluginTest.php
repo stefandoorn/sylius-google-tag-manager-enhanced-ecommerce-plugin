@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Unit;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\SyliusGtmEnhancedEcommercePlugin;
 use PHPUnit\Framework\TestCase;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\SyliusGtmEnhancedEcommercePlugin;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class SyliusGtmEnhancedEcommercePluginTest extends TestCase

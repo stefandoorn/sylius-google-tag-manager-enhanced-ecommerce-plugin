@@ -35,7 +35,7 @@ final class SyliusGtmEnhancedEcommerceExtensionTest extends AbstractExtensionTes
         $this->load([
             'features' => [
                 $feature => false,
-            ]
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter(sprintf('sylius_gtm_enhanced_ecommerce.features.%s', $feature), false);
