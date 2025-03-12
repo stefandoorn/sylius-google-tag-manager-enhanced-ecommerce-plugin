@@ -51,8 +51,3 @@ Supported events:
 * `add_shipping_info`
 * `add_payment_info`
 * `purchase`
-
-Make sure to check that the required 'sonata_block_render_events' template events are available. Check the
-`src/Resources/config/features/*.yml` & `src/Resources/config/services.yml` for the definitions.
-
-This is only to be checked if you've been overriding templates yourselves.
