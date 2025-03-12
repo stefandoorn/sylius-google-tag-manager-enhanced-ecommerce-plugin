@@ -13,16 +13,13 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 final class ThankYouListener
 {
-    private AddTransactionInterface $transactionService;
-
-    private OrderRepositoryInterface $orderRepository;
-
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
-        AddTransactionInterface $transactionService,
-        OrderRepositoryInterface $orderRepository
+        private AddTransactionInterface $transactionService,
+        private OrderRepositoryInterface $orderRepository,
     ) {
-        $this->transactionService = $transactionService;
-        $this->orderRepository = $orderRepository;
     }
 
     public function onKernelController(ControllerEvent $event): void

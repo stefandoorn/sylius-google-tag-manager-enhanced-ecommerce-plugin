@@ -1,0 +1,11 @@
+parameters:
+    reportUnmatchedIgnoredErrors: false
+
+    level: max
+
+    paths:
+        - src
+        - tests/Application/src
+        - tests/Unit
+
+    ignoreErrors: []

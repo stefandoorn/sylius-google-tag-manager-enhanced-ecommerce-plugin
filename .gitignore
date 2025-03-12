@@ -15,6 +15,6 @@
 /.phpunit.result.cache
 /behat.yml
 /phpunit.xml
-/phpspec.yml
+/phpstan.neon
 
 /node_modules

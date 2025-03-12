@@ -1,0 +1,10 @@
+services:
+
+  sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.controller:
+    class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CartListener
+    arguments:
+      - '@request_stack'
+      - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
+      - "@security.firewall.map"
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

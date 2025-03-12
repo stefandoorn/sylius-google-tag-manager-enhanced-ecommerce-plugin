@@ -14,24 +14,12 @@ final class Cart implements CartInterface
 {
     use CreateProductTrait;
 
-    private GoogleTagManagerInterface $googleTagManager;
-
-    private ChannelContextInterface $channelContext;
-
-    private CurrencyContextInterface $currencyContext;
-
-    private ProductIdentifierHelperInterface $productIdentifierHelper;
-
     public function __construct(
-        GoogleTagManagerInterface $googleTagManager,
-        ChannelContextInterface $channelContext,
-        CurrencyContextInterface $currencyContext,
-        ProductIdentifierHelperInterface $productIdentifierHelper
+        private GoogleTagManagerInterface $googleTagManager,
+        private ChannelContextInterface $channelContext,
+        private CurrencyContextInterface $currencyContext,
+        private ProductIdentifierHelperInterface $productIdentifierHelper,
     ) {
-        $this->googleTagManager = $googleTagManager;
-        $this->channelContext = $channelContext;
-        $this->currencyContext = $currencyContext;
-        $this->productIdentifierHelper = $productIdentifierHelper;
     }
 
     public function getOrderItem(OrderItemInterface $orderItem): array

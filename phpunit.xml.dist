@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
          bootstrap="tests/Application/config/bootstrap.php">
     <testsuites>
@@ -11,14 +11,7 @@
     </testsuites>
 
     <php>
-        <ini name="error_reporting" value="-1" />
-
-        <server name="KERNEL_DIR" value="tests/Application/"/>
-        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="1"/>
         <server name="APP_ENV" value="test"/>
-        <server name="KERNEL_CLASS" value="Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Application\Kernel"/>
-
-        <env name="APP_ENV" value="test"/>
-        <env name="SHELL_VERBOSITY" value="-1" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true"/>
     </php>
 </phpunit>

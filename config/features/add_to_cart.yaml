@@ -1,0 +1,13 @@
+imports:
+  - { resource: shared/cart.yaml }
+
+services:
+
+  sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.add_to_cart:
+    class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\CartListener
+    arguments:
+      - '@request_stack'
+      - '@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart'
+      - "@security.firewall.map"
+    tags:
+      - { name: kernel.event_listener, event: sylius.order_item.post_add, method: onAddToCart }

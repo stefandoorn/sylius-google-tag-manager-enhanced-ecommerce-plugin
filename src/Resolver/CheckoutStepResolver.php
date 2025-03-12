@@ -11,31 +11,23 @@ final class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
     public function resolve(string $method, Request $request): ?int
     {
-        switch ($method) {
-            case 'summaryAction':
-                return CheckoutStepInterface::STEP_CART;
-            case 'updateAction':
-                return $this->updateAction($request);
-        }
-
-        return null;
+        return match ($method) {
+            'summaryAction' => CheckoutStepInterface::STEP_CART,
+            'updateAction' => $this->updateAction($request),
+            default => null,
+        };
     }
 
     private function updateAction(Request $request): ?int
     {
         $route = $request->get('_route');
 
-        switch ($route) {
-            case 'sylius_shop_checkout_address':
-                return CheckoutStepInterface::STEP_ADDRESS;
-            case 'sylius_shop_checkout_select_shipping':
-                return CheckoutStepInterface::STEP_SHIPPING;
-            case 'sylius_shop_checkout_select_payment':
-                return CheckoutStepInterface::STEP_PAYMENT;
-            case 'sylius_shop_checkout_complete':
-                return CheckoutStepInterface::STEP_CONFIRM;
-        }
-
-        return null;
+        return match ($route) {
+            'sylius_shop_checkout_address' => CheckoutStepInterface::STEP_ADDRESS,
+            'sylius_shop_checkout_select_shipping' => CheckoutStepInterface::STEP_SHIPPING,
+            'sylius_shop_checkout_select_payment' => CheckoutStepInterface::STEP_PAYMENT,
+            'sylius_shop_checkout_complete' => CheckoutStepInterface::STEP_CONFIRM,
+            default => null,
+        };
     }
 }

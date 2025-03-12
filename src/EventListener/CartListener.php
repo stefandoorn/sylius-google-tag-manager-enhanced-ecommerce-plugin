@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\RequestStackMainRequest;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CartInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -18,20 +19,11 @@ final class CartListener
 
     public const POST_REMOVE_ORDER_ITEM = 'post_remove_order_item';
 
-    private RequestStack $requestStack;
-
-    private Cart $cart;
-
-    private FirewallMap $firewallMap;
-
     public function __construct(
-        RequestStack $requestStack,
-        Cart $cart,
-        FirewallMap $firewallMap
+        private RequestStack $requestStack,
+        private CartInterface $cart,
+        private FirewallMap $firewallMap,
     ) {
-        $this->requestStack = $requestStack;
-        $this->cart = $cart;
-        $this->firewallMap = $firewallMap;
     }
 
     public function onAddToCart(ResourceControllerEvent $event): void
@@ -41,9 +33,12 @@ final class CartListener
             return;
         }
 
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $event->getSubject();
+
         $session->set(
             self::POST_ADD_ORDER_ITEM,
-            $this->cart->getOrderItem($event->getSubject()),
+            $this->cart->getOrderItem($orderItem),
         );
     }
 
@@ -54,16 +49,23 @@ final class CartListener
             return;
         }
 
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $event->getSubject();
+
         $session->set(
             self::POST_REMOVE_ORDER_ITEM,
-            $this->cart->getOrderItem($event->getSubject()),
+            $this->cart->getOrderItem($orderItem),
         );
     }
 
     public function onKernelController(ControllerEvent $event): void
     {
         $firewallConfig = $this->firewallMap->getFirewallConfig($event->getRequest());
-        if (null !== $firewallConfig && 'shop' !== $firewallConfig->getName()) {
+        if (null === $firewallConfig) {
+            return;
+        }
+
+        if ('shop' !== $firewallConfig->getName()) {
             return;
         }
 
@@ -73,12 +75,14 @@ final class CartListener
         }
 
         if ($session->has(self::POST_ADD_ORDER_ITEM)) {
+            /** @var array<string, mixed> $orderItem */
             $orderItem = $session->get(self::POST_ADD_ORDER_ITEM);
             $session->remove(self::POST_ADD_ORDER_ITEM);
             $this->cart->add($orderItem);
         }
 
         if ($session->has(self::POST_REMOVE_ORDER_ITEM)) {
+            /** @var array<string, mixed> $orderItem */
             $orderItem = $session->get(self::POST_REMOVE_ORDER_ITEM);
             $session->remove(self::POST_REMOVE_ORDER_ITEM);
             $this->cart->remove($orderItem);
@@ -87,9 +91,8 @@ final class CartListener
 
     private function getSession(): ?SessionInterface
     {
-        try {
-            $request = RequestStackMainRequest::getMainRequest($this->requestStack);
-        } catch (\Exception $exception) {
+        $request = RequestStackMainRequest::getMainRequest($this->requestStack);
+        if (null === $request) {
             return null;
         }
 

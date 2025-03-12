@@ -1,22 +1,18 @@
 <?php
 
-use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
-use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
+declare(strict_types=1);
+
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return static function (ECSConfig $config): void {
-    $config->import('vendor/sylius-labs/coding-standard/ecs.php');
-
-    $config->skip([
-        VisibilityRequiredFixer::class => ['*Spec.php'],
-        'tests/Application/*',
+    $config->paths([
+        __DIR__ . '/src',
+        __DIR__ . '/tests/Unit',
+        __DIR__ . '/ecs.php',
     ]);
 
-    $config->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, []);
+    $config->import('vendor/sylius-labs/coding-standard/ecs.php');
 
-    $services = $config->services();
-    $services->set(
-        TrailingCommaInMultilineFixer::class
-    )->call('configure', [['elements' => ['arrays']]]);
+    $config->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, []);
 };
