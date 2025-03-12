@@ -6,7 +6,7 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper;
 
 use Sylius\Component\Core\Model\ProductInterface;
 
-final class ProductIdentifierHelper
+final class ProductIdentifierHelper implements ProductIdentifierHelperInterface
 {
     public const ID_IDENTIFIER = 'id';
 
