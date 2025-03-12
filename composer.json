@@ -7,15 +7,9 @@
         "sylius",
         "sylius-plugin"
     ],
-    "repositories": [
-        {
-            "type": "github",
-            "url": "https://github.com/Prometee/google-tag-manager-plugin.git"
-        }
-    ],
     "require": {
         "sylius/sylius": "^2.0",
-        "stefandoorn/google-tag-manager-plugin": "dev-sylius-2.0"
+        "stefandoorn/google-tag-manager-plugin": "^2.0-alpha || ^2.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
