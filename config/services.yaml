@@ -16,8 +16,4 @@ services:
         decorates: google_tag_manager
         arguments:
             - "@.inner"
-            - '@cache.sylius_gtm_enhanced_ecommerce'
-        tags:
-            - name: kernel.event_listener
-              event: !php/const Symfony\Component\HttpKernel\KernelEvents::TERMINATE
-              method: reset
+            - '@request_stack'
