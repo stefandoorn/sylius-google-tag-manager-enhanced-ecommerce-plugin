@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemListInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\BreadcrumbComponent;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Grid\View\GridViewInterface;
@@ -18,9 +18,14 @@ final class ViewItemListListener
     ) {
     }
 
-    public function __invoke(ResourceControllerEvent $event): void
+    public function __invoke(GenericEvent $event): void
     {
-        $taxon = $this->breadcrumbComponent->taxon();
+        try {
+            $taxon = $this->breadcrumbComponent->taxon();
+        } catch (\InvalidArgumentException) {
+            return;
+        }
+
         /** @var GridViewInterface $gridView */
         $gridView = $event->getSubject();
 
