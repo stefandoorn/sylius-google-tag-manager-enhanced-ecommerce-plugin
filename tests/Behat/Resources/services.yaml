@@ -1,0 +1,8 @@
+services:
+
+    test.sylius.google_tag_manager.enhanced_ecommerce_tracking.context.ui.shop.gtm:
+        public: true
+        class: Tests\StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Behat\Context\Ui\Shop\GtmContext
+        arguments:
+            - "@behat.mink.default_session"
+            - "@sylius.behat.java_script_test_helper"

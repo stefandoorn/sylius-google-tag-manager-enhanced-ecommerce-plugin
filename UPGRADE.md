@@ -9,6 +9,23 @@ Several config files have been renamed (`.yml` to `yaml`).
 
 The only template has been removed, as it was not used anywhere anymore.
 
+The trait `StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CreateProductTrait` has been removed.
+You can now rely on a factory : `StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory\GtmItemFactory` to customize your GTM item.
+
+`StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CartInterface` has been refactored to avoid using the session to store the cart data.
+
+`StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest` has been removed, no more needed with SF6 and 7.
+`StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\RequestStackMainRequest` has been removed, no more needed with SF6 and 7.
+
+`StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransaction` has been removed.
+`StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelper` has been removed.
+`StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface` has been removed.
+`sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_variant_price` has been removed.
+`sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout_step.abstract` has been removed.
+`sylius.google_tag_manager.enhanced_ecommerce_tracking.cart.listener.controller` has been removed.
+
+Purchase events are now tracked by the `StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep` class.
+
 Upgrade 2.0.0 -> 3.0.0
 ----------------------
 

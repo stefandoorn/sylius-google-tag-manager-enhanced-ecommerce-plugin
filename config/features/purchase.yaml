@@ -1,9 +1,10 @@
 services:
 
-  sylius.google_tag_manager.enhanced_ecommerce_tracking.purchases.listener.thank_you:
+  sylius.google_tag_manager.enhanced_ecommerce_tracking.purchase:
     class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ThankYouListener
     arguments:
-      - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction"
       - "@sylius.repository.order"
+      - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step"
     tags:
-      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+      - name: kernel.event_listener
+        event: kernel.controller

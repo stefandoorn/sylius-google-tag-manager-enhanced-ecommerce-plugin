@@ -92,6 +92,10 @@ jobs:
                     SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
             -
+                name: Install Behat driver
+                run: bin/bdi browser:google-chrome drivers
+
+            -
                 name: Get Yarn cache directory
                 id: yarn-cache
                 run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
@@ -151,3 +155,18 @@ jobs:
             -
                 name: Run tests
                 run: composer test
+
+            -
+                name: Run Behat
+                run: composer behat || composer behat-rerun
+
+            -
+                name: Upload Behat logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-sylius-${{ matrix.sylius }}-${{ strategy.job-index }}
+                    path: |
+                        etc/build/
+                        test/Application/var/log/
+                    if-no-files-found: ignore

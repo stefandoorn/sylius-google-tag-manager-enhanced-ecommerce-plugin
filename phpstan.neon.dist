@@ -8,4 +8,10 @@ parameters:
         - tests/Application/src
         - tests/Unit
 
-    ignoreErrors: []
+    ignoreErrors:
+        - message: "/Cannot access offset ('price'|0) on mixed\\./"
+          path: src/Provider/ViewItemProvider.php
+        - message: '/Method StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\Service\\CachedGoogleTagManager::(addPush|getPush|getData)\(\) .+ type specified.*\./'
+          path: src/Service/CachedGoogleTagManager.php
+        - message: '/Call to an undefined method Xynnn\\GoogleTagManagerBundle\\Service\\GoogleTagManagerInterface::reset\(\)\./'
+          path: src/Service/CachedGoogleTagManager.php

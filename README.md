@@ -4,7 +4,11 @@
 [![Version](https://img.shields.io/packagist/v/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin.svg)](https://packagist.org/packages/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin)
 [![Build](https://github.com/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/stefandoorn/sylius-google-tag-manager-enhanced-ecommerce-plugin/actions/workflows/build.yml)
 
-<p align="center"><a href="https://sylius.com/plugins/" target="_blank"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="200"></a></p>
+<p align="center">
+    <a href="https://sylius.com/plugins/" target="_blank">
+        <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="200">
+    </a>
+</p>
 
 ## Installation
 
@@ -42,12 +46,22 @@ References + examples of how to set up your GTM container: https://developers.go
 
 Supported events:
 
-* `view_item`
-* `view_item_list`
-* `add_to_cart`
-* `remove_from_cart`
-* `view_cart`
-* `begin_checkout`
-* `add_shipping_info`
-* `add_payment_info`
-* `purchase`
+Product catalogue actions:
+* `view_item` trigger on the event `sylius.product.show`.
+* `view_item_list` trigger on the event `sylius.product.index`.
+
+Cart actions:
+* `add_to_cart` trigger on the event `Sylius\Component\Order\SyliusCartEvents::CART_ITEM_ADD`.
+* `remove_from_cart` trigger on the event `Sylius\Component\Order\SyliusCartEvents::CART_ITEM_REMOVE`.
+* `view_cart` trigger on the event `Sylius\Component\Order\SyliusCartEvents::CART_SUMMARY`.
+
+Checkout steps:
+
+> Note: The targeted events `sylius.order.post_*` are triggered when the checkout step form is processed.
+> After the event is triggered, a redirection happens, making it impossible to track the event in the same request.
+> This plugin is saving the pushed GTM event and display it on the next available page.
+
+* `begin_checkout` trigger on the event `sylius.order.post_address`.
+* `add_shipping_info` trigger on the event `sylius.order.post_select_shipping`.
+* `add_payment_info` trigger on the event `sylius.order.post_payment`.
+* `purchase` trigger just before the `sylius.controller.order::thankYouAction` is called.

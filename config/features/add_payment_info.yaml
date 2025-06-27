@@ -1,10 +1,9 @@
-imports:
-  - { resource: shared/checkout.yaml }
-
 services:
 
   sylius.google_tag_manager.enhanced_ecommerce_tracking.add_payment_info:
-    parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout_step.abstract
-    arguments: [5]
+    parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.listener.checkout_step.abstract
+    arguments:
+      - !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_PAYMENT_SELECTED
     tags:
-      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+      - name: kernel.event_listener
+        event: sylius.order.post_payment

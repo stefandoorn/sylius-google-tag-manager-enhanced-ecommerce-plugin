@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransactionInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
@@ -17,52 +17,43 @@ final class ThankYouListener
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      */
     public function __construct(
-        private AddTransactionInterface $transactionService,
         private OrderRepositoryInterface $orderRepository,
+        private CheckoutStepInterface $checkoutStep,
     ) {
     }
 
-    public function onKernelController(ControllerEvent $event): void
+    public function __invoke(ControllerEvent $event): void
     {
         $controller = $event->getController();
 
-        // Only perform on the main request, not on subrequests
-        if (!ControllerEventMainRequest::isMainRequest($event)) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
-        /*
-         * $controller passed can be either a class or a Closure.
-         * This is not usual in Symfony but it may happen.
-         * If it is a class, it comes in array format
-         */
         if (!\is_array($controller)) {
             return;
         }
 
-        // We only want the SyliusOrderController
         if (!$controller[0] instanceof OrderController) {
             return;
         }
 
-        // Now check the method, should be
         if ($controller[1] !== 'thankYouAction') {
             return;
         }
 
         // Find Order ID
         $orderId = $event->getRequest()->getSession()->get('sylius_order_id');
-        if ($orderId === null) {
+        if (null === $orderId) {
             return;
         }
 
-        // Find Order
+        /** @var OrderInterface|null $order */
         $order = $this->orderRepository->find($orderId);
-        if (!$order instanceof OrderInterface) {
+        if (null === $order) {
             return;
         }
 
-        // Add E-Commerce data
-        $this->transactionService->addTransaction($order);
+        $this->checkoutStep->addStep($order, OrderCheckoutStates::STATE_COMPLETED);
     }
 }

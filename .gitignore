@@ -1,5 +1,6 @@
 /vendor/
 /node_modules/
+/drivers/
 /composer.lock
 
 .idea*

@@ -4,103 +4,38 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\GtmProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Symfony\Contracts\Service\ServiceProviderInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 final class CheckoutStep implements CheckoutStepInterface
 {
-    use CreateProductTrait;
-
+    /**
+     * @param ServiceProviderInterface<GtmProviderInterface> $locator
+     */
     public function __construct(
         private GoogleTagManagerInterface $googleTagManager,
-        private ProductIdentifierHelperInterface $productIdentifierHelper,
-        private ChannelContextInterface $channelContext,
-        private CurrencyContextInterface $currencyContext,
+        private ServiceProviderInterface $locator,
     ) {
     }
 
-    public function addStep(OrderInterface $order, int $step): void
+    public function addStep(OrderInterface $order, string $state): void
     {
-        // Triggers allowed:
-        // -----------------
-        // 1. Cart -> view_cart
-        // 2. Address -> begin_checkout (customer moved past the cart)
-        // 4. Payment -> add_shipping_info (customer moved past the shipping step)
-        // 5. Confirm -> add_payment_info (customer moved past the payment step)
-
-        $additionalData = [];
-        switch ($step) {
-            case CheckoutStepInterface::STEP_CART:
-                $event = 'view_cart';
-
-                break;
-            case CheckoutStepInterface::STEP_ADDRESS:
-                $event = 'begin_checkout';
-
-                break;
-            case CheckoutStepInterface::STEP_PAYMENT:
-                $event = 'add_shipping_info';
-                $additionalData['shipping_tier'] = implode(
-                    ', ',
-                    $order->getShipments()->map(function (ShipmentInterface $shipment) {
-                        return $shipment->getMethod()?->getName();
-                    })->toArray(),
-                );
-
-                break;
-            case CheckoutStepInterface::STEP_CONFIRM:
-                $event = 'add_payment_info';
-                $additionalData['payment_type'] = implode(
-                    ', ',
-                    $order->getPayments()->map(function (PaymentInterface $payment) {
-                        return $payment->getMethod()?->getName();
-                    })->toArray(),
-                );
-
-                break;
-            default:
-                return;
-        }
-
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#initiate_the_checkout_process
         $this->googleTagManager->addPush([
             'ecommerce' => null,
         ]);
 
-        $cart = [
-            'currency' => $this->currencyContext->getCurrencyCode(),
-            'value' => $order->getTotal() / 100,
-            'items' => $this->getProducts($order),
+        $provider = $this->locator->get($state);
+
+        $context = [
+            ContextInterface::CONTEXT_ORDER => $order,
         ];
-        if ($order->getPromotionCoupon() !== null) {
-            $cart['coupon'] = $order->getPromotionCoupon()->getCode();
-        }
 
         $this->googleTagManager->addPush([
-            'event' => $event,
-            'ecommerce' => \array_merge(
-                $additionalData,
-                $cart,
-            ),
+            'event' => $provider->getEvent($context),
+            'ecommerce' => $provider->getEcommerce($context),
         ]);
-    }
-
-    /**
-     * @return array<array<string, mixed>>
-     */
-    private function getProducts(OrderInterface $order): array
-    {
-        $products = [];
-
-        foreach ($order->getItems() as $index => $item) {
-            $products[] = $this->createProduct($item, $index);
-        }
-
-        return $products;
     }
 }
