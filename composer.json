@@ -21,6 +21,7 @@
         "phpstan/phpstan-webmozart-assert": "^1.0",
         "phpunit/phpunit": "^11.0",
         "sylius-labs/coding-standard": "^4.0",
+        "sylius/test-application": "^2.0.0@alpha",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/debug-bundle": "^6.4 || ^7.2",
         "symfony/dotenv": "^6.4 || ^7.2",
@@ -41,13 +42,8 @@
     "autoload": {
         "psr-4": {
             "StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": "src/",
-            "Tests\\StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": ["tests/", "tests/Application/src"]
+            "Tests\\StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": "tests/"
         }
-    },
-    "autoload-dev": {
-        "classmap": [
-            "tests/Application/Kernel.php"
-        ]
     },
     "scripts": {
         "post-install-cmd": [
@@ -71,9 +67,10 @@
         "branch-alias": {
             "dev-master": "4.0-dev"
         },
+        "public-dir": "vendor/sylius/test-application/public",
         "runtime": {
-            "project_dir": "tests/Application",
-            "dotenv_path": "tests/Application/.env"
+            "project_dir": "vendor/sylius/test-application",
+            "dotenv_path": "tests/TestApplication/.env"
         }
     }
 }

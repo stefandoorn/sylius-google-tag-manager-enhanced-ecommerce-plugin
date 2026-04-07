@@ -1,0 +1,19 @@
+imports:
+    - { resource: "../../../config/services.yaml" }
+
+google_tag_manager:
+    enabled: true
+    id: "GTM-TESTTEST"
+    autoAppend: false
+
+gtm:
+    inject: true
+    features:
+        environment: true
+        route: true
+        context: true
+        events: true
+
+sylius_gtm_enhanced_ecommerce:
+    features:
+        purchase: true
