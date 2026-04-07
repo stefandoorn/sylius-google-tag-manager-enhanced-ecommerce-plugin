@@ -1,6 +1,11 @@
 imports:
     - { resource: "../../../config/services.yaml" }
 
+doctrine:
+    orm:
+        enable_lazy_ghost_objects: true
+        enable_native_lazy_objects: true
+
 google_tag_manager:
     enabled: true
     id: "GTM-TESTTEST"

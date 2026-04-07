@@ -112,21 +112,21 @@ jobs:
             -
                 name: Prepare test application database
                 run: |
-                    (cd vendor/sylius/test-application && bin/console doctrine:database:create -vvv)
-                    (cd vendor/sylius/test-application && bin/console doctrine:migrations:migrate -n -vvv -q)
+                    bin/console doctrine:database:create -vvv
+                    bin/console doctrine:migrations:migrate -n -vvv -q
 
             -
                 name: Prepare test application assets
                 run: |
-                    (cd vendor/sylius/test-application && bin/console assets:install public -vvv)
+                    bin/console assets:install public -vvv
                     (cd vendor/sylius/test-application && yarn build)
             -
                 name: Prepare test application cache
-                run: (cd vendor/sylius/test-application && bin/console cache:warmup -vvv)
+                run: bin/console cache:warmup -vvv
 
             -
                 name: Load fixtures in test application
-                run: (cd vendor/sylius/test-application && bin/console sylius:fixtures:load -n)
+                run: bin/console sylius:fixtures:load -n
 
             -
                 name: Validate composer.json
@@ -134,7 +134,7 @@ jobs:
 
             -
                 name: Validate database schema
-                run: (cd vendor/sylius/test-application && bin/console doctrine:schema:validate)
+                run: bin/console doctrine:schema:validate
 
             -
                 name: Run security check
