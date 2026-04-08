@@ -62,6 +62,10 @@
         "runtime": {
             "project_dir": "vendor/sylius/test-application",
             "dotenv_path": "tests/TestApplication/.env"
+        },
+        "symfony": {
+            "allow-contrib": false,
+            "require": "^6.4"
         }
     }
 }
