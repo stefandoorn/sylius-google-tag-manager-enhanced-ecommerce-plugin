@@ -12,6 +12,10 @@ return static function (ECSConfig $config): void {
         __DIR__ . '/ecs.php',
     ]);
 
+    $config->skip([
+        '**/var/*',
+    ]);
+
     $config->import('vendor/sylius-labs/coding-standard/ecs.php');
 
     $config->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, []);
