@@ -46,15 +46,6 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-update-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-create-project-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
         "analyse": "vendor/bin/phpstan analyse",
         "check-style": "vendor/bin/ecs check --ansi",
         "fix-style": "vendor/bin/ecs check --ansi --fix",
