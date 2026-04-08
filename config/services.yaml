@@ -65,3 +65,10 @@ services:
         arguments:
             - "@sylius.calculator.product_variant_price"
             - "@sylius.context.channel"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.service.cached_google_tag_manager:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Service\CachedGoogleTagManager
+        decorates: google_tag_manager
+        arguments:
+            - "@.inner"
+            - '@request_stack'
