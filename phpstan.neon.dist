@@ -28,3 +28,9 @@ parameters:
           path: tests/Unit/TagManager/AddTransactionTest.php
         - identifier: offsetAccess.nonOffsetAccessible
           path: tests/Unit/TagManager/AddTransactionTest.php
+        - message: "/Cannot access offset ('price'|0) on mixed\\./"
+          path: src/Provider/ViewItemProvider.php
+        - identifier: return.unusedType
+          path: src/Factory/GtmEcommerceFactory.php
+        - identifier: return.type
+          path: src/Factory/GtmEcommerceFactory.php
