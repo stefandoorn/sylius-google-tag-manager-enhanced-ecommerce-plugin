@@ -25,6 +25,7 @@
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/debug-bundle": "^6.4 || ^7.2",
         "symfony/dotenv": "^6.4 || ^7.2",
+        "symfony/flex": "^2.4",
         "symfony/intl": "^6.4 || ^7.2",
         "symfony/runtime": "^6.4 || ^7.2",
         "symfony/web-profiler-bundle": "^6.4 || ^7.2"
@@ -34,7 +35,7 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "phpstan/extension-installer": true,
-            "symfony/flex": false,
+            "symfony/flex": true,
             "symfony/runtime": true
         }
     },

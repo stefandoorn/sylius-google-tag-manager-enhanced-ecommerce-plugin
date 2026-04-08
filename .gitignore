@@ -4,9 +4,6 @@
 /composer.lock
 
 .idea*
-/bin/*
-!/bin/.gitkeep
-!/bin/create_node_symlink.php
 
 /etc/build/*
 !/etc/build/.gitignore

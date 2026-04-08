@@ -11,7 +11,9 @@
     </testsuites>
 
     <php>
-        <server name="APP_ENV" value="test"/>
+        <server name="KERNEL_CLASS" value="Sylius\TestApplication\Kernel" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true"/>
+        <server name="APP_ENV" value="test"/>
+        <env name="APP_SECRET" value="''" />
     </php>
 </phpunit>
