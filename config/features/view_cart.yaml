@@ -5,6 +5,6 @@ services:
 
   sylius.google_tag_manager.enhanced_ecommerce_tracking.view_cart:
     parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.checkout_step.abstract
-    arguments: [1]
+    arguments: [!php/const Sylius\Component\Core\OrderCheckoutStates::STATE_CART]
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

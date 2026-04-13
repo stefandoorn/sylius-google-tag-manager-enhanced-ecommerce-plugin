@@ -8,5 +8,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface CheckoutStepResolverInterface
 {
-    public function resolve(string $method, Request $request): ?int;
+    public function resolve(string $method, Request $request): ?string;
 }

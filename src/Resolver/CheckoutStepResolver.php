@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CheckoutStepResolver implements CheckoutStepResolverInterface
 {
-    public function resolve(string $method, Request $request): ?int
+    public function resolve(string $method, Request $request): ?string
     {
         return match ($method) {
-            'summaryAction' => CheckoutStepInterface::STEP_CART,
+            'summaryAction' => OrderCheckoutStates::STATE_CART,
             'updateAction' => $this->updateAction($request),
             default => null,
         };
     }
 
-    private function updateAction(Request $request): ?int
+    private function updateAction(Request $request): ?string
     {
         $route = $request->get('_route');
 
         return match ($route) {
-            'sylius_shop_checkout_address' => CheckoutStepInterface::STEP_ADDRESS,
-            'sylius_shop_checkout_select_shipping' => CheckoutStepInterface::STEP_SHIPPING,
-            'sylius_shop_checkout_select_payment' => CheckoutStepInterface::STEP_PAYMENT,
-            'sylius_shop_checkout_complete' => CheckoutStepInterface::STEP_CONFIRM,
+            'sylius_shop_checkout_address' => OrderCheckoutStates::STATE_ADDRESSED,
+            'sylius_shop_checkout_select_shipping' => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
+            'sylius_shop_checkout_select_payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
+            'sylius_shop_checkout_complete' => OrderCheckoutStates::STATE_COMPLETED,
             default => null,
         };
     }
