@@ -6,7 +6,11 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemListInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
@@ -16,12 +20,15 @@ final class ViewItemListListener
 {
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
      */
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private LocaleContextInterface $localeContext,
         private FirewallMap $firewallMap,
         private ViewItemListInterface $viewItemList,
+        private ProductRepositoryInterface $productRepository,
+        private ChannelContextInterface $channelContext,
     ) {
     }
 
@@ -55,6 +62,16 @@ final class ViewItemListListener
             return;
         }
 
-        $this->viewItemList->add($taxon, $request->get('_route'));
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        /** @var ProductInterface[] $products */
+        $products = $this->productRepository->createShopListQueryBuilder(
+            $channel,
+            $taxon,
+            $this->localeContext->getLocaleCode(),
+        )->getQuery()->getResult();
+
+        $this->viewItemList->add($taxon, $products);
     }
 }

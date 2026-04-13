@@ -18,7 +18,7 @@ final class CheckoutStepListener
         private CheckoutStepInterface $checkoutStep,
         private CartContextInterface $cartContext,
         private CheckoutStepResolverInterface $checkoutStepResolver,
-        private int $step,
+        private string $state,
     ) {
     }
 
@@ -46,13 +46,13 @@ final class CheckoutStepListener
         }
 
         // Resolve step
-        $step = $this->checkoutStepResolver->resolve($controller[1], $event->getRequest());
-        if ($step === null) {
+        $state = $this->checkoutStepResolver->resolve($controller[1], $event->getRequest());
+        if ($state === null) {
             return;
         }
 
-        // Only allow happening on certain steps, due to service configuration (feature toggles)
-        if ($step !== $this->step) {
+        // Only allow happening on certain states, due to service configuration (feature toggles)
+        if ($state !== $this->state) {
             return;
         }
 
@@ -60,6 +60,6 @@ final class CheckoutStepListener
         $order = $this->cartContext->getCart();
 
         // Add E-Commerce data
-        $this->checkoutStep->addStep($order, $step);
+        $this->checkoutStep->addStep($order, $state);
     }
 }

@@ -1,0 +1,31 @@
+services:
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItem
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.channel"
+            - "@sylius.context.currency"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemList
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.channel"
+            - "@sylius.context.currency"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.checkout_step:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStep
+        arguments:
+            - "@google_tag_manager"
+            - !tagged_locator { tag: sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.checkout_step, index_by: state }
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_cart"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.add_to_cart"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.remove_form_cart"

@@ -16,18 +16,7 @@ parameters:
           path: src/EventListener/CheckoutStepListener.php
         - identifier: cast.string
           path: src/Helper/ProductIdentifierHelper.php
-        - identifier: binaryOp.invalid
-          path: src/TagManager/Cart.php
-        - identifier: argument.type
-          path: src/TagManager/ViewItemList.php
-        - identifier: arrayFilter.strict
-          path: src/TagManager/ViewItemList.php
-        - identifier: argument.type
-          path: tests/Unit/EventListener/ThankYouListenerTest.php
-        - identifier: argument.type
-          path: tests/Unit/TagManager/AddTransactionTest.php
-        - identifier: offsetAccess.nonOffsetAccessible
-          path: tests/Unit/TagManager/AddTransactionTest.php
+
         - message: "/Cannot access offset ('price'|0) on mixed\\./"
           path: src/Provider/ViewItemProvider.php
         - identifier: return.unusedType

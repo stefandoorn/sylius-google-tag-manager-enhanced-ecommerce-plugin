@@ -7,5 +7,7 @@ services:
       - "@sylius.context.locale"
       - "@security.firewall.map"
       - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list"
+      - "@sylius.repository.product"
+      - "@sylius.context.channel"
     tags:
       - { name: kernel.event_listener, event: kernel.controller }
