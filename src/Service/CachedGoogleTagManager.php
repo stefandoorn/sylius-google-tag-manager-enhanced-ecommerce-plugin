@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\Service\ResetInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
-final class CachedGoogleTagManager implements GoogleTagManagerInterface, ResetInterface
+final class CachedGoogleTagManager implements CachedGoogleTagManagerInterface, ResetInterface
 {
     public const GTM_CACHED_PUSH = 'gtm_cached_push';
 
@@ -21,15 +21,17 @@ final class CachedGoogleTagManager implements GoogleTagManagerInterface, ResetIn
 
     public function addPush($value): void
     {
-        if (false === $this->cachePush($value)) {
-            $this->googleTagManager->addPush($value);
+        if ($this->cachePush($value)) {
+            return;
         }
+
+        $this->googleTagManager->addPush($value);
     }
 
     public function getPush(): array
     {
         $this->addCachedPush();
-        $this->removeCachedPushed();
+        $this->clearCachedPush();
 
         return $this->googleTagManager->getPush();
     }
@@ -65,7 +67,7 @@ final class CachedGoogleTagManager implements GoogleTagManagerInterface, ResetIn
         }
     }
 
-    private function removeCachedPushed(): void
+    private function clearCachedPush(): void
     {
         $session = $this->getRequestSession();
         if (null === $session) {
