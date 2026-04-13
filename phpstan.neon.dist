@@ -34,3 +34,7 @@ parameters:
           path: src/Factory/GtmEcommerceFactory.php
         - identifier: return.type
           path: src/Factory/GtmEcommerceFactory.php
+        - message: '/Method StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\Service\\CachedGoogleTagManager::(addPush|getPush|getData)\(\) .+ type specified.*\./'
+          path: src/Service/CachedGoogleTagManager.php
+        - message: '/Call to an undefined method Xynnn\\GoogleTagManagerBundle\\Service\\GoogleTagManagerInterface::reset\(\)\./'
+          path: src/Service/CachedGoogleTagManager.php
