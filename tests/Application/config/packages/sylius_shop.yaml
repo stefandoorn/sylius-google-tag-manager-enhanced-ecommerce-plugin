@@ -1,3 +1,0 @@
-sylius_shop:
-    product_grid:
-        include_all_descendants: true

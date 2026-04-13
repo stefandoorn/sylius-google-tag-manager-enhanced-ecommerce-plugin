@@ -1,20 +1,20 @@
+/.playwright-mcp/
 /vendor/
 /node_modules/
 /composer.lock
 
 .idea*
-/bin/*
-!/bin/.gitkeep
-!/bin/create_node_symlink.php
 
 /etc/build/*
 !/etc/build/.gitignore
 
-/tests/Application/yarn.lock
+/var/
+/drivers/
+
+/tests/TestApplication/.env.local
+/tests/TestApplication/.env.*.local
 
 /.phpunit.result.cache
 /behat.yml
 /phpunit.xml
 /phpstan.neon
-
-/node_modules

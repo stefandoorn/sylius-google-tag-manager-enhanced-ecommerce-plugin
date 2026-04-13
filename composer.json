@@ -14,13 +14,14 @@
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^6.1",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "^1.2",
-        "phpstan/phpstan-doctrine": "^1.0",
-        "phpstan/phpstan-strict-rules": "^1.1",
-        "phpstan/phpstan-symfony": "^1.0",
-        "phpstan/phpstan-webmozart-assert": "^1.0",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^11.0",
         "sylius-labs/coding-standard": "^4.0",
+        "sylius/test-application": "^2.0.0@alpha",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/debug-bundle": "^6.4 || ^7.2",
         "symfony/dotenv": "^6.4 || ^7.2",
@@ -30,7 +31,6 @@
     },
     "config": {
         "sort-packages": true,
-        "bin-dir": "bin",
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "phpstan/extension-installer": true,
@@ -41,28 +41,14 @@
     "autoload": {
         "psr-4": {
             "StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": "src/",
-            "Tests\\StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": ["tests/", "tests/Application/src"]
+            "Tests\\StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\": "tests/"
         }
     },
-    "autoload-dev": {
-        "classmap": [
-            "tests/Application/Kernel.php"
-        ]
-    },
     "scripts": {
-        "post-install-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-update-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-create-project-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "analyse": "bin/phpstan analyse",
-        "check-style": "bin/ecs check --ansi",
-        "fix-style": "ecs check --ansi --fix",
-        "phpunit": "bin/phpunit",
+        "analyse": "vendor/bin/phpstan analyse",
+        "check-style": "vendor/bin/ecs check --ansi",
+        "fix-style": "vendor/bin/ecs check --ansi --fix",
+        "phpunit": "vendor/bin/phpunit",
         "test": [
             "@phpunit"
         ]
@@ -71,9 +57,10 @@
         "branch-alias": {
             "dev-master": "4.0-dev"
         },
+        "public-dir": "vendor/sylius/test-application/public",
         "runtime": {
-            "project_dir": "tests/Application",
-            "dotenv_path": "tests/Application/.env"
+            "project_dir": "vendor/sylius/test-application",
+            "dotenv_path": "tests/TestApplication/.env"
         }
     }
 }
