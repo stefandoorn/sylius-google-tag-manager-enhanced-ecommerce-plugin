@@ -7,9 +7,6 @@ parameters:
         - src
         - tests/Unit
 
-    excludePaths:
-        - src/TagManager/AddTransaction.php
-
     ignoreErrors:
         - identifier: argument.type
           path: src/DependencyInjection/SyliusGtmEnhancedEcommerceExtension.php
@@ -19,8 +16,6 @@ parameters:
           path: src/EventListener/CheckoutStepListener.php
         - identifier: cast.string
           path: src/Helper/ProductIdentifierHelper.php
-        - identifier: argument.type
-          path: tests/Unit/EventListener/ThankYouListenerTest.php
 
         - message: "/Cannot access offset ('price'|0) on mixed\\./"
           path: src/Provider/ViewItemProvider.php

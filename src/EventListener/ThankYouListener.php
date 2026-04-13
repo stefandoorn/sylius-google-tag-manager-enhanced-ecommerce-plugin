@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\AddTransactionInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CheckoutStepInterface;
 use Sylius\Bundle\CoreBundle\Controller\OrderController;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
@@ -17,7 +18,7 @@ final class ThankYouListener
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      */
     public function __construct(
-        private AddTransactionInterface $transactionService,
+        private CheckoutStepInterface $checkoutStep,
         private OrderRepositoryInterface $orderRepository,
     ) {
     }
@@ -63,6 +64,6 @@ final class ThankYouListener
         }
 
         // Add E-Commerce data
-        $this->transactionService->addTransaction($order);
+        $this->checkoutStep->addStep($order, OrderCheckoutStates::STATE_COMPLETED);
     }
 }
