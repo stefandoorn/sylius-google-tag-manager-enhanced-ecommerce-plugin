@@ -28,3 +28,7 @@ parameters:
           path: tests/Unit/TagManager/AddTransactionTest.php
         - identifier: offsetAccess.nonOffsetAccessible
           path: tests/Unit/TagManager/AddTransactionTest.php
+        - message: '/Method StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\Service\\SessionPersistentGoogleTagManager::(addPush|getPush|getData)\(\) .+ type specified.*\./'
+          path: src/Service/SessionPersistentGoogleTagManager.php
+        - message: '/Call to an undefined method Xynnn\\GoogleTagManagerBundle\\Service\\GoogleTagManagerInterface::reset\(\)\./'
+          path: src/Service/SessionPersistentGoogleTagManager.php
