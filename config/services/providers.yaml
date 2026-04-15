@@ -1,0 +1,12 @@
+services:
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\ViewItemListProvider
+        arguments:
+            - "@sylius.resolver.product_variant.default"
+            - "@sylius.calculator.product_variant_price"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_item"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\ViewItemProvider
+        parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list

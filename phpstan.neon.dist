@@ -28,6 +28,20 @@ parameters:
           path: tests/Unit/TagManager/AddTransactionTest.php
         - identifier: offsetAccess.nonOffsetAccessible
           path: tests/Unit/TagManager/AddTransactionTest.php
+        - identifier: cast.string
+          path: src/Factory/GtmItemFactory.php
+        - identifier: offsetAccess.nonOffsetAccessible
+          path: src/Provider/ViewItemProvider.php
+        - identifier: argument.type
+          path: tests/Unit/Provider/ViewItemProviderTest.php
+        - identifier: offsetAccess.nonOffsetAccessible
+          path: tests/Unit/Provider/ViewItemProviderTest.php
+        - identifier: staticMethod.dynamicCall
+          path: tests/Unit/TagManager/ViewItemTest.php
+        - identifier: argument.type
+          path: tests/Unit/TagManager/ViewItemTest.php
+        - identifier: offsetAccess.nonOffsetAccessible
+          path: tests/Unit/TagManager/ViewItemTest.php
         - message: '/Method StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\Service\\SessionPersistentGoogleTagManager::(addPush|getPush|getData)\(\) .+ type specified.*\./'
           path: src/Service/SessionPersistentGoogleTagManager.php
         - message: '/Call to an undefined method Xynnn\\GoogleTagManagerBundle\\Service\\GoogleTagManagerInterface::reset\(\)\./'

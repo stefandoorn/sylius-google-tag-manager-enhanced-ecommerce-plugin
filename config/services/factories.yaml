@@ -1,0 +1,6 @@
+services:
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_item:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory\GtmItemFactory
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
