@@ -6,3 +6,11 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemList
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.channel"
+            - "@sylius.context.currency"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list"

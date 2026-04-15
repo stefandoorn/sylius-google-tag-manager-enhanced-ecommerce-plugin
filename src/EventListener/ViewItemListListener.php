@@ -4,57 +4,38 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\ControllerEventMainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemListInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\BreadcrumbComponent;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Grid\View\GridViewInterface;
+use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class ViewItemListListener
 {
-    /**
-     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
-     */
     public function __construct(
-        private TaxonRepositoryInterface $taxonRepository,
-        private LocaleContextInterface $localeContext,
-        private FirewallMap $firewallMap,
         private ViewItemListInterface $viewItemList,
+        private BreadcrumbComponent $breadcrumbComponent,
     ) {
     }
 
-    public function __invoke(ControllerEvent $event): void
+    public function __invoke(GenericEvent $event): void
     {
-        if (!ControllerEventMainRequest::isMainRequest($event)) {
+        try {
+            $taxon = $this->breadcrumbComponent->taxon();
+        } catch (\InvalidArgumentException) {
             return;
         }
 
-        $request = $event->getRequest();
+        /** @var GridViewInterface $gridView */
+        $gridView = $event->getSubject();
 
-        $firewallConfig = $this->firewallMap->getFirewallConfig($request);
-        if (null !== $firewallConfig && 'shop' !== $firewallConfig->getName()) {
-            return;
+        $products = [];
+        /** @var iterable<ProductInterface> $data */
+        $data = $gridView->getData();
+        foreach ($data as $product) {
+            $products[] = $product;
         }
 
-        if ('sylius_shop_product_index' !== $request->get('_route')) {
-            return;
-        }
-
-        /** @var string|null $slug */
-        $slug = $request->get('slug');
-
-        if (null === $slug) {
-            return;
-        }
-
-        $taxon = $this->taxonRepository->findOneBySlug($slug, $this->localeContext->getLocaleCode());
-
-        if (!$taxon instanceof TaxonInterface) {
-            return;
-        }
-
-        $this->viewItemList->add($taxon, $request->get('_route'));
+        $this->viewItemList->add($taxon, $products);
     }
 }
