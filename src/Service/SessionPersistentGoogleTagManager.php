@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\Service\ResetInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
-final class CachedGoogleTagManager implements CachedGoogleTagManagerInterface, ResetInterface
+final class SessionPersistentGoogleTagManager implements PersistentGoogleTagManagerInterface, ResetInterface
 {
-    public const GTM_CACHED_PUSH = 'gtm_cached_push';
+    public const GTM_PERSISTED_PUSH = 'gtm_persisted_push';
 
     public function __construct(
         private GoogleTagManagerInterface $googleTagManager,
@@ -21,7 +21,7 @@ final class CachedGoogleTagManager implements CachedGoogleTagManagerInterface, R
 
     public function addPush($value): void
     {
-        if ($this->cachePush($value)) {
+        if ($this->persistPush($value)) {
             return;
         }
 
@@ -30,13 +30,13 @@ final class CachedGoogleTagManager implements CachedGoogleTagManagerInterface, R
 
     public function getPush(): array
     {
-        $this->addCachedPush();
-        $this->clearCachedPush();
+        $this->addPersistedPush();
+        $this->clearPersistedPush();
 
         return $this->googleTagManager->getPush();
     }
 
-    private function cachePush(mixed $value): bool
+    private function persistPush(mixed $value): bool
     {
         $session = $this->getRequestSession();
         if (null === $session) {
@@ -44,37 +44,37 @@ final class CachedGoogleTagManager implements CachedGoogleTagManagerInterface, R
         }
 
         /** @var mixed[] $push */
-        $push = $session->get(self::GTM_CACHED_PUSH, []);
+        $push = $session->get(self::GTM_PERSISTED_PUSH, []);
         $push[] = $value;
 
-        $session->set(self::GTM_CACHED_PUSH, $push);
+        $session->set(self::GTM_PERSISTED_PUSH, $push);
 
         return true;
     }
 
-    private function addCachedPush(): void
+    private function addPersistedPush(): void
     {
         $session = $this->getRequestSession();
         if (null === $session) {
             return;
         }
 
-        /** @var array<string, array<string, mixed>> $cachedPushes */
-        $cachedPushes = $session->get(self::GTM_CACHED_PUSH, []);
+        /** @var array<string, array<string, mixed>> $persistedPushes */
+        $persistedPushes = $session->get(self::GTM_PERSISTED_PUSH, []);
 
-        foreach ($cachedPushes as $push) {
+        foreach ($persistedPushes as $push) {
             $this->googleTagManager->addPush($push);
         }
     }
 
-    private function clearCachedPush(): void
+    private function clearPersistedPush(): void
     {
         $session = $this->getRequestSession();
         if (null === $session) {
             return;
         }
 
-        $session->remove(self::GTM_CACHED_PUSH);
+        $session->remove(self::GTM_PERSISTED_PUSH);
     }
 
     private function getRequestSession(): ?SessionInterface

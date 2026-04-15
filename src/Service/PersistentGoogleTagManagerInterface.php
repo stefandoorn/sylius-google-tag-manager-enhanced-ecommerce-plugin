@@ -6,6 +6,6 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Service;
 
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
-interface CachedGoogleTagManagerInterface extends GoogleTagManagerInterface
+interface PersistentGoogleTagManagerInterface extends GoogleTagManagerInterface
 {
 }
