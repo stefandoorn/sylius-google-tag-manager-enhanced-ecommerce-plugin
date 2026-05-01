@@ -1,5 +1,4 @@
 services:
-
     sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\ViewItemListProvider
         arguments:

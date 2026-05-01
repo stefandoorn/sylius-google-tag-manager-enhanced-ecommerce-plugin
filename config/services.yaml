@@ -1,6 +1,5 @@
 imports:
     - { resource: "services/*.yaml" }
-
 services:
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction:
