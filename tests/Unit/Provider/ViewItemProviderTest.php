@@ -64,7 +64,12 @@ final class ViewItemProviderTest extends TestCase
         $this->gtmItemFactory->expects($this->once())
             ->method('createNewFromProductVariant')
             ->with($productVariant)
-            ->willReturn(['item_id' => 'product123', 'item_name' => 'Test Product', 'item_category' => 'Category A']);
+            ->willReturn([
+                'item_id' => 'product123',
+                'item_name' => 'Test Product',
+                'item_variant' => 'Test Variant',
+                'item_category' => 'Category A',
+            ]);
 
         $channel->method('getName')->willReturn('My Store');
 
@@ -85,6 +90,7 @@ final class ViewItemProviderTest extends TestCase
         self::assertEquals(0, $result['items'][0]['index']);
         self::assertEquals('product123', $result['items'][0]['item_id']);
         self::assertEquals('Test Product', $result['items'][0]['item_name']);
+        self::assertEquals('Test Variant', $result['items'][0]['item_variant']);
         self::assertEquals(15.0, $result['value']);
     }
 

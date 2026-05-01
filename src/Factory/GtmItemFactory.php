@@ -26,7 +26,8 @@ final class GtmItemFactory implements GtmItemFactoryInterface
             'item_id' => null !== $product
                 ? $this->productIdentifierHelper->getProductIdentifier($product)
                 : (string) $productVariant->getCode(),
-            'item_name' => $productVariant->getDescriptor(),
+            'item_name' => null !== $product ? (string) $product->getName() : $productVariant->getDescriptor(),
+            'item_variant' => $productVariant->getName() ?? $productVariant->getCode(),
             'item_category' => $this->getMainTaxonName($productVariant),
         ];
     }
