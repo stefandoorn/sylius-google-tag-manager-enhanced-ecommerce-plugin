@@ -1,3 +1,5 @@
+imports:
+    - { resource: "services/*.yaml" }
 services:
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.add_transaction:
@@ -7,16 +9,6 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
-
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItem
-        arguments:
-            - "@google_tag_manager"
-            - "@sylius.context.channel"
-            - "@sylius.context.currency"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
-            - "@sylius.resolver.product_variant.default"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_variant_price"
 
     sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item_list:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItemList

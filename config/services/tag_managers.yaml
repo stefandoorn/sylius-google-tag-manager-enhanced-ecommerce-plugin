@@ -1,0 +1,8 @@
+services:
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.view_item:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\ViewItem
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.context.channel"
+            - "@sylius.context.currency"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item"

@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductVariantPriceHelperInterface;
+use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\GtmProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Xynnn\GoogleTagManagerBundle\Service\GoogleTagManagerInterface;
 
 final class ViewItem implements ViewItemInterface
@@ -20,9 +17,7 @@ final class ViewItem implements ViewItemInterface
         private GoogleTagManagerInterface $googleTagManager,
         private ChannelContextInterface $channelContext,
         private CurrencyContextInterface $currencyContext,
-        private ProductIdentifierHelperInterface $productIdentifierHelper,
-        private ProductVariantResolverInterface $productVariantResolver,
-        private ProductVariantPriceHelperInterface $productVariantPriceHelper,
+        private GtmProviderInterface $viewItemProvider,
     ) {
     }
 
@@ -33,38 +28,23 @@ final class ViewItem implements ViewItemInterface
 
     private function addViewItemData(ProductInterface $product): void
     {
-        /** @var TaxonInterface|null $mainTaxon */
-        $mainTaxon = $product->getMainTaxon();
-
-        $data = [
-            'items' => [
-                [
-                    'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
-                    'item_name' => $product->getName(),
-                    'affiliation' => $this->channelContext->getChannel()->getName(),
-                    'item_category' => null !== $mainTaxon ? $mainTaxon->getName() : '',
-                    'index' => 0,
-                ],
-            ],
-        ];
-
-        /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantResolver->getVariant($product);
-        if (null !== $productVariant) {
-            $data['value'] = $this->productVariantPriceHelper->getProductVariantPrice($productVariant) / 100;
-            $data['currency'] = $this->currencyContext->getCurrencyCode();
-
-            $data['items'][0]['price'] = $data['value'];
-        }
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
 
         // https://developers.google.com/analytics/devguides/collection/ga4/ecommerce?client_type=gtm#view_item_details
         $this->googleTagManager->addPush([
             'ecommerce' => null,
         ]);
 
+        $context = [
+            ContextInterface::CONTEXT_PRODUCT => $product,
+            ContextInterface::CONTEXT_CHANNEL => $channel,
+            ContextInterface::CONTEXT_CURRENCY_CODE => $this->currencyContext->getCurrencyCode(),
+        ];
+
         $this->googleTagManager->addPush([
-            'event' => 'view_item',
-            'ecommerce' => $data,
+            'event' => $this->viewItemProvider->getEvent($context),
+            'ecommerce' => $this->viewItemProvider->getEcommerce($context),
         ]);
     }
 }
