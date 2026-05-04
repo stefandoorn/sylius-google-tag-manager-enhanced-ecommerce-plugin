@@ -19,7 +19,7 @@
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
-        "phpunit/phpunit": "^11.0",
+        "phpunit/phpunit": "^13.1",
         "sylius-labs/coding-standard": "^4.0",
         "sylius/test-application": "^2.0.0@alpha",
         "symfony/browser-kit": "^6.4 || ^7.2",
