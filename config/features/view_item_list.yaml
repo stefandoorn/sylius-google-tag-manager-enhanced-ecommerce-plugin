@@ -1,5 +1,4 @@
 services:
-
   sylius.google_tag_manager.enhanced_ecommerce_tracking.view_item_list.listener:
     class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener\ViewItemListListener
     arguments:
