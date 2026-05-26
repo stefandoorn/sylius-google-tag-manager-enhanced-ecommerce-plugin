@@ -18,10 +18,7 @@ parameters:
           path: src/Helper/ProductIdentifierHelper.php
         - identifier: binaryOp.invalid
           path: src/TagManager/Cart.php
-        - identifier: argument.type
-          path: src/TagManager/ViewItemList.php
-        - identifier: arrayFilter.strict
-          path: src/TagManager/ViewItemList.php
+
         - identifier: argument.type
           path: tests/Unit/EventListener/ThankYouListenerTest.php
         - identifier: argument.type
@@ -42,6 +39,12 @@ parameters:
           path: tests/Unit/TagManager/ViewItemTest.php
         - identifier: offsetAccess.nonOffsetAccessible
           path: tests/Unit/TagManager/ViewItemTest.php
+        - identifier: staticMethod.dynamicCall
+          path: tests/Unit/TagManager/ViewItemListTest.php
+        - identifier: argument.type
+          path: tests/Unit/TagManager/ViewItemListTest.php
+        - identifier: offsetAccess.nonOffsetAccessible
+          path: tests/Unit/TagManager/ViewItemListTest.php
         - message: '/Method StefanDoorn\\SyliusGtmEnhancedEcommercePlugin\\Service\\SessionPersistentGoogleTagManager::(addPush|getPush|getData)\(\) .+ type specified.*\./'
           path: src/Service/SessionPersistentGoogleTagManager.php
         - message: '/Call to an undefined method Xynnn\\GoogleTagManagerBundle\\Service\\GoogleTagManagerInterface::reset\(\)\./'
