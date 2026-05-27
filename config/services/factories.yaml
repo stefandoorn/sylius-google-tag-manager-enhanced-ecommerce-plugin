@@ -3,3 +3,14 @@ services:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory\GtmItemFactory
         arguments:
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
+
+    StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory\GtmItemFactoryInterface:
+        alias: sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_item
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_ecommerce:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory\GtmEcommerceFactory
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_item"
+
+    StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory\GtmEcommerceFactoryInterface:
+        alias: sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_ecommerce

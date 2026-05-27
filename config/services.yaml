@@ -18,14 +18,6 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
 
-    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart:
-        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart
-        arguments:
-            - "@google_tag_manager"
-            - "@sylius.context.channel"
-            - "@sylius.context.currency"
-            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.helper.product_identifier"
-
     sylius.google_tag_manager.enhanced_ecommerce_tracking.resolver.checkout_step:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Resolver\CheckoutStepResolver
 

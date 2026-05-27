@@ -9,3 +9,17 @@ services:
     sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item:
         class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\ViewItemProvider
         parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_cart:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\ViewCartProvider
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_ecommerce"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.add_to_cart:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\AddToCartProvider
+        arguments:
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.factory.gtm_ecommerce"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.remove_form_cart:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Provider\RemoveFromCartProvider
+        parent: sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.add_to_cart

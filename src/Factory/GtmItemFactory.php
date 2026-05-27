@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory;
 
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\ProductIdentifierHelperInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -32,21 +34,49 @@ final class GtmItemFactory implements GtmItemFactoryInterface
         ];
     }
 
-    public function createNewFromOrderItem(OrderItemInterface $orderItem): array
+    public function createNewFromOrderItem(OrderItemInterface $orderItem, OrderInterface $order): array
     {
+        $index = 0;
+        foreach ($order->getItems() as $i => $item) {
+            if ($item === $orderItem) {
+                $index = $i;
+
+                break;
+            }
+        }
+
+        /** @var ChannelInterface|null $channel */
+        $channel = $order->getChannel();
+
         /** @var ProductVariantInterface|null $variant */
         $variant = $orderItem->getVariant();
         if (null === $variant) {
-            return [
+            $data = [
                 'item_id' => (string) $orderItem->getId(),
                 'item_name' => (string) $orderItem->getProductName(),
             ];
+        } else {
+            $data = $this->createNewFromProductVariant($variant);
         }
 
-        $data = $this->createNewFromProductVariant($variant);
+        $data['affiliation'] = null !== $channel ? (string) $channel->getName() : '';
+        $data['index'] = $index;
+        $data['price'] = $orderItem->getFullDiscountedUnitPrice() / 100;
         $data['quantity'] = $orderItem->getQuantity();
 
         return $data;
+    }
+
+    public function createNewFromProduct(ProductInterface $product): array
+    {
+        /** @var TaxonInterface|null $mainTaxon */
+        $mainTaxon = $product->getMainTaxon();
+
+        return [
+            'item_id' => $this->productIdentifierHelper->getProductIdentifier($product),
+            'item_name' => (string) $product->getName(),
+            'item_category' => null !== $mainTaxon ? (string) $mainTaxon->getName() : '',
+        ];
     }
 
     private function getMainTaxonName(ProductVariantInterface $productVariant): string
