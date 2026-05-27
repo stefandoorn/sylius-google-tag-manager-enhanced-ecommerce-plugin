@@ -14,3 +14,14 @@ services:
             - "@sylius.context.channel"
             - "@sylius.context.currency"
             - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_item_list"
+
+    sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart:
+        class: StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\Cart
+        arguments:
+            - "@google_tag_manager"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.view_cart"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.add_to_cart"
+            - "@sylius.google_tag_manager.enhanced_ecommerce_tracking.provider.remove_form_cart"
+
+    StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CartInterface:
+        alias: sylius.google_tag_manager.enhanced_ecommerce_tracking.tag_manager.cart

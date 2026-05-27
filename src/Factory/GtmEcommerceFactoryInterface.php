@@ -7,19 +7,18 @@ namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Factory;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface GtmItemFactoryInterface
+interface GtmEcommerceFactoryInterface
 {
     /**
      * @return array<string, mixed>
      */
-    public function createNewFromProductVariant(ProductVariantInterface $productVariant): array;
+    public function createNewFromOrder(OrderInterface $order): array;
 
     /**
      * @return array<string, mixed>
      */
-    public function createNewFromOrderItem(OrderItemInterface $orderItem, OrderInterface $order): array;
+    public function createNewFromSingleOrderItem(OrderItemInterface $orderItem, OrderInterface $order): array;
 
     /**
      * @return array<string, mixed>

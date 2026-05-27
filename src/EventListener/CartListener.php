@@ -4,98 +4,66 @@ declare(strict_types=1);
 
 namespace StefanDoorn\SyliusGtmEnhancedEcommercePlugin\EventListener;
 
-use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\Helper\MainRequest\RequestStackMainRequest;
 use StefanDoorn\SyliusGtmEnhancedEcommercePlugin\TagManager\CartInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CartListener
 {
-    public const POST_ADD_ORDER_ITEM = 'post_add_order_item';
-
-    public const POST_REMOVE_ORDER_ITEM = 'post_remove_order_item';
-
     public function __construct(
-        private RequestStack $requestStack,
+        private CartContextInterface $cartContext,
         private CartInterface $cart,
-        private FirewallMap $firewallMap,
     ) {
     }
 
-    public function onAddToCart(ResourceControllerEvent $event): void
+    public function onCartSummary(GenericEvent $event): void
     {
-        $session = $this->getSession();
-        if (null === $session) {
+        $subject = $event->getSubject();
+        if (!$subject instanceof OrderInterface) {
             return;
         }
 
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $event->getSubject();
-
-        $session->set(
-            self::POST_ADD_ORDER_ITEM,
-            $this->cart->getOrderItem($orderItem),
-        );
+        $this->cart->view($subject);
     }
 
-    public function onRemoveFromCart(ResourceControllerEvent $event): void
+    public function onAddToCart(GenericEvent $event): void
     {
-        $session = $this->getSession();
-        if (null === $session) {
+        $subject = $event->getSubject();
+        if (!$subject instanceof AddToCartCommandInterface) {
             return;
         }
 
-        /** @var OrderItemInterface $orderItem */
-        $orderItem = $event->getSubject();
+        $cart = $subject->getCart();
+        $orderItem = $subject->getCartItem();
 
-        $session->set(
-            self::POST_REMOVE_ORDER_ITEM,
-            $this->cart->getOrderItem($orderItem),
-        );
+        if (!$cart instanceof OrderInterface || !$orderItem instanceof OrderItemInterface) {
+            return;
+        }
+
+        $this->cart->add($orderItem, $cart);
     }
 
-    public function onKernelController(ControllerEvent $event): void
+    public function onRemoveFromCart(GenericEvent $event): void
     {
-        $firewallConfig = $this->firewallMap->getFirewallConfig($event->getRequest());
-        if (null === $firewallConfig) {
+        $subject = $event->getSubject();
+        if (!$subject instanceof OrderItemInterface) {
             return;
         }
 
-        if ('shop' !== $firewallConfig->getName()) {
+        try {
+            $cart = $this->cartContext->getCart();
+        } catch (CartNotFoundException) {
             return;
         }
 
-        $session = $this->getSession();
-        if (null === $session) {
+        if (!$cart instanceof OrderInterface) {
             return;
         }
 
-        if ($session->has(self::POST_ADD_ORDER_ITEM)) {
-            /** @var array<string, mixed> $orderItem */
-            $orderItem = $session->get(self::POST_ADD_ORDER_ITEM);
-            $session->remove(self::POST_ADD_ORDER_ITEM);
-            $this->cart->add($orderItem);
-        }
-
-        if ($session->has(self::POST_REMOVE_ORDER_ITEM)) {
-            /** @var array<string, mixed> $orderItem */
-            $orderItem = $session->get(self::POST_REMOVE_ORDER_ITEM);
-            $session->remove(self::POST_REMOVE_ORDER_ITEM);
-            $this->cart->remove($orderItem);
-        }
-    }
-
-    private function getSession(): ?SessionInterface
-    {
-        $request = RequestStackMainRequest::getMainRequest($this->requestStack);
-        if (null === $request) {
-            return null;
-        }
-
-        return $request->hasSession() ? $request->getSession() : null;
+        $this->cart->remove($subject, $cart);
     }
 }
