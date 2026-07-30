@@ -24,7 +24,7 @@
         "sylius/test-application": "^2.0.0@alpha",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/debug-bundle": "^6.4 || ^7.2",
-        "symfony/dotenv": "^6.4 || ^7.2",
+        "symfony/dotenv": "^8.1.2",
         "symfony/intl": "^6.4 || ^7.2",
         "symfony/runtime": "^6.4 || ^7.2",
         "symfony/web-profiler-bundle": "^6.4 || ^7.2"
